@@ -45,7 +45,7 @@ const Services = () => {
               gains—inside and outside the gym. Our app rewards you with coupons
               redeemable across all our locations nationwide, turning your
               dedication into tangible rewards. As you invest in your strength,
-              you'll accumulate member points, elevating your status and
+              you&apos;ll accumulate member points, elevating your status and
               unlocking a cascade of passive perks. With each level, the
               benefits grow, enhancing your journey to peak fitness.
             </p>
