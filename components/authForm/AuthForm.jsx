@@ -1,5 +1,6 @@
 import React from 'react'
 import "../../app/globals.css";
+import Logo from '@/public/images/Logo.png'
 
 function AuthForm({title}) {
   return (
@@ -9,7 +10,7 @@ function AuthForm({title}) {
         <span className='text-white'>{title}</span>
         <span className="text-purple"> Lightweight</span>
       </h1>
-      <img src={logo} alt="Logo"/>
+      <img src={Logo} alt="Logo"/>
     </div>
   )
 }
