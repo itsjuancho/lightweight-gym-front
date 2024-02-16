@@ -4,7 +4,7 @@ import React from 'react';
 
 
 const RegistroPage = () => {
-  return <AuthForm title="Registrarse" />;
+  return <AuthForm title="Sign up to" />;
 };
 
 export default RegistroPage;

@@ -1,7 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
+@font-face {
+  font-family: 'CoandaTrial';
+  src: url('../assets/font/All-CoType-Trials/Coanda-trial/CoandaTRIAL-Bold.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.text-style-coanda-trial{
+  font-family: 'CoandaTrial', sans-serif;
+}
+.text-white {
+  color: #ffffff;
+}
+
+.text-purple {
+  color: #6366F1;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -33,6 +51,7 @@
     --ring: 240 10% 3.9%;
  
     --radius: 0.5rem;
+    
   }
  
   .dark {
