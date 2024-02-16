@@ -115,8 +115,35 @@
   color: #ffffff;
 }
 
-.text-purple {
-  color: #6366F1;
+.authform{
+   display: flex;
+   background-color: #6366F1;
+   justify-content: space-between;
+}
+
+.form-img > img{
+ width: 606px;
+ height: 100vh;
+ object-fit: cover;
+}
+
+.bg-gradient-to-t {
+  background-image: linear-gradient(to top, #14050A, #030712);
+}
+
+.form-shadow-right {
+  box-shadow: -70px 0 50px 0px #14050aa1;
+}
+
+.form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10rem;
+}
+
+.custom-w-13{
+  width: 70%;
 }
 
 @keyframes fadeInOut {
