@@ -9,8 +9,11 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 
 function AuthForm({ title }) {
+  const SHOW_INPUT = title.includes('Sign up')? '' : 'hidden';
+  const SHOW_LABEL = title.includes('Sign up')? 'hidden' : '';
+
   return (
-    <div className="authform min-w-max min-h-screen">
+    <div className="authform min-w-max min-h-full">
       <div className="form-img">
         <Image src={GymMen} />
       </div>
@@ -36,20 +39,44 @@ function AuthForm({ title }) {
           </div>
 
           <div className="flex justify-between items-center">
-            <div> <Label htmlFor="password" className="text-2xl"> Password </Label></div>
-            <div><Link href="#" className="text-sm coanda">Forgot your password?</Link></div>
+            <div>
+              <Label htmlFor="password" className="text-2xl">
+                Password
+              </Label>
+            </div>
+            <div className={`${SHOW_LABEL}`}>
+              <Link href="#" className="text-sm coanda">
+                Forgot your password?
+              </Link>
+            </div>
           </div>
 
           <div className="w-full">
-            <Input type="password" id="pass" className="bg-transparent border border-white "/>
+            <Input
+              type="password"
+              id="pass"
+              className="bg-transparent border border-white "
+            />
           </div>
+
+          <div className={`grid w-full items-center gap-1.5 my-6 ${SHOW_INPUT}`}>
+              <Label htmlFor="password" className="text-2xl">
+                Re-Password
+              </Label>
+              <Input
+                type="password"
+                id="password"
+                className="bg-transparent border border-white w-13"
+              />
+            </div>
 
         </div>
         <Button className="coanda-bold w-1/3 bg-red-500 hover:bg-red-500 focus:bg-red-500 text-xl m-5 ">
           Login
         </Button>
-        <Link href="#" className="text-sm text-white coanda">Aren’t a member yet? Sign up instead</Link>
-        
+        <Link href="#" className="text-sm text-white coanda">
+          Aren’t a member yet? Sign up instead
+        </Link>
       </div>
     </div>
   );
