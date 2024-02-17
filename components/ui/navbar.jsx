@@ -3,6 +3,7 @@ import Image from "next/image";
 import lwLogo from "@/public/lw-logo.svg";
 import Container from "./container";
 import Link from "next/link";
+import { ROUTE_LOGIN } from "@/utils/routes";
 
 const Navbar = () => {
   return (
@@ -14,7 +15,7 @@ const Navbar = () => {
           </a>
 
         <ul>
-          <li className="text-red-500"><Link href='/join'>Join/ sign in</Link></li>
+          <li className="text-red-500"><Link href={ROUTE_LOGIN}>Join/ sign in</Link></li>
           <li><a href="#services">Services</a></li>
           <li><a href='#about'>About us</a></li>
           <li><a href="#contact">Contact</a></li>
