@@ -13,7 +13,8 @@ function AuthForm({ title }) {
   const isSignUp = title.includes("Sign up");
   const SHOW_ELEMENT = {
     input: isSignUp ? "" : "hidden",
-    label: isSignUp ? "hidden" : ""
+    label: isSignUp ? "hidden" : "",
+    buttonName: isSignUp ? "Register" : "Login"
   };
 
   return (
@@ -31,6 +32,34 @@ function AuthForm({ title }) {
           </h1>
         </div>
         <div className="text-white coanda-bold xl:w-2/6 md:w-7/12 w-4/5">
+
+
+        <div
+            className={`grid w-full items-center gap-1.5 my-6 ${SHOW_ELEMENT.input}`}
+          >
+            <Label htmlFor="text" className="text-2xl">
+              Name
+            </Label>
+            <Input
+              type="text"
+              id="name"
+              className="bg-transparent border border-white w-full md:w-13"
+            />
+          </div>
+
+          <div
+            className={`grid w-full items-center gap-1.5 my-6 ${SHOW_ELEMENT.input}`}
+          >
+            <Label htmlFor="text" className="text-2xl">
+              Last name
+            </Label>
+            <Input
+              type="text"
+              id="lastNamme"
+              className="bg-transparent border border-white w-full md:w-13"
+            />
+          </div>
+
           <div className="grid w-full items-center gap-1.5 my-6 md:my-8">
             <Label htmlFor="email" className="text-2xl">
               Email
@@ -77,7 +106,7 @@ function AuthForm({ title }) {
           </div>
         </div>
         <Button className="coanda-bold w-4/5 xl:w-2/6 md:w-7/12 bg-red-500 hover:bg-red-500 focus:bg-red-500 text-xl m-5 ">
-          Login
+          {SHOW_ELEMENT.buttonName}
         </Button>
         <Link
           href={ROUTE_REGISTER}
