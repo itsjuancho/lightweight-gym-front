@@ -8,14 +8,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { ROUTE_REGISTER } from "@/utils/routes";
-import useRegister from "@/hooks/useRegister";
+import useAuth from "@/hooks/useAuth";
 import ShowAlert from "@/components/alert/ShowAlert";
 import { AnimatePresence } from "framer-motion";
 function AuthForm({ title }) {
-  const { formData, status, loading, handleChange, handleSubmit } =
-    useRegister();
+  const { formData, status, loading, handleChange, handleSubmit } = useAuth();
 
   const isSignUp = title.includes("Sign up");
+  formData.isRegister = isSignUp;
   const SHOW_ELEMENT = {
     input: isSignUp ? "" : "hidden",
     label: isSignUp ? "hidden" : "",
@@ -77,9 +77,7 @@ function AuthForm({ title }) {
             />
           </div>
 
-          <div
-            className={`grid w-full items-center gap-1.5 my-6 ${SHOW_ELEMENT.input}`}
-          >
+          <div className={`grid w-full items-center gap-1.5 my-6`}>
             <Label htmlFor="text" className="text-2xl">
               Username
             </Label>
@@ -92,7 +90,9 @@ function AuthForm({ title }) {
             />
           </div>
 
-          <div className="grid w-full items-center gap-1.5 my-6 md:my-8">
+          <div
+            className={`grid w-full items-center gap-1.5 my-6 md:my-8 ${SHOW_ELEMENT.input}`}
+          >
             <Label htmlFor="email" className="text-2xl">
               Email
             </Label>
@@ -152,7 +152,9 @@ function AuthForm({ title }) {
         <Link
           href={ROUTE_REGISTER}
           className={`text-sm text-white coanda inline-block ${SHOW_ELEMENT.label}`}
-        >Aren’t a member yet?<span className="inline border-b border-white"> Sign up instead</span>
+        >
+          Aren’t a member yet?
+          <span className="inline border-b border-white"> Sign up instead</span>
         </Link>
       </div>
     </div>
