@@ -11,10 +11,14 @@ import { ROUTE_REGISTER } from "@/utils/routes";
 import useAuth from "@/hooks/useAuth";
 import ShowAlert from "@/components/alert/ShowAlert";
 import { AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
 function AuthForm({ title }) {
   const { formData, status, loading, handleChange, handleSubmit } = useAuth();
 
   const isSignUp = title.includes("Sign up");
+  const isReg = usePathname().includes("register");
+  console.log(isReg, "isReg");
+
   formData.isRegister = isSignUp;
   const SHOW_ELEMENT = {
     input: isSignUp ? "" : "hidden",
@@ -23,20 +27,16 @@ function AuthForm({ title }) {
   };
 
   return (
-    <div className="authform w-full h-full">
-      <div className="form-img hidden lg:hiden xl:block">
-        <Image src={GymMen} alt="gym men" />
-      </div>
-
-      <div className="form bg-black xl:w-4/5 w-full h-screen bg-gradient-to-t form-shadow-right">
-        <div className="form-title flex  items-center w-full max-w-sm">
-          <Image src={Logo} alt="logo" className="min-w-min p-5" />
+    <div className="authform w-screen min-h-[100dvh]">
+      <Image src={GymMen} alt="gym men" className="xl:w-[956px] hidden sm:block" />
+      <div className="form bg-black w-full bg-gradient-to-t form-shadow-right">
+        <div className="form-title flex items-center justify-center w-full max-w-sm">
+          <Image src={Logo} alt="logo" className="mr-8" />
           <h1 className="text-white coanda-bold text-2xl">
             <span className="text-white">{title}</span>
             <span className="text-red-500"> Lightweight</span>
           </h1>
         </div>
-
         <AnimatePresence>
           {status && (
             <ShowAlert
@@ -45,7 +45,6 @@ function AuthForm({ title }) {
             />
           )}
         </AnimatePresence>
-
         <div className="text-white coanda-bold xl:w-2/6 md:w-7/12 w-4/5">
           <div
             className={`grid w-full items-center gap-1.5 my-6 ${SHOW_ELEMENT.input}`}
@@ -105,7 +104,7 @@ function AuthForm({ title }) {
             />
           </div>
 
-          <div className="flex justify-between items-center block">
+          <div className="flex justify-between items-center">
             <div>
               <Label htmlFor="password" className="text-2xl">
                 Password
@@ -153,9 +152,22 @@ function AuthForm({ title }) {
           href={ROUTE_REGISTER}
           className={`text-sm text-white coanda inline-block ${SHOW_ELEMENT.label}`}
         >
-          Aren’t a member yet?
+          Aren&apos;t a member yet?
           <span className="inline border-b border-white"> Sign up instead</span>
         </Link>
+        {isReg && (
+          <Link
+            href={'login'}
+            className={`text-sm text-white coanda`}
+          >
+            Already a member?
+            <span className="inline border-b border-white">
+              {" "}
+              Sign in instead
+            </span>
+          </Link>
+        )}
+        
       </div>
     </div>
   );
