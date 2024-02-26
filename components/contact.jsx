@@ -12,7 +12,7 @@ const Contact = () => {
       <Container className="w-full py-16 grid grid-cols-12 gap-5 px-20">
         <div className=" col-span-12 flex justify-between items-start">
           <div className="flex flex-col">
-            <h1 className="coanda-bold text-4xl text-red-500">Let's do it</h1>
+            <h1 className="coanda-bold text-4xl text-red-500">Let&apos;s do it</h1>
             <span className="text-2xl">
               Call us, or submit your email and we&apos;ll be in touch
             </span>
