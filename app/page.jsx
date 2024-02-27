@@ -1,17 +1,13 @@
-import About from "@/components/about";
-import Hero from "@/components/hero";
-import Services from "@/components/services";
-import Navbar from "@/components/ui/navbar";
-import Contact from "@/components/contact";
+import Hero from "../components/sections/hero";
+import Services from "../components/sections/services";
+import Highlights from "../components/sections/highlights";
 
 export default function Home() {
   return (
     <main className="flex flex-col">
-        <Navbar />
         <Hero />
+        <Highlights/>
         <Services />
-        <About/>
-        <Contact />
     </main>
   );
 }

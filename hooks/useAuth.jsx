@@ -1,6 +1,6 @@
-import { BASE_URL, LOGIN_URL, REGISTER, REGISTER_URL } from "@/utils/routes";
-import { validateRegistration } from "@/utils/validation";
-import { useRouter } from "next/router";
+'use client'
+import { validateRegistration } from "../utils/validation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const useAuth = () => {
@@ -31,7 +31,7 @@ const useAuth = () => {
 
   const builderRequest = (isRegister) => {
     if (isRegister) {
-      urlRequest = REGISTER_URL;
+      urlRequest = "/register";
       successMessage = "Success Register";
       exception = "Failed to register";
       requestData = {
@@ -43,7 +43,7 @@ const useAuth = () => {
       };
       return;
     }
-    urlRequest = LOGIN_URL;
+    urlRequest = '/login';
     successMessage = "Success Login";
     exception = "Failed to login";
     requestData = {
@@ -65,7 +65,7 @@ const useAuth = () => {
     setLoading(true);
     builderRequest(formData.isRegister);
     try {
-      const response = await fetch(`${BASE_URL}/${urlRequest}`, {
+      const response = await fetch(`http://localhost:8080/${urlRequest}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

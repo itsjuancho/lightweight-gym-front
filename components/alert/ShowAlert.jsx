@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { ExclamationTriangleIcon, RocketIcon } from "@radix-ui/react-icons";
 import "../../app/globals.css";
 

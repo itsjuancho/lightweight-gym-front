@@ -1,5 +1,5 @@
 // pages/login.js
-import AuthForm from "@/components/authForm/AuthForm";
+import AuthForm from "../../components/authForm/AuthForm";
 import React from "react";
 const LoginPage = () => {
   return (

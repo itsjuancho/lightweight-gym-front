@@ -1,15 +1,14 @@
+'use client'
 import React from "react";
-import "../../app/globals.css";
-import Logo from "@/public/images/Logo.png";
-import GymMen from "@/public/images/menGym.png";
+import Logo from "../../public/images/logo.png";
+import GymMen from "../../public/images/MenGym.png";
 import Image from "next/image";
 import { Button } from "../ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
 import Link from "next/link";
-import { ROUTE_REGISTER } from "@/utils/routes";
-import useAuth from "@/hooks/useAuth";
-import ShowAlert from "@/components/alert/ShowAlert";
+import useAuth from "../../hooks/useAuth";
+import ShowAlert from "../../components/alert/ShowAlert";
 import { AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 function AuthForm({ title }) {
@@ -45,7 +44,7 @@ function AuthForm({ title }) {
             />
           )}
         </AnimatePresence>
-        <div className="text-white coanda-bold xl:w-2/6 md:w-7/12 w-4/5">
+        <div className="text-white coanda-bold w-96">
           <div
             className={`grid w-full items-center gap-1.5 my-6 ${SHOW_ELEMENT.input}`}
           >
@@ -144,12 +143,12 @@ function AuthForm({ title }) {
         </div>
         <Button
           onClick={handleSubmit}
-          className="coanda-bold w-4/5 xl:w-2/6 md:w-7/12 bg-red-500 hover:bg-red-500 focus:bg-red-500 text-xl m-5 "
+          className="coanda-bold w-96 bg-red-500 hover:bg-red-500 focus:bg-red-500 text-xl my-5"
         >
           {SHOW_ELEMENT.buttonName}
         </Button>
         <Link
-          href={ROUTE_REGISTER}
+          href='/register'
           className={`text-sm text-white coanda inline-block ${SHOW_ELEMENT.label}`}
         >
           Aren&apos;t a member yet?
