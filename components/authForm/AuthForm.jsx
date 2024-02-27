@@ -1,7 +1,7 @@
 'use client'
 import React from "react";
-import Logo from "../../public/images/logo.png";
-import GymMen from "../../public/images/MenGym.png";
+import Logo from "../../public/lw-logo.svg";
+import GymMen from "../../public/images/menGym.png";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { Input } from "../../components/ui/input";

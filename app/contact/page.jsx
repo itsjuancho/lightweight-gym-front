@@ -1,6 +1,6 @@
 import React from "react";
 import Container from "../../components/ui/container";
-import arrowDown from "@/public/arrow-down.svg";
+import arrowDown from "../../public/arrow-down.svg";
 import Image from "next/image";
 
 const Contact = () => {
