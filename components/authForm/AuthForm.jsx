@@ -7,7 +7,7 @@ import { Button } from "../ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-import { ROUTE_REGISTER } from "@/utils/routes";
+import { ROUTE_FORGOT_PASS, ROUTE_REGISTER } from "@/utils/routes";
 import useAuth from "@/hooks/useAuth";
 import ShowAlert from "@/components/alert/ShowAlert";
 import { AnimatePresence } from "framer-motion";
@@ -32,7 +32,7 @@ function AuthForm({ title }) {
       <div className="form bg-black w-full bg-gradient-to-t form-shadow-right">
         <div className="form-title flex items-center justify-center w-full max-w-sm">
           <Image src={Logo} alt="logo" className="mr-8" />
-          <h1 className="text-white coanda-bold text-2xl">
+          <h1 className="text-white aeonik-bold text-2xl">
             <span className="text-white">{title}</span>
             <span className="text-red-500"> Lightweight</span>
           </h1>
@@ -45,7 +45,7 @@ function AuthForm({ title }) {
             />
           )}
         </AnimatePresence>
-        <div className="text-white coanda-bold xl:w-2/6 md:w-7/12 w-4/5">
+        <div className="text-white aeonik-bold xl:w-2/6 md:w-7/12 w-4/5">
           <div
             className={`grid w-full items-center gap-1.5 my-6 ${SHOW_ELEMENT.input}`}
           >
@@ -111,7 +111,7 @@ function AuthForm({ title }) {
               </Label>
             </div>
             <div className={` ml-4 md:ml-0 ${SHOW_ELEMENT.label}`}>
-              <Link href="#" className="text-sm coanda">
+              <Link href={ROUTE_FORGOT_PASS} className="text-sm aeonik">
                 Forgot your password?
               </Link>
             </div>
@@ -144,13 +144,13 @@ function AuthForm({ title }) {
         </div>
         <Button
           onClick={handleSubmit}
-          className="coanda-bold w-4/5 xl:w-2/6 md:w-7/12 bg-red-500 hover:bg-red-500 focus:bg-red-500 text-xl m-5 "
+          className="aeonik-bold w-4/5 xl:w-2/6 md:w-7/12 bg-red-500 hover:bg-red-500 focus:bg-red-500 text-xl m-5 "
         >
           {SHOW_ELEMENT.buttonName}
         </Button>
         <Link
           href={ROUTE_REGISTER}
-          className={`text-sm text-white coanda inline-block ${SHOW_ELEMENT.label}`}
+          className={`text-sm text-white aeonik inline-block ${SHOW_ELEMENT.label}`}
         >
           Aren&apos;t a member yet?
           <span className="inline border-b border-white"> Sign up instead</span>
@@ -158,7 +158,7 @@ function AuthForm({ title }) {
         {isReg && (
           <Link
             href={'login'}
-            className={`text-sm text-white coanda`}
+            className={`text-sm text-white aeonik`}
           >
             Already a member?
             <span className="inline border-b border-white">

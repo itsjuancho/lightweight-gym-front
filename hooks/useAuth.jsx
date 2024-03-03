@@ -74,7 +74,7 @@ const useAuth = () => {
       });
 
       if (!response.ok) {
-        throw new status(exception);
+        throw new setStatus(exception);
       }
 
       if (!formData.isRegister) {
@@ -91,8 +91,11 @@ const useAuth = () => {
         rePassword: "",
         isRegister: "",
       });
+      if (!formData.isRegister) {
+        router.push("/")
+      }
       setStatus(successMessage);
-      router.push("/");
+   
     } catch (status) {
       setStatus(status.message);
     }
