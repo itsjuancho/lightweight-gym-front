@@ -28,6 +28,9 @@ const Navbar = () => {
           <li>
             <a href="#contact">Contact</a>
           </li>
+          <li>
+            <a href="/checkout">Checkout</a>
+          </li>
         </ul>
       </Container>
     </div>

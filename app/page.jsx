@@ -7,11 +7,11 @@ import Contact from "@/components/contact";
 export default function Home() {
   return (
     <main className="flex flex-col">
-        <Navbar />
-        <Hero />
-        <Services />
-        <About/>
-        <Contact />
+      <Navbar />
+      <Hero />
+      <Services />
+      <About />
+      <Contact />
     </main>
   );
 }
