@@ -4,6 +4,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { ExclamationTriangleIcon, RocketIcon } from "@radix-ui/react-icons";
 import "../../app/globals.css";
 import { ROUTE_LOGIN } from "@/utils/routes";
+import Link from "next/link";
 
 const ShowAlert = ({ type, message}) => {
   return (
@@ -25,8 +26,8 @@ const ShowAlert = ({ type, message}) => {
           {message}
 
           {message.includes("reset success") &&(
-            <Link href={ROUTE_LOGIN} className="text-sm aeonik">
-              Go to Login
+            <Link href={ROUTE_LOGIN} className="text-xl aeonik underline">
+                Go to Login
             </Link>
           )}
         </AlertDescription>

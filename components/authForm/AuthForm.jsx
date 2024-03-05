@@ -50,14 +50,14 @@ function AuthForm({ title }) {
             className={`grid w-full items-center gap-1.5 my-6 ${SHOW_ELEMENT.input}`}
           >
             <Label htmlFor="text" className="text-2xl">
-              first name
+              First name
             </Label>
             <Input
               type="text"
               id="firstName"
               value={formData.firstName}
               onChange={handleChange}
-              className="bg-transparent border border-white w-full md:w-13"
+              className="bg-transparent border border-white w-full md:w-13 text-xl font-normal"
             />
           </div>
 
@@ -72,7 +72,7 @@ function AuthForm({ title }) {
               id="lastName"
               value={formData.lastName}
               onChange={handleChange}
-              className="bg-transparent border border-white w-full md:w-13"
+              className="bg-transparent border border-white w-full md:w-13 text-xl font-normal"
             />
           </div>
 
@@ -85,7 +85,7 @@ function AuthForm({ title }) {
               id="username"
               value={formData.username}
               onChange={handleChange}
-              className="bg-transparent border border-white w-full md:w-13"
+              className="bg-transparent border border-white w-full md:w-13 text-xl font-normal"
             />
           </div>
 
@@ -100,7 +100,7 @@ function AuthForm({ title }) {
               id="email"
               value={formData.email}
               onChange={handleChange}
-              className="bg-transparent border border-white w-full md:w-13"
+              className="bg-transparent border border-white w-full md:w-13 text-xl font-normal"
             />
           </div>
 
@@ -111,7 +111,7 @@ function AuthForm({ title }) {
               </Label>
             </div>
             <div className={` ml-4 md:ml-0 ${SHOW_ELEMENT.label}`}>
-              <Link href={ROUTE_FORGOT_PASS} className="text-sm aeonik">
+              <Link href={ROUTE_FORGOT_PASS} className="text-base aeonik">
                 Forgot your password?
               </Link>
             </div>
@@ -123,7 +123,7 @@ function AuthForm({ title }) {
               id="password"
               value={formData.password}
               onChange={handleChange}
-              className="bg-transparent border border-white w-full"
+              className="bg-transparent border border-white w-full text-xl"
             />
           </div>
 
@@ -138,7 +138,7 @@ function AuthForm({ title }) {
               id="rePassword"
               value={formData.rePassword}
               onChange={handleChange}
-              className="bg-transparent border border-white w-full md:w-13"
+              className="bg-transparent border border-white w-full md:w-13 text-xl"
             />
           </div>
         </div>

@@ -35,14 +35,12 @@ const useRecoverPasswod = () => {
   };
 
   const sendEmailFetch = async () => {
-    const formUrlEncoded= new URLSearchParams();
-    formUrlEncoded.append("email",formData.email);
     const response = await fetch(`${BASE_URL}/${urlRequest}`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/json",
       },
-      body:formUrlEncoded.toString(),
+      body:JSON.stringify(requestData),
     });
 
     if (!response.ok) {
@@ -85,7 +83,7 @@ const useRecoverPasswod = () => {
       successMessage = `Password is reset success`;
       exception = "Failed to reset password";
       requestData = {
-        token: formData.token,
+        tokenPassword: formData.token,
         password: formData.newPassword,
         confirmPassword: formData.confirmPassword,
       };
@@ -97,6 +95,10 @@ const useRecoverPasswod = () => {
       urlRequest = FORGOT_PASSWORD_URL;
       successMessage = `Send link to ${formData.email} for recover you password`;
       exception = "Failed to  send email";
+      requestData = {
+        mailTo: formData.email
+      };
+      
       return;
     }
 
