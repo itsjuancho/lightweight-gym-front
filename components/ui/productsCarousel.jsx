@@ -3,6 +3,7 @@
 import { cn } from "../../lib/utils";
 import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const ProductsCarousel = ({
   items,
@@ -98,7 +99,8 @@ const ProductsCarousel = ({
                   <span className=" text-lg leading-[1.6] text-gray-400 font-normal">
                     $ {item.price} Credits
                   </span>
-                  <button className="bg-red-500 text-xl rounded-md w-32 mt-2">Buy Now</button>
+                  <Link href={`/product/${item.id}`} className="bg-red-500 text-xl rounded-md w-32 mt-2 text-center">Buy Now
+                  </Link>
                 </div>
               </div>
             </blockquote>
