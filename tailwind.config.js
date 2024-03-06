@@ -27,6 +27,8 @@ module.exports = {
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-slider":
+          "linear-gradient(112deg, rgba(255,255,255,1) 1%, rgba(147,144,144,1) 27%, rgba(25,24,24,1) 54%, rgba(17,14,57,1) 272626%)",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
