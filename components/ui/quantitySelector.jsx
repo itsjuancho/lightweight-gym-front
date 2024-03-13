@@ -2,7 +2,7 @@ import React from 'react'
 
 const QuantitySelector = ({quantity, changeQuantity}) => {
   return (
-    <div className="flex items-center pl-10">
+    <div className="flex ml-10">
       <button onClick={() => changeQuantity(-1)}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -19,7 +19,7 @@ const QuantitySelector = ({quantity, changeQuantity}) => {
           />
         </svg>
       </button>
-      <span className="mx-2 w-16 text-center py-2 bg-red-500 bg-opacity-70 text-xl font-semibold">
+      <span className="mx-2 w-16 text-center py-2 bg-red-500 bg-opacity-90 rounded text-xl font-semibold">
         {quantity}
       </span>
       <button onClick={() => changeQuantity(1)}>
