@@ -1,8 +1,8 @@
 "use client";
 import React, { useEffect, useRef } from "react";
-import Container from "./ui/container";
+import Container from "../ui/container";
 import Image from "next/image";
-import globe from "@/public/globe.svg";
+import globe from "../../public/globe.svg";
 import { motion, useInView } from "framer-motion";
 
 const Services = () => {
@@ -19,7 +19,7 @@ const Services = () => {
       });
 
   return (
-    <div id='services' className="overflow-hidden min-h-[100dvh] bg-gradient-to-b from-[#210303] to-[#030712] text-gray-50 aeonik flex flex-col justify-center">
+    <div id='services' className="overflow-hidden min-h-[100dvh] bg-[#030712] text-gray-50 aeonik flex flex-col justify-center">
       <Container className="relative grid grid-cols-12 gap-5 px-20">
         <div className="col-span-3" />
         <div className="col-span-9">

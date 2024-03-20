@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "name": "Protein Powder",
+    "category": "Supplements",
+    "description": "High-quality whey protein for muscle recovery and growth. This protein powder is sourced from grass-fed cows and contains a blend of essential amino acids for optimal muscle repair. With a delicious chocolate flavor, it's perfect for post-workout shakes or as a nutritious addition to your morning smoothie. Whether you're a professional athlete or a fitness enthusiast, this protein powder will help you achieve your fitness goals.",
+    "price": "29.99",
+    "image": "https://ssnindia.com/wp-content/uploads/2023/03/SSN_Carbo-Force_5LBS-LEMON_-.1-600x600.png",
+    "image_gallery": [
+      "https://ssnindia.com/wp-content/uploads/2023/03/100pure-whey-protein_chocolate_2lbs_-.1-600x600.png",
+      "https://ssnindia.com/wp-content/uploads/2023/03/100pure-whey-protein_chocolate_2lbs_-.1-600x600.png",
+      "https://ssnindia.com/wp-content/uploads/2023/03/100pure-whey-protein_chocolate_2lbs_-.1-600x600.png"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "BCAAs",
+    "category": "Supplements",
+    "description": "Branch Chain Amino Acids for enhancing muscle recovery. These BCAAs are formulated to provide essential amino acids to fuel your muscles during intense workouts. With a refreshing lemon-lime flavor, they're the perfect addition to your water bottle during your gym sessions. Whether you're training for a marathon or hitting the weights at the gym, these BCAAs will help you recover faster and perform better.",
+    "price": "19.99",
+    "image": "https://ssnindia.com/wp-content/uploads/2023/03/SSN_Carbo-Force_5LBS-LEMON_-.1-600x600.png",
+    "image_gallery": [
+      "https://ssnindia.com/wp-content/uploads/2023/03/SSN_Carbo-Force_5LBS-LEMON_-.1-600x600.png",
+      "https://ssnindia.com/wp-content/uploads/2023/03/SSN_Carbo-Force_5LBS-LEMON_-.1-600x600.png",
+      "https://ssnindia.com/wp-content/uploads/2023/03/SSN_Carbo-Force_5LBS-LEMON_-.1-600x600.png"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Pre-workout",
+    "category": "Supplements",
+    "description": "Energizing formula to boost your workout performance. This pre-workout supplement is packed with caffeine, beta-alanine, and creatine to give you the energy and focus you need to crush your workouts. With a delicious fruit punch flavor, it's the perfect way to kickstart your gym session. Whether you're hitting the gym before work or training for a competition, this pre-workout will help you push past your limits and achieve your fitness goals.",
+    "price": "24.99",
+    "image": "https://ssnindia.com/wp-content/uploads/2023/03/SSN_NOX-Pump_2018-225g-berry_-.1-600x600.png",
+    "image_gallery": [
+      "https://ssnindia.com/wp-content/uploads/2023/03/SSN_NOX-Pump_2018-225g-berry_-.1-600x600.png",
+      "https://ssnindia.com/wp-content/uploads/2023/03/SSN_NOX-Pump_2018-225g-berry_-.1-600x600.png",
+      "https://ssnindia.com/wp-content/uploads/2023/03/SSN_NOX-Pump_2018-225g-berry_-.1-600x600.png"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Anabolic Muscle Builder",
+    "category": "Health",
+    "description": "Comprehensive nutrient support for active individuals. This muscle builder supplement is designed to provide your body with the essential nutrients it needs to support muscle growth and recovery. With a blend of protein, carbohydrates, and vitamins, it's the perfect post-workout shake for athletes and fitness enthusiasts. Whether you're a bodybuilder or just looking to build lean muscle mass, this supplement will help you achieve your fitness goals.",
+    "price": "14.99",
+    "image": "https://ssnindia.com/wp-content/uploads/2023/03/SSN_Creatine_300g_-.1-600x600.png",
+    "image_gallery": [
+      "https://ssnindia.com/wp-content/uploads/2023/03/SSN_Creatine_300g_-.1-600x600.png",
+      "https://ssnindia.com/wp-content/uploads/2023/03/SSN_Creatine_300g_-.1-600x600.png",
+      "https://ssnindia.com/wp-content/uploads/2023/03/SSN_Creatine_300g_-.1-600x600.png"
+    ]
+  }
+]

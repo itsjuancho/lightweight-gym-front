@@ -1,13 +1,16 @@
+"use client";
 import React from "react";
 import Image from "next/image";
-import lwLogo from "@/public/lw-logo.svg";
+import lwLogo from "../../public/lw-logo.svg";
 import Container from "./container";
 import Link from "next/link";
-import { ROUTE_LOGIN } from "@/utils/routes";
+import { usePathname } from "next/navigation";
+import {LOGIN_URL, ROUTE_CART, ROUTE_LOGIN} from '../../app/utils/routes';
 
 const Navbar = () => {
-
-  return (
+  const route = usePathname();
+  
+  return route !== "/"? null : (
     <div className="z-50 fixed top-0 h-28 min-w-[100dvw] aeonik text-gray-50 text-2xl py-8">
       <Container className="px-20 flex justify-between items-start">
         <a href="/" className="flex items-center">
@@ -20,16 +23,13 @@ const Navbar = () => {
             <Link href={ROUTE_LOGIN}>Join/ sign in</Link>
           </li>
           <li>
-            <a href="#services">Services</a>
+            <a href="/about-us">About us</a>
           </li>
           <li>
-            <a href="#about">About us</a>
+            <a href="/contact">Contact</a>
           </li>
           <li>
-            <a href="#contact">Contact</a>
-          </li>
-          <li>
-            <a href="/checkout">Checkout</a>
+            <a href={ROUTE_CART}>Cart</a>
           </li>
         </ul>
       </Container>

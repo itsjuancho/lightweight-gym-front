@@ -67,15 +67,6 @@
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
 @font-face {
   font-family: "Coanda";
   font-weight: normal;
@@ -169,4 +160,26 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+.swiper-pagination-bullet {
+  background: #ffffff !important;
+  width: 15px !important;
+  height: 15px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #ef4444 !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  padding: 30px;
+  border-radius: 50% !important;
+  background-color: #e6e6e6;
+  color: #000 !important;
+}
+
+.swiper-button-prev:after, .swiper-button-next:after {
+  font-size: 1rem !important;
 }

@@ -1,13 +1,13 @@
 import React from "react";
-import Container from "./ui/container";
-import arrowDown from "@/public/arrow-down.svg";
+import Container from "../../components/ui/container";
+import arrowDown from "../../public/arrow-down.svg";
 import Image from "next/image";
 
 const Contact = () => {
   return (
     <div
       id="contact"
-      className="bg-gradient-to-b from-[#030712] to-[#210303] text-gray-50 aeonik flex flex-col justify-center"
+      className="min-h-[100dvh] bg-gradient-to-b from-[#030712] to-[#210303] text-gray-50 aeonik flex flex-col justify-center"
     >
       <Container className="w-full py-16 grid grid-cols-12 gap-5 px-20">
         <div className=" col-span-12 flex justify-between items-start">

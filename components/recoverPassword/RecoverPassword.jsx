@@ -1,17 +1,20 @@
+'use client'
+
 import Image from "next/image";
 import React from "react";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import Logo from "@/public/images/Logo.png";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { Button } from "../ui/button";
+import Logo from "../../public/images/Logo.png";
 import "../../app/globals.css";
-import { useRouter } from "next/router";
-import useRecoverPasswod from "@/hooks/useRecoverPasswod";
+import useRecoverPasswod from "../../hooks/useRecoverPasswod";
 import { AnimatePresence } from "framer-motion";
 import ShowAlert from "../alert/ShowAlert";
+import { useSearchParams  } from "next/navigation";
+
 const RecoverPassword = ({ title, labelButton }) => {
-  const router = useRouter();
-  const { token } = router.query;
+  const searchParams = useSearchParams()
+  const token = searchParams.get('token')
   const { formData, status, handleChange, handleSubmit } =
     useRecoverPasswod();
   const isForgot = labelButton.includes("Forgot");

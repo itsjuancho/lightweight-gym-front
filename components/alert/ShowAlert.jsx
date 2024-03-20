@@ -1,9 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { ExclamationTriangleIcon, RocketIcon } from "@radix-ui/react-icons";
 import "../../app/globals.css";
-import { ROUTE_LOGIN } from "@/utils/routes";
+import { ROUTE_LOGIN } from "../../app/utils/routes";
 import Link from "next/link";
 
 const ShowAlert = ({ type, message}) => {

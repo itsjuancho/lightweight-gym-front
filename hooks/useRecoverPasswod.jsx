@@ -1,16 +1,20 @@
+import { useRouter } from "next/navigation";
 import {
   BASE_URL,
   CHANGE_PASSWORD_URL,
   FORGOT_PASSWORD_URL,
   RESET_PASSWORD_URL,
-} from "@/utils/routes";
+  ROUTE_LOGIN,
+} from "../app/utils/routes";
 import {
   validateFieldForResetPassword,
   validateOnlyEmail
-} from "@/utils/validation";
-
+} from "../app/utils/validation";
 import { useState } from "react";
+
 const useRecoverPasswod = () => {
+
+  const router = useRouter();
   const [status, setStatus] = useState(null);
   const [formData, setFormData] = useState({
     email: "",
@@ -73,6 +77,7 @@ const useRecoverPasswod = () => {
       newPassword: "",
       confirmPassword: "",
     });
+    router.push(`${ROUTE_LOGIN}`)
   };
 
   const builderRequest = (isForgot) => {
@@ -98,7 +103,6 @@ const useRecoverPasswod = () => {
       requestData = {
         mailTo: formData.email
       };
-      
       return;
     }
 

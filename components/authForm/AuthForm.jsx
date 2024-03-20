@@ -1,17 +1,17 @@
+'use client'
 import React from "react";
-import "../../app/globals.css";
-import Logo from "@/public/images/Logo.png";
-import GymMen from "@/public/images/menGym.png";
+import Logo from "../../public/lw-logo.svg";
+import GymMen from "../../public/images/menGym.png";
 import Image from "next/image";
 import { Button } from "../ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
 import Link from "next/link";
-import { ROUTE_FORGOT_PASS, ROUTE_REGISTER } from "@/utils/routes";
-import useAuth from "@/hooks/useAuth";
-import ShowAlert from "@/components/alert/ShowAlert";
+import useAuth from "../../hooks/useAuth";
+import ShowAlert from "../../components/alert/ShowAlert";
 import { AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { ROUTE_FORGOT_PASS, ROUTE_LOGIN, ROUTE_REGISTER } from "../../app/utils/routes";
 function AuthForm({ title }) {
   const { formData, status, loading, handleChange, handleSubmit } = useAuth();
 
@@ -144,7 +144,7 @@ function AuthForm({ title }) {
         </div>
         <Button
           onClick={handleSubmit}
-          className="aeonik-bold w-4/5 xl:w-2/6 md:w-7/12 bg-red-500 hover:bg-red-500 focus:bg-red-500 text-xl m-5 "
+          className="aeonik-bold w-4/5 xl:w-2/6 md:w-7/12 text-white bg-red-500 hover:bg-red-500 focus:bg-red-500 text-xl m-5 "
         >
           {SHOW_ELEMENT.buttonName}
         </Button>
@@ -157,7 +157,7 @@ function AuthForm({ title }) {
         </Link>
         {isReg && (
           <Link
-            href={'login'}
+            href={ROUTE_LOGIN}
             className={`text-sm text-white aeonik`}
           >
             Already a member?
