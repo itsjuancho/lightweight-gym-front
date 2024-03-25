@@ -9,12 +9,19 @@ import products from "../../../public/enhanced_gym_items.json";
 import ProductsCarousel from "../../../components/ui/productsCarousel";
 import ProductBento from "../../../components/ui/productBento";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { ROUTE_CART } from "../../utils/routes";
 
 const ProductPage = ({ params }) => {
+  const router = useRouter();
   const product_id = parseInt(params.product_id);
   const [showNotification, setShowNotification] = useState(false);
   const product = products.find((item) => item.id === product_id);
   const [quantity, setQuantity] = useState(1);
+
+  const redirect = () => {
+    router.push(ROUTE_CART);
+  };
 
   const changeQuantity = (amount: number) => {
     setQuantity((prevQuantity) => {
@@ -87,7 +94,7 @@ const ProductPage = ({ params }) => {
                 </div>
               )}
               <Link
-                href={""}
+                href={`http://localhost:3000/${ROUTE_CART}`}
                 className="bg-red-500 text-base py-2 px-8 text-center"
               >
                 Buy Now

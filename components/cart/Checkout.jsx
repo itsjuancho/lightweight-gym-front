@@ -40,7 +40,6 @@ import useShoppingCart from "../../hooks/useShoppingCart";
 import useCreditCard from "../../hooks/useCreditCard";
 
 const Checkout = () => {
-  
   const getProductLocalStorage = localStorage.getItem("cartItem");
   const products = getProductLocalStorage
     ? JSON.parse(getProductLocalStorage)
@@ -55,7 +54,9 @@ const Checkout = () => {
     applyCoupon,
     coupons,
     discount,
-    appliedCoupons
+    appliedCoupons,
+    handleSubmit,
+    showNotification,
   } = useShoppingCart(products);
 
   return (
@@ -163,13 +164,19 @@ const Checkout = () => {
         </ScrollArea>
 
         <div className="flex flex-col justify-start items-center aeonik bg-[#0E0E0E] w-3/12 text-white py-10">
+          {showNotification && (
+            <div className="fixed top-[8%] z-10 text-center left-[79%] w-60 p-3 bg-red-500 text-white rounded shadow-lg">
+              Success
+            </div>
+          )}
+
           <div className="w-4/5">
             <h2 className="font-semibold text-2xl leading-[3.5rem] px-8">
               Order Summary
             </h2>
             <hr className="w-full" />
           </div>
-          <div className="w-4/5 h-[70dvh] my-6">
+          <div className="w-4/5 h-[70dvh] my-2">
             <div className="flex justify-between font-semibold text-2xl px-8">
               <h3>Payment</h3>
               <span>$ {subtotal.toFixed(2)}</span>
@@ -182,6 +189,7 @@ const Checkout = () => {
                 type="text"
                 id="account"
                 className="bg-transparent border border-white"
+                placeholder="Your Name"
               />
             </div>
             <div className="grid w-full items-center gap-1.5 px-8 my-6">
@@ -191,27 +199,27 @@ const Checkout = () => {
                   <SelectValue placeholder="Select a account" />
                 </SelectTrigger>
                 <SelectContent className="bg-white">
-                  <SelectItem value="est">123944-Lina Account</SelectItem>
+                  <SelectItem value="1">123944-Lina Account</SelectItem>
                 </SelectContent>
               </Select>
             </div>
-            <div className="grid w-full items-center gap-1.5 px-8 my-6">
+            {/* <div className="grid w-full items-center gap-1.5 px-8 my-6">
               <Label className="font-semibold text-xl my-2">Enter Cupon</Label>
               <Input
                 type="text"
                 id="cupon"
                 className="bg-transparent border border-white"
               />
-            </div>
+            </div> */}
 
             <div className="font-semibold px-8 my-6">
-              <Button className="bg-[#413E3E] text-base w-[144px] h-[44px]">
+              {/* <Button className="bg-[#413E3E] text-base w-[144px] h-[44px]">
                 Apply
-              </Button>
+              </Button> */}
 
               <Dialog className="w-full bg-blue dialog-size">
                 <DialogTrigger asChild>
-                  <Button className="bg-transparent text-red-500 text-base mx-6">
+                  <Button className="bg-transparent text-red-500 text-base hover:bg-red-500 hover:text-white">
                     View Coupns
                   </Button>
                 </DialogTrigger>
@@ -221,7 +229,7 @@ const Checkout = () => {
                     <Separator className="my-9 bg-gray-500" />
                   </DialogHeader>
 
-                  <div className="flex h-[29rem]">
+                  <div className="flex flex-wrap h-[29rem]">
                     {coupons.map((counpon) => (
                       <Coupon
                         amount={counpon.amount}
@@ -269,6 +277,9 @@ const Checkout = () => {
                   <SelectValue placeholder="Select Payment Method" />
                 </SelectTrigger>
                 <SelectContent className="bg-white">
+                  <SelectItem key={20} value={"myAccount"}>
+                    debit my account
+                  </SelectItem>
                   {cards.map((card, index) => (
                     <SelectItem key={index} value={index.toString()}>
                       {card}
@@ -276,7 +287,7 @@ const Checkout = () => {
                   ))}
                 </SelectContent>
               </Select>
-
+              {/* 
               <Dialog>
                 <DialogTrigger asChild>
                   <Button className="bg-[#413E3E] w-[180px] h-[44px] my-2 text-base">
@@ -344,7 +355,7 @@ const Checkout = () => {
                     </Button>
                   </DialogFooter>
                 </DialogContent>
-              </Dialog>
+              </Dialog> */}
             </div>
             <hr />
             <div className="font-semibold px-8 my-7">
@@ -363,7 +374,10 @@ const Checkout = () => {
             </div>
 
             <div className="flex flex-col justify-items-center items-center my-6">
-              <Button className="bg-red-500 text-base w-[90%]">
+              <Button
+                onClick={handleSubmit}
+                className="bg-red-500 text-base w-[90%]"
+              >
                 {" "}
                 Checkout{" "}
               </Button>

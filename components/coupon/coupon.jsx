@@ -16,7 +16,7 @@ const Coupon = ({
   };
 
   return (
-    <div className="bg-[#353535] h-[15rem] w-[20rem] mx-4">
+    <div className="bg-[#353535] h-[13rem] w-[20rem] mx-4 my-4">
       <div className="flex flex-col justify-center items-center py-4">
         <div>
           <h3 className="text-3xl">{amount}</h3>

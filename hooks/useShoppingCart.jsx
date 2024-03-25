@@ -1,21 +1,18 @@
 import { useEffect, useState } from "react";
-import { BASE_URL, COUPON_URL } from "../app/utils/routes";
+import { BASE_URL, COUPON_URL, PURCHAGE_URL } from "../app/utils/routes";
 
 function useShoppingCart(products) {
-  const [formData, setFormData] = useState({
-    accountId: "",
-  });
-  
   const [cartProducts, setCartProducts] = useState(products);
   const [subtotal, setSubtotal] = useState(0);
   const [totalToPay, setTotalToPay] = useState(0);
   const [coupons, setCoupons] = useState([]);
   const [appliedCoupons, setAppliedCoupons] = useState([]);
   const [discount, setDiscount] = useState(0);
-  const [totalDiscount, setTotalDiscount] = useState(0);
+  const [selectedAccount, setSelectedAccount] = useState(null);
+  const [showNotification, setShowNotification] = useState(false);
   const token = localStorage.getItem("token");
-  let couponsIds=[];
-  
+  let couponsIds = [];
+
   useEffect(() => {
     if (products.length > 0) {
       setCartProducts(products);
@@ -44,34 +41,33 @@ function useShoppingCart(products) {
     fetchCounpons();
   }, []);
 
+  const handleSelectChange = (event) => {
+    console.log(event.target.value);
+    setSelectedAccount(event.target.value);
+  };
+
   const calculateSubTotal = (cartProducts) => {
     let newSubtotal = 0;
     cartProducts.forEach((product) => {
       newSubtotal += parseFloat(product.price) * product.quantity;
     });
     setSubtotal(newSubtotal);
-    if (couponsIds.length === 0){
-      setTotalToPay(newSubtotal)
+    if (couponsIds.length === 0) {
+      setTotalToPay(newSubtotal);
     }
   };
 
   const calculateDiscount = (couponId) => {
-    
-    couponsIds.push(couponId)
+    couponsIds.push(couponId);
 
-    console.log(couponsIds)
     if (couponsIds.length > 0) {
       let totalWithoutDiscount = subtotal;
-      let totalDiscount = 0;
+      let totalDiscount = discount;
+
       couponsIds.forEach((couponId) => {
         let coupon = coupons.find((coupon) => coupon.id === couponId);
         if (coupon && !coupon.spent) {
-          let discountAmount = Math.min(
-            coupon.amount,
-            totalWithoutDiscount * 0.3
-          );
-          totalDiscount += discountAmount;
-
+          totalDiscount += coupon.amount;
           if (!appliedCoupons.includes(couponId)) {
             setAppliedCoupons([...appliedCoupons, couponId]);
           }
@@ -79,8 +75,12 @@ function useShoppingCart(products) {
       });
 
       let totalWithDiscount = totalWithoutDiscount - totalDiscount;
+      if (totalWithDiscount <= 0) {
+        setTotalToPay(0);
+      } else {
+        setTotalToPay(totalWithDiscount);
+      }
       setDiscount(totalDiscount);
-      setTotalToPay(totalWithDiscount);
     } else {
       setTotalToPay(subtotal);
     }
@@ -112,17 +112,54 @@ function useShoppingCart(products) {
     setCartProducts(updatedProducts);
     calculateSubTotal(cartProducts);
     calculateDiscount();
-    
   };
 
   const applyCoupon = (couponId) => {
     if (!appliedCoupons.includes(couponId)) {
-      console.log("wenas")
+      console.log("wenas");
       calculateDiscount(couponId);
       setAppliedCoupons([...appliedCoupons, couponId]);
     }
 
     console.log(discount);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const headers = new Headers();
+      headers.append("Content-Type", "application/json");
+      headers.append("Authorization", `Bearer ${token}`);
+
+      const purchaseDetails = cartProducts.map((product) => ({
+        productId: product.id,
+        quantity: product.quantity, // Se establece la cantidad como 1 para cada producto
+      }));
+
+      let requestData = {
+        accountId: 1,
+        storeSubscriptionId: 1,
+        purchaseDetails: purchaseDetails,
+        couponsIds: appliedCoupons,
+      };
+
+      const response = await fetch(`${BASE_URL}/${PURCHAGE_URL}`, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(requestData),
+      });
+
+      if (!response.ok) {
+        throw new setStatus(exception);
+      }
+      setShowNotification(true)
+      setCartProducts([]);
+      localStorage.setItem("cartItem", []);
+    } catch (status) {
+      console.error(status);
+      setShowNotification(false)
+    }
+    
   };
 
   return {
@@ -134,6 +171,9 @@ function useShoppingCart(products) {
     coupons,
     discount,
     appliedCoupons,
+    handleSelectChange,
+    handleSubmit,
+    showNotification,
   };
 }
 
