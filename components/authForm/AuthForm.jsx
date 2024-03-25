@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React from "react";
 import Logo from "../../public/lw-logo.svg";
 import GymMen from "../../public/images/menGym.png";
@@ -11,7 +11,12 @@ import useAuth from "../../hooks/useAuth";
 import ShowAlert from "../../components/alert/ShowAlert";
 import { AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { ROUTE_FORGOT_PASS, ROUTE_LOGIN, ROUTE_REGISTER } from "../../app/utils/routes";
+import {
+  ROUTE_FORGOT_PASS,
+  ROUTE_HOME,
+  ROUTE_LOGIN,
+  ROUTE_REGISTER,
+} from "../../app/utils/routes";
 function AuthForm({ title }) {
   const { formData, status, loading, handleChange, handleSubmit } = useAuth();
 
@@ -28,10 +33,16 @@ function AuthForm({ title }) {
 
   return (
     <div className="authform w-screen min-h-[100dvh]">
-      <Image src={GymMen} alt="gym men" className="xl:w-[956px] hidden sm:block" />
+      <Image
+        src={GymMen}
+        alt="gym men"
+        className="xl:w-[956px] lg:hidden xl:block hidden" 
+      />
       <div className="form bg-black w-full bg-gradient-to-t form-shadow-right">
         <div className="form-title flex items-center justify-center w-full max-w-sm">
-          <Image src={Logo} alt="logo" className="mr-8" />
+          <Link href={ROUTE_HOME}>
+            <Image src={Logo} alt="logo" className="mr-8" />
+          </Link>
           <h1 className="text-white aeonik-bold text-2xl">
             <span className="text-white">{title}</span>
             <span className="text-red-500"> Lightweight</span>
@@ -57,7 +68,7 @@ function AuthForm({ title }) {
               id="firstName"
               value={formData.firstName}
               onChange={handleChange}
-              className="bg-transparent border border-white w-full md:w-13 text-xl font-normal"
+              className="bg-transparent border border-white w-full md:w-13 text-2xl font-normal"
             />
           </div>
 
@@ -72,7 +83,7 @@ function AuthForm({ title }) {
               id="lastName"
               value={formData.lastName}
               onChange={handleChange}
-              className="bg-transparent border border-white w-full md:w-13 text-xl font-normal"
+              className="bg-transparent border border-white w-full md:w-13 text-2xl	font-normal"
             />
           </div>
 
@@ -85,7 +96,7 @@ function AuthForm({ title }) {
               id="username"
               value={formData.username}
               onChange={handleChange}
-              className="bg-transparent border border-white w-full md:w-13 text-xl font-normal"
+              className="bg-transparent border border-white w-full md:w-13 text-2xl	font-normal"
             />
           </div>
 
@@ -100,7 +111,7 @@ function AuthForm({ title }) {
               id="email"
               value={formData.email}
               onChange={handleChange}
-              className="bg-transparent border border-white w-full md:w-13 text-xl font-normal"
+              className="bg-transparent border border-white w-full md:w-13 text-2xl	font-normal"
             />
           </div>
 
@@ -144,22 +155,19 @@ function AuthForm({ title }) {
         </div>
         <Button
           onClick={handleSubmit}
-          className="aeonik-bold w-4/5 xl:w-2/6 md:w-7/12 text-white bg-red-500 hover:bg-red-500 focus:bg-red-500 text-xl m-5 "
+          className="aeonik-bold w-4/5 xl:w-2/6 md:w-7/12 text-white bg-red-500 hover:bg-red-500 focus:bg-red-500 text-xl m-5 p-7 "
         >
           {SHOW_ELEMENT.buttonName}
         </Button>
         <Link
           href={ROUTE_REGISTER}
-          className={`text-sm text-white aeonik inline-block ${SHOW_ELEMENT.label}`}
+          className={`text-xl text-white aeonik inline-block ${SHOW_ELEMENT.label}`}
         >
           Aren&apos;t a member yet?
           <span className="inline border-b border-white"> Sign up instead</span>
         </Link>
         {isReg && (
-          <Link
-            href={ROUTE_LOGIN}
-            className={`text-sm text-white aeonik`}
-          >
+          <Link href={ROUTE_LOGIN} className={`text-xl text-white aeonik`}>
             Already a member?
             <span className="inline border-b border-white">
               {" "}
@@ -167,7 +175,6 @@ function AuthForm({ title }) {
             </span>
           </Link>
         )}
-        
       </div>
     </div>
   );

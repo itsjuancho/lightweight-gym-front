@@ -6,13 +6,14 @@ const About = () => {
     { name: "Maicol" },
     { name: "Tobi" },
     { name: "Elias" },
-    { name: "Lina" },
     { name: "Ruth" },
     { name: "Eri" },
     { name: "Luca" },
     { name: "Juancho" },
     { name: "Ale" },
     { name: "Juan Ignacio" },
+    { name: "Maxi Vulcano" },
+    { name: "Oscar" },
   ];
 
   return (

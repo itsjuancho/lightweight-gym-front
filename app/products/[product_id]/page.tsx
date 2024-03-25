@@ -14,16 +14,11 @@ import { useRouter } from "next/navigation";
 import { ROUTE_CART } from "../../utils/routes";
 
 const ProductPage = ({ params }) => {
-  const router = useRouter();
   const product_id = parseInt(params.product_id);
   const [showNotification, setShowNotification] = useState(false);
   const product = products.find((item) => item.id === product_id);
   const [quantity, setQuantity] = useState(1);
-  const [couponModal, setCouponModal] = useState(false);
-
-  const redirect = () => {
-    router.push(ROUTE_CART);
-  };
+  /* const [couponModal, setCouponModal] = useState(false); */
 
   const changeQuantity = (amount: number) => {
     setQuantity((prevQuantity) => {
@@ -49,23 +44,27 @@ const ProductPage = ({ params }) => {
     };
 
     const currentCartJson = localStorage.getItem("cartItem");
-    const currentCart = currentCartJson? JSON.parse(currentCartJson): [];
+    const currentCart = currentCartJson ? JSON.parse(currentCartJson) : [];
 
-    const existingProductIndex = currentCart.findIndex(item => item.id === product.id);
+    const existingProductIndex = currentCart.findIndex(
+      (item) => item.id === product.id
+    );
     if (existingProductIndex !== -1) {
       currentCart[existingProductIndex].quantity = quantity;
-      currentCart[existingProductIndex].total = (parseFloat(product.price) * currentCart[existingProductIndex].quantity).toFixed(2);
+      currentCart[existingProductIndex].total = (
+        parseFloat(product.price) * currentCart[existingProductIndex].quantity
+      ).toFixed(2);
     } else {
       currentCart.push(formattedProduct);
     }
-    localStorage.setItem('cartItem', JSON.stringify(currentCart));
+    localStorage.setItem("cartItem", JSON.stringify(currentCart));
     setShowNotification(true);
   };
 
-  const closeCouponModal = () => {
+/*   const closeCouponModal = () => {
     setCouponModal(false);
-  }
-
+  };
+ */
   return (
     <div
       id="product-page"
@@ -88,28 +87,31 @@ const ProductPage = ({ params }) => {
             />
             <ProductInformation product={product} className="" />
             <div className="flex justify-end space-x-10 items-center">
-              <button
+              {/*   <button
                 onClick={() => setCouponModal(true)}
                 className="group text-neutral-100 transition duration-300 animate-fade-in"
               >
                 Apply coupons
                 <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[1px] bg-neutral-100"></span>
-              </button>
+              </button> */}
               <button
                 onClick={addToCart}
-                className="bg-zinc-600 border text-base py-2 px-8 text-center rounded hover:bg-transparent transition-colors"
+                className="bg-zinc-600 border text-base py-2 px-8 text-center rounded hover:bg-transparent transition-colors text-xl"
               >
                 Add to Cart
               </button>
               {showNotification && (
-                <div className="absolute top-0 z-10 right-0 text-center w-60 p-3 bg-red-500/50 text-white rounded">
+                <div className="absolute top-0 z-10 right-0 text-center w-60 p-3 bg-red-500/50 text-white text-xl rounded">
                   Item added to cart!
                 </div>
               )}
-             <Link
+              <Link
                 href={`http://localhost:3000/${ROUTE_CART}`}
-                className="bg-red-500 text-base py-2 px-8 text-center rounded border border-red-500 hover:bg-transparent transition-colors"
-              > Buy now </Link>
+                className="bg-red-500 text-base py-2 px-8 text-center rounded border border-red-500 hover:bg-transparent transition-colors text-xl"
+              >
+                {" "}
+                Buy now{" "}
+              </Link>
             </div>
           </div>
         </div>
@@ -124,7 +126,7 @@ const ProductPage = ({ params }) => {
           />
         </div>
       </Container>
-      {couponModal && <CouponsModal close={closeCouponModal}/>}
+      {/* {couponModal && <CouponsModal close={closeCouponModal}/>} */}
     </div>
   );
 };

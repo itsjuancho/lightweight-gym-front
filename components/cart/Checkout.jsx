@@ -70,7 +70,7 @@ const Checkout = () => {
         </a>
         <div className=" flex justify-between w-full">
           <div className="flex justify-evenly items-center text-white w-2/4 text-xl underline">
-            <Link href={"/#services"}>Services</Link>
+            <Link href={"/#services"}>View Products</Link>
             <Link href={"/#about"}>About Us </Link>
             <Link href={"/#contact"}>Contact </Link>
           </div>
@@ -188,17 +188,17 @@ const Checkout = () => {
               <Input
                 type="text"
                 id="account"
-                className="bg-transparent border border-white"
+                className="bg-transparent border border-white text-lg	"
                 placeholder="Your Name"
               />
             </div>
             <div className="grid w-full items-center gap-1.5 px-8 my-6">
               <Label className="font-semibold text-xl my-2">Shipping</Label>
               <Select>
-                <SelectTrigger className="bg-transparent border border-white text-base">
+                <SelectTrigger className="bg-transparent border border-white text-lg">
                   <SelectValue placeholder="Select a account" />
                 </SelectTrigger>
-                <SelectContent className="bg-white">
+                <SelectContent className="bg-white text-lg">
                   <SelectItem value="1">123944-Lina Account</SelectItem>
                 </SelectContent>
               </Select>
@@ -272,19 +272,14 @@ const Checkout = () => {
               <Label className="font-semibold text-xl my-2">
                 Payment Method
               </Label>
-              <Select>
+              <Select disabled={true}>
                 <SelectTrigger className="bg-transparent border border-white text-base">
-                  <SelectValue placeholder="Select Payment Method" />
+                  <SelectValue placeholder={'debit credits from my account'} />
                 </SelectTrigger>
                 <SelectContent className="bg-white">
                   <SelectItem key={20} value={"myAccount"}>
                     debit my account
                   </SelectItem>
-                  {cards.map((card, index) => (
-                    <SelectItem key={index} value={index.toString()}>
-                      {card}
-                    </SelectItem>
-                  ))}
                 </SelectContent>
               </Select>
               {/* 

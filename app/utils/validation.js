@@ -28,6 +28,10 @@ export const validateRegistration = (formData) => {
       return "First Name, Last Name, and Username should not contain special characters";
     }
 
+    if (firstName.length <4 || lastName.length <4) {
+      return "First Name & LastName must be at least 4 characters longs";
+    }
+
     if (!REGEX_FIELD_EMAIL.test(email)) {
       return "Invalid email address";
     }
@@ -45,6 +49,10 @@ export const validateRegistration = (formData) => {
 
   if (!username) {
     return "Username Field is required";
+  }
+
+  if (username.length <3) {
+    return "Username must be at least 3 characters long";
   }
 
   if (password.length < 8) {

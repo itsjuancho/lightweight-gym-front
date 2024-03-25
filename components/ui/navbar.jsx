@@ -5,7 +5,7 @@ import lwLogo from "../../public/lw-logo.svg";
 import Container from "./container";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {LOGIN_URL, ROUTE_CART, ROUTE_LOGIN} from '../../app/utils/routes';
+import {LOGIN_URL, ROUTE_CART, ROUTE_LOGIN, ROUTE_REGISTER} from '../../app/utils/routes';
 
 const Navbar = () => {
   const route = usePathname();
@@ -20,7 +20,8 @@ const Navbar = () => {
 
         <ul>
           <li className="text-red-500">
-            <Link href={ROUTE_LOGIN}>Join/ sign in</Link>
+            <Link href={ROUTE_LOGIN}>Join/</Link>
+            <Link href={ROUTE_REGISTER}> sign in</Link>
           </li>
           <li>
             <a href="/about-us">About us</a>

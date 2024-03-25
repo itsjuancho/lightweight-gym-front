@@ -2,7 +2,7 @@
 import { validateRegistration } from "../app/utils/validation";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { BASE_URL, LOGIN_URL, REGISTER_URL, ROUTE_HOME } from "../app/utils/routes";
+import { BASE_URL, LOGIN_URL, REGISTER_URL, ROUTE_HOME, ROUTE_LOGIN } from "../app/utils/routes";
 
 const useAuth = () => {
   const router = useRouter();
@@ -92,8 +92,13 @@ const useAuth = () => {
         rePassword: "",
         isRegister: "",
       });
+      
       if (!formData.isRegister) {
         router.push(`${ROUTE_HOME}`)
+      }
+
+      if (formData.isRegister) {
+        router.push(`${ROUTE_LOGIN}`)
       }
       setStatus(successMessage);
    
