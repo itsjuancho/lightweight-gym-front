@@ -14,7 +14,7 @@ const Navbar = () => {
     <div className="z-50 fixed top-0 h-28 min-w-[100dvw] aeonik text-gray-50 text-2xl py-8">
       <Container className="px-20 flex justify-between items-start">
         <a href="/" className="flex items-center">
-          <Image src={lwLogo} />
+          <Image src={lwLogo} alt="logo" />
           <p className="coanda-bold ml-6">Lightweight</p>
         </a>
 

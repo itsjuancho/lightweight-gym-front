@@ -150,13 +150,14 @@ function useShoppingCart(products) {
       });
 
       if (!response.ok) {
-        throw new setStatus(exception);
+        console.error(response)
+        return;
       }
       setShowNotification(true)
       setCartProducts([]);
       localStorage.setItem("cartItem", []);
-    } catch (status) {
-      console.error(status);
+    } catch (error) {
+      console.error(error.message);
       setShowNotification(false)
     }
     

@@ -104,7 +104,7 @@ const ProductsCarousel = ({
                 </div>
               </div>
             </blockquote>
-            <Image src={item.image} width={384} height={0} className="absolute mb-3"/>
+            <Image src={item.image} alt={item.name} width={384} height={0} className="absolute mb-3"/>
           </li>
         ))}
       </ul>

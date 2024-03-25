@@ -225,7 +225,7 @@ const Checkout = () => {
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[80rem] h-[40rem] bg-[#232323] text-white w-full">
                   <DialogHeader>
-                    <DialogTitle> My Coupons </DialogTitle>
+                    <DialogTitle className="text-xl"> My Coupons </DialogTitle>
                     <Separator className="my-9 bg-gray-500" />
                   </DialogHeader>
 
@@ -258,7 +258,7 @@ const Checkout = () => {
                       <Button
                         type="button"
                         variant="secondary"
-                        className="bg-gray-500"
+                        className="bg-gray-500 text-lg"
                       >
                         Close
                       </Button>
