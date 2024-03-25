@@ -7,6 +7,7 @@ import QuantitySelector from "../../../components/ui/quantitySelector";
 import ProductInformation from "../../../components/ui/productInformation";
 import products from "../../../public/enhanced_gym_items.json";
 import ProductsCarousel from "../../../components/ui/productsCarousel";
+import CouponsModal from "../../../components/ui/couponsModal";
 import ProductBento from "../../../components/ui/productBento";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -18,6 +19,7 @@ const ProductPage = ({ params }) => {
   const [showNotification, setShowNotification] = useState(false);
   const product = products.find((item) => item.id === product_id);
   const [quantity, setQuantity] = useState(1);
+  const [couponModal, setCouponModal] = useState(false);
 
   const redirect = () => {
     router.push(ROUTE_CART);
@@ -60,10 +62,14 @@ const ProductPage = ({ params }) => {
     setShowNotification(true);
   };
 
+  const closeCouponModal = () => {
+    setCouponModal(false);
+  }
+
   return (
     <div
       id="product-page"
-      className="pt-36 min-h-[100dvh] bg-gradient-to-b from-[#030712] to-[#210303] text-gray-50 aeonik flex flex-col justify-center "
+      className="pt-36 min-h-[100dvh] bg-gradient-to-b from-[#030712] to-[#210303] text-gray-50 aeonik flex flex-col justify-center"
     >
       <Container className={"w-auto relative"}>
         <div className="flex">
@@ -71,8 +77,8 @@ const ProductPage = ({ params }) => {
             <ProductSlider images={product?.image_gallery} />
           </div>
           <div className="w-3/6 space-y-6">
-            <div className="w-full bg-slate-50 opacity-85">
-              <p className="leading-[1.6] text-zinc-900 font-bold aeonik text-4xl pl-10 py-2">
+            <div className="w-full text-zinc-50">
+              <p className="leading-[1.6] font-bold aeonik text-4xl pl-10 py-2">
                 {product?.name}
               </p>
             </div>
@@ -80,25 +86,30 @@ const ProductPage = ({ params }) => {
               quantity={quantity}
               changeQuantity={changeQuantity}
             />
-            <ProductInformation product={product} />
-            <div className="pl-10 space-x-10 pt-6">
+            <ProductInformation product={product} className="" />
+            <div className="flex justify-end space-x-10 items-center">
+              <button
+                onClick={() => setCouponModal(true)}
+                className="group text-neutral-100 transition duration-300 animate-fade-in"
+              >
+                Apply coupons
+                <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[1px] bg-neutral-100"></span>
+              </button>
               <button
                 onClick={addToCart}
-                className="bg-gray-600 text-base py-2 px-8 text-center"
+                className="bg-zinc-600 border text-base py-2 px-8 text-center rounded hover:bg-transparent transition-colors"
               >
                 Add to Cart
               </button>
               {showNotification && (
-                <div className="fixed top-36 z-10 text-center left-0 2xl:left-[calc(100%-90%)] w-60 p-3 bg-red-500 text-white rounded shadow-lg">
+                <div className="absolute top-0 z-10 right-0 text-center w-60 p-3 bg-red-500/50 text-white rounded">
                   Item added to cart!
                 </div>
               )}
-              <Link
+             <Link
                 href={`http://localhost:3000/${ROUTE_CART}`}
-                className="bg-red-500 text-base py-2 px-8 text-center"
-              >
-                Buy Now
-              </Link>
+                className="bg-red-500 text-base py-2 px-8 text-center rounded border border-red-500 hover:bg-transparent transition-colors"
+              > Buy now </Link>
             </div>
           </div>
         </div>
@@ -113,6 +124,7 @@ const ProductPage = ({ params }) => {
           />
         </div>
       </Container>
+      {couponModal && <CouponsModal close={closeCouponModal}/>}
     </div>
   );
 };

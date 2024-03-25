@@ -1,9 +1,10 @@
 import React from 'react'
 
-const productInformation = ({ product }) => {
+const productInformation = ({ product, className }) => {
+  const classes = className ? className : '';
   return (
     <>
-      <div>
+      <div className={`${classes}`}>
         <p className="leading-[1.6] text-red-400 opacity-85 font-bold aeonik text-3xl pl-10">
           Price: {product?.price} credits
         </p>

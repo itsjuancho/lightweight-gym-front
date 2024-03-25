@@ -22,7 +22,7 @@ const ProductsSlider = ({ images }) => {
     >
       {images?.map((image, index) => (
         <SwiperSlide key={index}>
-          <div className="flex justify-center items-center bg-gradient-slider pt-7 pb-14">
+          <div className="flex rounded-xl justify-center items-center bg-gradient-to-r from-slate-800 to-slate-900 pt-7 pb-14">
             <Image className='transform -rotate-12' src={image} alt={`image-product ${index}`} width={400} height={400} loading="lazy"/>
           </div>
         </SwiperSlide>
