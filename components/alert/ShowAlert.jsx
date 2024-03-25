@@ -3,8 +3,10 @@ import { motion } from "framer-motion";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { ExclamationTriangleIcon, RocketIcon } from "@radix-ui/react-icons";
 import "../../app/globals.css";
+import { ROUTE_LOGIN } from "../../app/utils/routes";
+import Link from "next/link";
 
-const ShowAlert = ({ type, message }) => {
+const ShowAlert = ({ type, message}) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: -50 }}
@@ -22,6 +24,12 @@ const ShowAlert = ({ type, message }) => {
         <AlertTitle className="text-xl mx-2.5">{type}</AlertTitle>
         <AlertDescription className="text-base mx-2.5">
           {message}
+
+          {message.includes("reset success") &&(
+            <Link href={ROUTE_LOGIN} className="text-xl aeonik underline">
+                Go to Login 
+            </Link>
+          )}
         </AlertDescription>
       </Alert>
     </motion.div>

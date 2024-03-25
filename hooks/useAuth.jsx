@@ -1,7 +1,8 @@
 'use client'
-import { validateRegistration } from "../utils/validation";
+import { validateRegistration } from "../app/utils/validation";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { BASE_URL, LOGIN_URL, REGISTER_URL, ROUTE_HOME, ROUTE_LOGIN } from "../app/utils/routes";
 
 const useAuth = () => {
   const router = useRouter();
@@ -31,7 +32,7 @@ const useAuth = () => {
 
   const builderRequest = (isRegister) => {
     if (isRegister) {
-      urlRequest = "/register";
+      urlRequest = REGISTER_URL;
       successMessage = "Success Register";
       exception = "Failed to register";
       requestData = {
@@ -43,7 +44,7 @@ const useAuth = () => {
       };
       return;
     }
-    urlRequest = '/login';
+    urlRequest = LOGIN_URL;
     successMessage = "Success Login";
     exception = "Failed to login";
     requestData = {
@@ -65,7 +66,7 @@ const useAuth = () => {
     setLoading(true);
     builderRequest(formData.isRegister);
     try {
-      const response = await fetch(`http://localhost:8080/${urlRequest}`, {
+      const response = await fetch(`${BASE_URL}/${urlRequest}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -74,7 +75,7 @@ const useAuth = () => {
       });
 
       if (!response.ok) {
-        throw new status(exception);
+        throw new setStatus(exception);
       }
 
       if (!formData.isRegister) {
@@ -91,8 +92,16 @@ const useAuth = () => {
         rePassword: "",
         isRegister: "",
       });
+      
+      if (!formData.isRegister) {
+        router.push(`${ROUTE_HOME}`)
+      }
+
+      if (formData.isRegister) {
+        router.push(`${ROUTE_LOGIN}`)
+      }
       setStatus(successMessage);
-      router.push("/");
+   
     } catch (status) {
       setStatus(status.message);
     }

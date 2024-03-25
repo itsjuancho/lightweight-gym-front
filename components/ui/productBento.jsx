@@ -22,6 +22,7 @@ const ProductBento = () => {
           <img 
           className='w-full h-full contrast-150 saturate-50'
           src='https://images.unsplash.com/photo-1584863495140-a320b13a11a8?q=80&w=2773&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+           alt='product'
           />
         </div>
 
@@ -29,6 +30,7 @@ const ProductBento = () => {
           <img 
           className='w-full h-full object-cover contrast-125 saturate-50'
           src='https://images.unsplash.com/photo-1583969430754-a4ca5030bb21?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+          alt='product'
           />
         </div>
         <div className={`hover:z-50 col-span-2 h-64 p-4 grid place-content-center coanda-bold text-8xl`}>Lightweight</div>
@@ -36,6 +38,7 @@ const ProductBento = () => {
           <img
             src='https://ssnindia.com/wp-content/uploads/2023/03/NO2_Rage_225g-BERRY-BLAST_-.1-1-600x600.png'
             className='absolute h-64 bottom-0 -left-24'
+            alt='product'
           />
           <h1 className='text-3xl font-bold text-right'>NO 2 Rage Pre Workout</h1>
           <b className='text-red-500 text-2xl text-end w-full'>50% OFF</b>

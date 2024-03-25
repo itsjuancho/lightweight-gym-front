@@ -28,6 +28,10 @@ export const validateRegistration = (formData) => {
       return "First Name, Last Name, and Username should not contain special characters";
     }
 
+    if (firstName.length <4 || lastName.length <4) {
+      return "First Name & LastName must be at least 4 characters longs";
+    }
+
     if (!REGEX_FIELD_EMAIL.test(email)) {
       return "Invalid email address";
     }
@@ -37,7 +41,6 @@ export const validateRegistration = (formData) => {
     }
 
     if (password !== rePassword) {
-      console.log("ok entro a validate re paswword");
       return "Passwords do not match";
     }
     return null;
@@ -48,9 +51,44 @@ export const validateRegistration = (formData) => {
     return "Username Field is required";
   }
 
+  if (username.length <3) {
+    return "Username must be at least 3 characters long";
+  }
+
   if (password.length < 8) {
     return "Password must be at least 8 characters long";
   }
 
   return null; 
 };
+
+export const validateOnlyEmail= (email)=>{
+  if (!email) {
+    return "email is required";
+  }
+
+  if (!REGEX_FIELD_EMAIL.test(email)) {
+      return "Invalid email address";
+  }
+}
+
+export const validateFieldForResetPassword= (formData)=>{
+   const {token,newPassword,confirmPassword} = formData;
+  if (!token) {
+     return "invalid token"
+  }
+
+  if (!newPassword || !confirmPassword) {
+     return "newPassword and re-password is required"
+  }
+
+  if (newPassword !== confirmPassword) {
+    return "Passwords do not match";
+  }
+
+  if (newPassword.length < 8 || confirmPassword.length < 8) {
+    return "Passwords must be at least 8 characters long";
+  }
+
+  
+}
