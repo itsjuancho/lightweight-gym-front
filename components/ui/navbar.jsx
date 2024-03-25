@@ -8,24 +8,27 @@ import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const route = usePathname();
-  
+
   return route === "/login" || route === "/register" ? null : (
     <div className="z-50 fixed top-0 h-28 min-w-[100dvw] aeonik text-gray-50 text-2xl py-8">
-      <Container className="px-20 flex justify-between items-start">
+      <Container className="px-20 flex justify-between items-center items-start">
         <a href="/" className="flex items-center">
           <Image src={lwLogo} />
           <p className="coanda-bold ml-6">Lightweight</p>
         </a>
 
-        <ul>
+        <ul className="flex space-x-4 text-lg">
+          <li>
+            <Link href={"/products"}>Products</Link>
+          </li>
+          <li>
+            <Link href="/about-us">About us</Link>
+          </li>
+          <li>
+            <Link href="/contact">Contact</Link>
+          </li>
           <li className="text-red-500">
             <Link href="/login">Join/ sign in</Link>
-          </li>
-          <li>
-            <a href="/about-us">About us</a>
-          </li>
-          <li>
-            <a href="/contact">Contact</a>
           </li>
         </ul>
       </Container>
