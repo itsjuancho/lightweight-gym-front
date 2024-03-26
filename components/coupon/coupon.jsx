@@ -29,9 +29,9 @@ const Coupon = ({
     "
       >
         <div>
-           {isApplied ? (
-           <Button
-              disable
+          {isApplied ? (
+            <Button
+              disable={true}
               className="bg-transparent text-white my-4 text-base mx-3"
             >
               Applied
@@ -44,6 +44,12 @@ const Coupon = ({
               Redeem Coupon
             </Button>
           )}
+          <Button
+            disable={isApplied ? false : true}
+            className="bg-transparent text-white text-base mx-3"
+          >
+            Remove Coupon
+          </Button>
         </div>
         <div className="flex flex-col justify-items-center items-center">
           <p>Expiration Date</p>

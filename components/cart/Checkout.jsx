@@ -57,6 +57,7 @@ const Checkout = () => {
     appliedCoupons,
     handleSubmit,
     showNotification,
+    removeItem,
   } = useShoppingCart(products);
 
   return (
@@ -152,15 +153,19 @@ const Checkout = () => {
                 <div className="w-[7%] flex justify-center items-center">
                   <h4>{parseFloat(prod.total).toFixed(2)}</h4>
                 </div>
+
+                <div className="my-8">
+                  <Button
+                    onClick={() => removeItem(prod.id)}
+                    className="bg-red-500 text-white hover:bg-red-400 text-base"
+                  >
+                    Remove
+                  </Button>
+                </div>
               </div>
             ))}
           </div>
           <ScrollBar orientation="vertical" />
-          <div className="my-8">
-            <Link href={ROUTE_HOME} className="text-red-500 text-xl">
-              Continue Shopping
-            </Link>
-          </div>
         </ScrollArea>
 
         <div className="flex flex-col justify-start items-center aeonik bg-[#0E0E0E] w-3/12 text-white py-10">
@@ -274,7 +279,7 @@ const Checkout = () => {
               </Label>
               <Select disabled={true}>
                 <SelectTrigger className="bg-transparent border border-white text-base">
-                  <SelectValue placeholder={'debit credits from my account'} />
+                  <SelectValue placeholder={"debit credits from my account"} />
                 </SelectTrigger>
                 <SelectContent className="bg-white">
                   <SelectItem key={20} value={"myAccount"}>

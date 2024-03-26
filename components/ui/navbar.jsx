@@ -37,7 +37,6 @@ const Navbar = () => {
     setPrevScrollPos(currentScrollPos);
   };
 
-
   useEffect(() => {
     const handleStorageChange = () => {
       const cartItems = JSON.parse(localStorage.getItem("cartItem"));
@@ -90,21 +89,31 @@ const Navbar = () => {
             <a href={ROUTE_CONTACT}>Contact</a>
           </li>
           <li className="flex">
-            <a href={ROUTE_CART}>
-              <Badge
-                className={`absolute bg-red-500 text-center top-[30px] mx-3`}
-              >
-                {totalItem}
-              </Badge>
-              <Image src={cart} alt="cart" className="my-3" />
-            </a>
-
-            <a href={ROUTE_PROFILE}>
-              <Avatar className="mx-4 my-2 cursor-pointer">
-                <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-            </a>
+            {localStorage.getItem("token") ? (
+              <a href={ROUTE_CART}>
+                <Badge
+                  className={`absolute bg-red-500 text-center top-[30px] mx-3`}
+                >
+                  {totalItem}
+                </Badge>
+                <Image src={cart} alt="cart" className="my-3" />
+              </a>
+            ) : (
+              ""
+            )}
+            {localStorage.getItem("token") ? (
+              <a href={ROUTE_PROFILE}>
+                <Avatar className="mx-4 my-2 cursor-pointer">
+                  <AvatarImage
+                    src="https://github.com/shadcn.png"
+                    alt="shadcn"
+                  />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+              </a>
+            ) : (
+              ""
+            )}
           </li>
         </ul>
       </Container>
