@@ -10,7 +10,7 @@ const productInformation = ({ product, className }) => {
         </p>
       </div>
       <div>
-        <p className="leading-[1.6] text-slate-100  text-s pl-10">
+        <p className="leading-[1.6] text-slate-100 aeonik text-s pl-10 text-lg">
           <b>Description:</b> {product?.description}
         </p>
       </div>

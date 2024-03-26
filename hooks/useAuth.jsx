@@ -2,6 +2,7 @@
 import { validateRegistration } from "../utils/validation";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { BASE_URL, LOGIN_URL, REGISTER_URL, ROUTE_HOME, ROUTE_LOGIN } from "../app/utils/routes";
 
 const useAuth = () => {
   const router = useRouter();
@@ -31,7 +32,7 @@ const useAuth = () => {
 
   const builderRequest = (isRegister) => {
     if (isRegister) {
-      urlRequest = "/register";
+      urlRequest = REGISTER_URL;
       successMessage = "Success Register";
       exception = "Failed to register";
       requestData = {
@@ -93,6 +94,14 @@ const useAuth = () => {
         rePassword: "",
         isRegister: "",
       });
+      
+      if (!formData.isRegister) {
+        router.push(`${ROUTE_HOME}`)
+      }
+
+      if (formData.isRegister) {
+        router.push(`${ROUTE_LOGIN}`)
+      }
       setStatus(successMessage);
       router.push("/");
     } catch (error) {

@@ -5,6 +5,7 @@ import lwLogo from "../../public/lw-logo.svg";
 import Container from "./container";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {LOGIN_URL, ROUTE_CART, ROUTE_LOGIN, ROUTE_REGISTER} from '../../app/utils/routes';
 
 const Navbar = () => {
   const route = usePathname();
@@ -24,10 +25,9 @@ const Navbar = () => {
     <div className="z-50 fixed top-0 h-28 min-w-[100dvw]  text-gray-50 text-2xl py-8">
       <Container className="px-20 flex justify-between items-center">
         <a href="/" className="flex items-center">
-          <Image src={lwLogo} />
+          <Image src={lwLogo} alt="logo" />
           <p className="coanda-bold ml-6">Lightweight</p>
         </a>
-
         <ul className="flex space-x-4 text-lg">
           <li>
             <Link
@@ -67,6 +67,9 @@ const Navbar = () => {
               <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[1px] bg-red-500"></span>
             </Link>
           )}
+          <li>
+            <a href={ROUTE_CART}>Cart</a>
+          </li>
         </ul>
       </Container>
     </div>

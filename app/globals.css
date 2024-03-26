@@ -99,6 +99,10 @@
 . {
   font-family: "";
 }
+.aeonik-bold {
+  font-family: "Aeonik";
+  font-weight: bold;
+}
 
 .text-white {
   color: #ffffff;
