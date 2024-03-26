@@ -93,7 +93,7 @@ const ProductsCarousel = ({
               ></div>
               <div className="relative z-20 mt-6 flex flex-row">
                 <div className="flex flex-col gap-1">
-                  <span className=" text-2xl leading-[1.6] text-gray-50 font-bold aeonik">
+                  <span className=" text-2xl leading-[1.6] text-gray-50 font-bold ">
                     {item.name}
                   </span>
                   <span className=" text-lg leading-[1.6] text-gray-400 font-normal">

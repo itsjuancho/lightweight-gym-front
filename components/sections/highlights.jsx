@@ -8,7 +8,7 @@ const Highlights = () => {
   return (
     <div
       id="services"
-      className="overflow-hidden bg-gradient-to-b from-[#210303] to-[#030712] text-gray-50 aeonik flex flex-col justify-center"
+      className="overflow-hidden bg-gradient-to-b from-[#210303] to-[#030712] text-gray-50  flex flex-col justify-center"
     >
       <Container className={'pb-20'}>
         <h1 className="text-heading">Our Favorite Products</h1>

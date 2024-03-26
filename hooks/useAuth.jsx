@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { validateRegistration } from "../utils/validation";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -43,7 +43,7 @@ const useAuth = () => {
       };
       return;
     }
-    urlRequest = '/login';
+    urlRequest = "/login";
     successMessage = "Success Login";
     exception = "Failed to login";
     requestData = {
@@ -53,6 +53,7 @@ const useAuth = () => {
   };
 
   const handleSubmit = async (e) => {
+    const backUrl = process.env.NEXT_PUBLIC_BACK_URL;
     setStatus(null);
     e.preventDefault();
 
@@ -65,16 +66,17 @@ const useAuth = () => {
     setLoading(true);
     builderRequest(formData.isRegister);
     try {
-      const response = await fetch(`http://localhost:8080/${urlRequest}`, {
+      const response = await fetch(`${backUrl}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
         },
         body: JSON.stringify(requestData),
       });
 
       if (!response.ok) {
-        throw new status(exception);
+        console.error(response);
       }
 
       if (!formData.isRegister) {
@@ -93,8 +95,8 @@ const useAuth = () => {
       });
       setStatus(successMessage);
       router.push("/");
-    } catch (status) {
-      setStatus(status.message);
+    } catch (error) {
+      setStatus(`Error: ${error.message}`);
     }
     setLoading(false);
   };

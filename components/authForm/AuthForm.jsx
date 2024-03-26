@@ -16,7 +16,6 @@ function AuthForm({ title }) {
 
   const isSignUp = title.includes("Sign up");
   const isReg = usePathname().includes("register");
-  console.log(isReg, "isReg");
 
   formData.isRegister = isSignUp;
   const SHOW_ELEMENT = {

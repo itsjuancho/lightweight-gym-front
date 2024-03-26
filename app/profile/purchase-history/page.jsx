@@ -39,7 +39,7 @@ const page = () => {
   }, 0);
 
   return (
-    <div className="min-h-[100dvh] 2xl:pt-64 pt-0 bg-gradient-to-b from-[#030712] to-[#210303] text-gray-50 aeonik flex flex-col justify-start items-center">
+    <div className="min-h-[100dvh] 2xl:pt-64 pt-0 bg-gradient-to-b from-[#030712] to-[#210303] text-gray-50  flex flex-col justify-start items-center">
       <Container className="w-full">
       <h1 className="coanda text-2xl font-bold text-red-500">Purchase History</h1>
         <Table>

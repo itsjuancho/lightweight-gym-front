@@ -8,9 +8,11 @@ import arrowDown from "../../public/arrow-down.svg";
 import { motion, cubicBezier } from "framer-motion";
 
 const Hero = () => {
+  // const token = localStorage.getItem("token");
+  // console.log(token);
 
   return (
-    <div className="min-h-[100dvh] bg-gradient-to-b from-[#030712] to-[#210303] text-gray-50 aeonik flex flex-col justify-center">
+    <div className="min-h-[100dvh] bg-gradient-to-b from-[#030712] to-[#210303] text-gray-50  flex flex-col justify-center">
       <Container className="pt-40 pb-16 grid grid-cols-12 gap-5 px-20">
         <div className="relative z-20 col-span-5 w-[637px]">
           <motion.h1 variants={h1Variants} initial='initial' animate='animate' className="text-red-500 text-display coanda-bold text-nowrap">

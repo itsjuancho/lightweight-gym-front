@@ -90,14 +90,14 @@
 }
 
 @font-face {
-  font-family: "Aeonik";
+  font-family: "";
   font-weight: normal;
   font-style: normal;
-  src: url("/fonts/AeonikProTRIAL-Regular.otf") format("opentype");
+  src: url("/fonts/ProTRIAL-Regular.otf") format("opentype");
 }
 
-.aeonik {
-  font-family: "Aeonik";
+. {
+  font-family: "";
 }
 
 .text-white {
