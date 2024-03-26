@@ -11,13 +11,14 @@ import CouponsModal from "../../../components/ui/couponsModal";
 import ProductBento from "../../../components/ui/productBento";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ROUTE_CART } from "../../utils/routes";
+import { ROUTE_CART, ROUTE_HOME } from "../../utils/routes";
 
 const ProductPage = ({ params }) => {
   const product_id = parseInt(params.product_id);
   const [showNotification, setShowNotification] = useState(false);
   const product = products.find((item) => item.id === product_id);
   const [quantity, setQuantity] = useState(1);
+  const router = useRouter();
   /* const [couponModal, setCouponModal] = useState(false); */
 
   const changeQuantity = (amount: number) => {
@@ -26,6 +27,7 @@ const ProductPage = ({ params }) => {
       return newQuantity > 0 ? newQuantity : 1;
     });
   };
+
   const addToCart = () => {
     if (!product || !product.price) {
       console.error("Product or product price is undefined");
@@ -61,7 +63,12 @@ const ProductPage = ({ params }) => {
     setShowNotification(true);
   };
 
-/*   const closeCouponModal = () => {
+  const handleBuyNow = () => {
+    addToCart();
+    router.push(`http://localhost:3000/${ROUTE_CART}`);
+  };
+
+  /*   const closeCouponModal = () => {
     setCouponModal(false);
   };
  */
@@ -100,18 +107,25 @@ const ProductPage = ({ params }) => {
               >
                 Add to Cart
               </button>
+
               {showNotification && (
                 <div className="absolute top-0 z-10 right-0 text-center w-60 p-3 bg-red-500/50 text-white text-xl rounded">
                   Item added to cart!
                 </div>
               )}
-              <Link
-                href={`http://localhost:3000/${ROUTE_CART}`}
+              <button
+                onClick={handleBuyNow}
                 className="bg-red-500 text-base py-2 px-8 text-center rounded border border-red-500 hover:bg-transparent transition-colors text-xl"
               >
                 {" "}
                 Buy now{" "}
-              </Link>
+              </button>
+              <a
+                href={ROUTE_HOME}
+                className="w-[140px] mx-52 bg-red-500 text-base py-2 px-8 text-center rounded border border-red-500 hover:bg-transparent transition-colors text-xl"
+              >
+                Volver
+              </a>
             </div>
           </div>
         </div>
