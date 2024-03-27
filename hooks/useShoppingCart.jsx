@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BASE_URL, COUPON_URL, PURCHAGE_URL } from "../app/utils/routes";
+import { BASE_URL, COUPON_CLIENT_URL, COUPON_URL, PURCHAGE_URL } from "../app/utils/routes";
 
 function useShoppingCart(products) {
   const [cartProducts, setCartProducts] = useState(products);
@@ -7,25 +7,29 @@ function useShoppingCart(products) {
   const [totalToPay, setTotalToPay] = useState(0);
   const [coupons, setCoupons] = useState([]);
   const [appliedCoupons, setAppliedCoupons] = useState([]);
-  const [couponsIds, setCouponsIds] = useState([]);
+  //const [appliedCoupons, setappliedCoupons] = useState([]);
   const [discount, setDiscount] = useState(0);
   const [selectedAccount, setSelectedAccount] = useState(null);
   const [showNotification, setShowNotification] = useState(false);
   const token = localStorage.getItem("token");
+  const accountId=1;
+  useEffect(() => {
+    calculateSubTotal(cartProducts);
+  }, [subtotal, cartProducts]);
 
   useEffect(() => {
-      calculateSubTotal(cartProducts);
-      calculateDiscount()
-    
-  }, [subtotal,cartProducts,couponsIds]);
-  
-   useEffect(() => {
+    calculateDiscount();
+  }, [appliedCoupons,coupons, discount]);
+
+  useEffect(() => {
     const fetchCounpons = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/${COUPON_URL}`, {
+        const response = await fetch(`${BASE_URL}/coupon/valid-coupons/${accountId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
+            
           },
+          method:"GET"
         });
         if (!response.ok) {
           throw new Error("Failed to fetch coupons");
@@ -38,7 +42,7 @@ function useShoppingCart(products) {
     };
 
     fetchCounpons();
-  }, []); 
+  }, []);
 
   const handleSelectChange = (event) => {
     console.log(event.target.value);
@@ -51,20 +55,21 @@ function useShoppingCart(products) {
       newSubtotal += parseFloat(product.price) * product.quantity;
     });
     setSubtotal(newSubtotal);
-    if (couponsIds.length === 0) {
+    if (appliedCoupons.length === 0) {
       setTotalToPay(newSubtotal);
     }
   };
 
   const calculateDiscount = () => {
-    if (couponsIds.length > 0) {
+    if (appliedCoupons.length > 0) {
       let totalWithoutDiscount = subtotal;
       let totalDiscount = discount;
 
-      couponsIds.forEach((couponId) => {
+      appliedCoupons.forEach((couponId) => {
         let coupon = coupons.find((coupon) => coupon.id === couponId);
         if (coupon && !coupon.spent) {
           totalDiscount += coupon.amount;
+          coupon.spent = true;
         }
       });
 
@@ -77,6 +82,7 @@ function useShoppingCart(products) {
       setDiscount(totalDiscount);
     } else {
       setTotalToPay(subtotal);
+      setDiscount(0);
     }
   };
 
@@ -106,23 +112,31 @@ function useShoppingCart(products) {
 
   const applyCoupon = (couponId) => {
     if (!appliedCoupons.includes(couponId)) {
-      setCouponsIds([...couponsIds, couponId]);
       setAppliedCoupons([...appliedCoupons, couponId]);
     }
   };
 
   const removeItem = (prodId) => {
     const updatedProducts = products.filter((product) => product.id !== prodId);
-    console.log(updatedProducts);
     setCartProducts(updatedProducts);
     localStorage.setItem("cartItem", JSON.stringify(updatedProducts));
   };
 
   const removeCoupon = (cupId) => {
-    const updatedCoupon = coupons.filter((counpon) => counpon.id !== cupId);
     const updatedCouponApplied = appliedCoupons.filter((id) => id !== cupId);
-    setCoupons(updatedCoupon);
     setAppliedCoupons(updatedCouponApplied);
+
+    const updatedCoupons = coupons.map((coupon) => {
+      if (coupon.id === cupId) {
+        return { ...coupon, spent: false };
+      }
+      return coupon;
+    });
+    setCoupons(updatedCoupons);
+
+    const couponsDeleted = coupons.find((coupon) => coupon.id === cupId);
+    const updateDiscountTotal=discount - couponsDeleted.amount;
+    setDiscount(updateDiscountTotal)
   };
 
   const handleSubmit = async (e) => {
@@ -176,6 +190,7 @@ function useShoppingCart(products) {
     handleSubmit,
     showNotification,
     removeItem,
+    removeCoupon,
   };
 }
 

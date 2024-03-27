@@ -58,6 +58,7 @@ const Checkout = () => {
     handleSubmit,
     showNotification,
     removeItem,
+    removeCoupon,
   } = useShoppingCart(products);
 
   return (
@@ -244,6 +245,7 @@ const Checkout = () => {
                         issueDate={counpon.issueDate}
                         applyCoupon={applyCoupon}
                         isApplied={appliedCoupons.includes(counpon.id)}
+                        handleRemove={removeCoupon}
                       />
                     ))}
                   </div>
