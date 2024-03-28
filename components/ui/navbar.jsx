@@ -5,17 +5,17 @@ import lwLogo from "../../public/lw-logo.svg";
 import Container from "./container";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {LOGIN_URL, ROUTE_CART, ROUTE_LOGIN, ROUTE_REGISTER} from '../../app/utils/routes';
+import { LOGIN_URL, ROUTE_CART, ROUTE_LOGIN, ROUTE_REGISTER } from '../../app/utils/routes';
 
 const Navbar = () => {
   const route = usePathname();
-  const token = localStorage.getItem("token");
   const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
     if (token) setAuthorized(true);
     console.log(token, authorized);
-  }, [token]);
+  }, [authorized]);
 
   useEffect(() => {
     console.log("Authorization status:", authorized);
@@ -57,7 +57,10 @@ const Navbar = () => {
             </Link>
           </li>
           {authorized ? (
-            <button>Log out</button>
+            <div className="space-x-4">
+              <Link href={ROUTE_CART}>Cart</Link>
+              <button className="text-red-500">Log out</button>
+            </div>
           ) : (
             <Link
               href="/login"
@@ -67,9 +70,6 @@ const Navbar = () => {
               <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[1px] bg-red-500"></span>
             </Link>
           )}
-          <li>
-            <a href={ROUTE_CART}>Cart</a>
-          </li>
         </ul>
       </Container>
     </div>

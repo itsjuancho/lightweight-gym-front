@@ -1,5 +1,5 @@
 "use client";
-import { validateRegistration } from "../utils/validation";
+import { validateRegistration } from "../app/utils/validation";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { BASE_URL, LOGIN_URL, REGISTER_URL, ROUTE_HOME, ROUTE_LOGIN } from "../app/utils/routes";
