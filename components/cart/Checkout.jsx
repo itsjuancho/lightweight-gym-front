@@ -40,7 +40,15 @@ import useShoppingCart from "../../hooks/useShoppingCart";
 import useCreditCard from "../../hooks/useCreditCard";
 
 const Checkout = () => {
-  const getProductLocalStorage = localStorage.getItem("cartItem");
+  const [getProductLocalStorage, SetgetProductLocalStorage] = useState(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedProducts = localStorage.getItem("cartItem");
+      SetgetProductLocalStorage(storedProducts);
+    }
+  }, []);
+
   const products = getProductLocalStorage
     ? JSON.parse(getProductLocalStorage)
     : [];
@@ -61,7 +69,7 @@ const Checkout = () => {
 
   return (
     <div>
-      <div className="flex justify-between justify-center bg-black px-11">
+      <div className="flex justify-between items-center bg-black px-11">
         <a href={`/`} className="flex justify-center items-center">
           <Image src={lwLogo} alt="logo" className="w-[2rem] h-[2rem]" />
           <span className="coanda-bold mx-5 text-red-500 text-2xl">

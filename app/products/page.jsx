@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Container from "../../components/ui/container";
 import { fetchAllProducts } from "../../hooks/fetchProducts";
 import Link from "next/link";
+import Image from "next/image";
 import { Search } from "lucide-react";
 import {
   Select,

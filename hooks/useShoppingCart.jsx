@@ -10,7 +10,15 @@ function useShoppingCart(products) {
   const [discount, setDiscount] = useState(0);
   const [selectedAccount, setSelectedAccount] = useState(null);
   const [showNotification, setShowNotification] = useState(false);
-  const token = localStorage.getItem("token");
+  const [token, setToken] = useState(null)
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const userToken = localStorage.getItem("token");
+      setToken(userToken);
+    }
+  }, [token]);
+
   let couponsIds = [];
 
   useEffect(() => {
@@ -160,7 +168,7 @@ function useShoppingCart(products) {
       console.error(error.message);
       setShowNotification(false)
     }
-    
+
   };
 
   return {

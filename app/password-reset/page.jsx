@@ -1,8 +1,9 @@
-import React from 'react'
+import React, {Suspense} from 'react'
 import RecoverPassword from '../../components/recoverPassword/RecoverPassword'
 
 const PasswordResetPage = () => {
-  return <RecoverPassword title={"Restore Password"} labelButton={"Restore Forgot Password"}/>
+  return <Suspense fallback={<div>Loading...</div>}><RecoverPassword title={"Restore Password"} labelButton={"Restore Forgot Password"} /></Suspense>
+
 }
 
 export default PasswordResetPage
