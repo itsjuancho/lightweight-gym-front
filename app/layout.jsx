@@ -3,6 +3,8 @@ import "./globals.css";
 import Navbar from "../components/ui/navbar";
 
 const inter = Inter({ subsets: ["latin"] });
+import { SessionProvider } from "../hooks/sessionContext";
+import { HydrationProvider, Server, Client } from "react-hydration-provider";
 
 export const metadata = {
   title: "Create Next App",
@@ -13,8 +15,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-      <Navbar/>
-      {children}
+        <HydrationProvider>
+          <Client>
+            <SessionProvider>
+              <Navbar />
+              {children}
+            </SessionProvider>
+          </Client>
+        </HydrationProvider>
       </body>
     </html>
   );

@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import cart from "../../public/images/cart.svg";
@@ -17,13 +18,16 @@ import {
 } from "../../app/utils/routes";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Badge } from "../ui/badge";
+import { useSession } from "../../hooks/sessionContext";
 
 const Navbar = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
-  const [totalItem, setTotalItem] = useState(
-    JSON.parse(localStorage.getItem("cartItem"))?.length || 0
-  );
+  const {session, setSession } = useSession();
+  const [totalItem, setTotalItem] = useState(() => {
+      const cartItem = JSON.parse(localStorage.getItem("cartItem"));
+      return cartItem ? cartItem.length : 0;
+  });
 
   const handleScroll = () => {
     const currentScrollPos = window.scrollY;
@@ -35,6 +39,11 @@ const Navbar = () => {
     );
 
     setPrevScrollPos(currentScrollPos);
+  };
+
+  const handleCloseSession = () => {
+    localStorage.removeItem("token");
+    setSession(null);
   };
 
   useEffect(() => {
@@ -58,9 +67,12 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    console.log(session)
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", handleScroll);
 
-    return () => window.removeEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
   }, [prevScrollPos, visible]);
 
   const route = usePathname();
@@ -77,45 +89,37 @@ const Navbar = () => {
           <p className="coanda-bold ml-6">Lightweight</p>
         </a>
 
-        <ul className="flex justify-around items-center w-[40%]">
-          <li className="text-red-500">
-            <Link href={ROUTE_LOGIN}>Join/</Link>
-            <Link href={ROUTE_REGISTER}> sign in</Link>
-          </li>
-          <li>
+        <div className="flex justify-around items-center w-[40%]">
+          <div className={`${session === null ? "text-red-500 visible" : " text-red-500 hidden"}`}>
+            <a href={ROUTE_LOGIN}>Join/</a>
+            <a href={ROUTE_REGISTER}> Sign in</a>
+          </div>
+
+          <div>
             <a href={ROUTE_ABOUT}>About us</a>
-          </li>
-          <li>
+          </div>
+          <div>
             <a href={ROUTE_CONTACT}>Contact</a>
-          </li>
-          <li className="flex">
-            {localStorage.getItem("token") ? (
-              <a href={ROUTE_CART}>
-                <Badge
-                  className={`absolute bg-red-500 text-center top-[30px] mx-3`}
-                >
-                  {totalItem}
-                </Badge>
-                <Image src={cart} alt="cart" className="my-3" />
-              </a>
-            ) : (
-              ""
-            )}
-            {localStorage.getItem("token") ? (
-              <a href={ROUTE_PROFILE}>
-                <Avatar className="mx-4 my-2 cursor-pointer">
-                  <AvatarImage
-                    src="https://github.com/shadcn.png"
-                    alt="shadcn"
-                  />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-              </a>
-            ) : (
-              ""
-            )}
-          </li>
-        </ul>
+          </div>
+
+          <div className={`flex ${session !== null ? "" : "hidden"}`}>
+            <a href={ROUTE_CART}>
+              <Badge
+                className={`absolute bg-red-500 text-center top-[30px] mx-3`}
+              >
+                {totalItem}
+              </Badge>
+              <Image src={cart} alt="cart" className="my-3" />
+            </a>
+            <a href={ROUTE_PROFILE}>
+              <Avatar className="mx-4 my-2 cursor-pointer">
+                <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+            </a>
+            <button onClick={handleCloseSession}>Logout</button>
+          </div>
+        </div>
       </Container>
     </div>
   );

@@ -1,36 +1,85 @@
-import { useEffect, useState } from "react";
-import { BASE_URL, COUPON_CLIENT_URL, COUPON_URL, PURCHAGE_URL } from "../app/utils/routes";
+"use client";
 
-function useShoppingCart(products) {
-  const [cartProducts, setCartProducts] = useState(products);
+import { useEffect, useState } from "react";
+import {
+  BASE_URL,
+  COUPON_CLIENT_URL,
+  COUPON_URL,
+  PURCHAGE_URL,
+  ROUTE_LOGIN,
+} from "../app/utils/routes";
+import { useRouter } from "next/navigation";
+import { useSession } from "./sessionContext";
+
+function useShoppingCart() {
+  const router = useRouter();
+  const { session } = useSession();
+  const [cartProducts, setCartProducts] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
   const [totalToPay, setTotalToPay] = useState(0);
   const [coupons, setCoupons] = useState([]);
+  const [profile, setProfile] = useState(null);
   const [appliedCoupons, setAppliedCoupons] = useState([]);
-  //const [appliedCoupons, setappliedCoupons] = useState([]);
   const [discount, setDiscount] = useState(0);
   const [selectedAccount, setSelectedAccount] = useState(null);
   const [showNotification, setShowNotification] = useState(false);
-  const token = localStorage.getItem("token");
-  const accountId=1;
+  const accountId = 1;
+
+  useEffect(() => {
+    if (session === null) {
+      router.push(ROUTE_LOGIN);
+    }
+  }, []);
+
+  useEffect(() => {
+    const getProductLocalStorage = localStorage.getItem("cartItem");
+
+    if (getProductLocalStorage) {
+      setCartProducts(JSON.parse(getProductLocalStorage));
+    }
+  }, []);
+
   useEffect(() => {
     calculateSubTotal(cartProducts);
   }, [subtotal, cartProducts]);
 
   useEffect(() => {
     calculateDiscount();
-  }, [appliedCoupons,coupons, discount]);
+  }, [appliedCoupons, coupons, discount]);
 
   useEffect(() => {
     const fetchCounpons = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/coupon/valid-coupons/${accountId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            
-          },
-          method:"GET"
-        });
+        const response = await fetch(
+          `${BASE_URL}/coupon/valid-coupons/${accountId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${session}`,
+            },
+            method: "GET",
+          }
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch coupons");
+        }
+        const data = await response.json();
+        setCoupons(data);
+      } catch (error) {
+        console.error("Error fetching coupons:", error);
+      }
+    };
+
+    const fetchProfile = async () => {
+      try {
+        const response = await fetch(
+          `${BASE_URL}/coupon/valid-coupons/${accountId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${session}`,
+            },
+            method: "GET",
+          }
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch coupons");
         }
@@ -117,7 +166,7 @@ function useShoppingCart(products) {
   };
 
   const removeItem = (prodId) => {
-    const updatedProducts = products.filter((product) => product.id !== prodId);
+    const updatedProducts = cartProducts.filter((product) => product.id !== prodId);
     setCartProducts(updatedProducts);
     localStorage.setItem("cartItem", JSON.stringify(updatedProducts));
   };
@@ -135,8 +184,8 @@ function useShoppingCart(products) {
     setCoupons(updatedCoupons);
 
     const couponsDeleted = coupons.find((coupon) => coupon.id === cupId);
-    const updateDiscountTotal=discount - couponsDeleted.amount;
-    setDiscount(updateDiscountTotal)
+    const updateDiscountTotal = discount - couponsDeleted.amount;
+    setDiscount(updateDiscountTotal);
   };
 
   const handleSubmit = async (e) => {
@@ -165,7 +214,7 @@ function useShoppingCart(products) {
       });
 
       if (!response.ok) {
-        console.error(response);
+        console.log(response);
         return;
       }
       setShowNotification(true);

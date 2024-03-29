@@ -22,7 +22,6 @@ function AuthForm({ title }) {
 
   const isSignUp = title.includes("Sign up");
   const isReg = usePathname().includes("register");
-  console.log(isReg, "isReg");
 
   formData.isRegister = isSignUp;
   const SHOW_ELEMENT = {
@@ -122,7 +121,7 @@ function AuthForm({ title }) {
               </Label>
             </div>
             <div className={` ml-4 md:ml-0 ${SHOW_ELEMENT.label}`}>
-              <Link href={ROUTE_FORGOT_PASS} className="text-base aeonik">
+              <Link href={ROUTE_FORGOT_PASS} className="text-[1.2rem] aeonik">
                 Forgot your password?
               </Link>
             </div>
@@ -165,7 +164,9 @@ function AuthForm({ title }) {
         >
           Aren&apos;t a member yet?
           <span className="inline border-b border-white"> Sign up instead</span>
+          
         </Link>
+        <a href={ROUTE_HOME} className=" my-4 text-xl text-white border-b border-white aeonik text-base"> Back To Home</a>
         {isReg && (
           <Link href={ROUTE_LOGIN} className={`text-xl text-white aeonik`}>
             Already a member?

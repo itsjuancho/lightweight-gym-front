@@ -1,11 +1,14 @@
 'use client'
 import { validateRegistration } from "../app/utils/validation";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
 import { BASE_URL, LOGIN_URL, REGISTER_URL, ROUTE_HOME, ROUTE_LOGIN } from "../app/utils/routes";
+import { useRouter } from "next/navigation";
+import { useSession } from "./sessionContext";
 
 const useAuth = () => {
   const router = useRouter();
+  const { session, setSession} = useSession();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -22,6 +25,10 @@ const useAuth = () => {
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
 
+/*   useEffect(() => {
+    console.log(session);
+  }, [session]);
+ */
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData({
@@ -81,6 +88,8 @@ const useAuth = () => {
       if (!formData.isRegister) {
         const data = await response.json();
         localStorage.setItem("token", data.token);
+        localStorage.setItem("username", requestData.username);
+        setSession(data.token)
       }
 
       setFormData({
@@ -101,7 +110,6 @@ const useAuth = () => {
         router.push(`${ROUTE_LOGIN}`)
       }
       setStatus(successMessage);
-   
     } catch (status) {
       setStatus(status.message);
     }
