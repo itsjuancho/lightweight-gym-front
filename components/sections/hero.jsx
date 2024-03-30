@@ -8,18 +8,16 @@ import arrowDown from "../../public/arrow-down.svg";
 import { motion, cubicBezier } from "framer-motion";
 
 const Hero = () => {
-  // const token = localStorage.getItem("token");
-  // console.log(token);
 
   return (
     <div className="min-h-[100dvh] bg-gradient-to-b from-[#030712] to-[#210303] text-gray-50  flex flex-col justify-center">
-      <Container className="pt-40 pb-16 grid grid-cols-12 gap-5 px-20">
-        <div className="relative z-20 col-span-5 w-[637px]">
+      <Container className="md:pt-40 md:pb-16 grid grid-cols-1 sm:grid-cols-12 gap-5 px-5 md:px-20">
+        <div className="relative z-20 sm:col-span-5 md:w-[637px]">
           <motion.h1
             variants={h1Variants}
             initial="initial"
             animate="animate"
-            className="text-red-500 text-display coanda-bold text-nowrap"
+            className="text-red-500 text-4xl text-center md:text-display coanda-bold sm:text-nowrap md:leading-normal leading-9"
           >
             Dominate the Iron
           </motion.h1>
@@ -27,7 +25,7 @@ const Hero = () => {
             variants={pVariants}
             initial="initial"
             animate="animate"
-            className="text-2xl text-justify mt-7"
+            className="sm:text-2xl text-lg text-justify mt-7"
           >
             not for the faint of heart—it&apos;s a haven for those who dare to
             push the boundaries of strength. With our exclusive membership
@@ -38,7 +36,7 @@ const Hero = () => {
             variants={btnVariants}
             initial="initial"
             animate="animate"
-            className="bg-red-500 hover:bg-transparent border-transparent border hover:border-red-500 transition-colors px-6 py-2 rounded-sm mt-14"
+            className="bg-red-500 hover:bg-transparent border-transparent border hover:border-red-500 transition-colors px-6 py-2 w-full md:w-max rounded-sm md:mt-14 mt-32"
           >
             <a href="/login">Start your journey</a>
           </motion.button>
@@ -46,7 +44,7 @@ const Hero = () => {
             variants={btnVariants}
             initial="initial"
             animate="animate"
-            className="flex flex-col space-y-4 absolute bottom-0"
+            className="flex flex-col space-y-4 absolute md:bottom-0 bottom-12"
           >
             <Image
               src={arrowDown}
@@ -69,10 +67,10 @@ const Hero = () => {
           variants={imgVariants}
           initial="initial"
           animate="animate"
-          className="relative col-span-7"
+          className="relative md:col-span-7"
         >
-          <Image src={pump01} alt="pupm01" className="" />
-          <Image src={overlay01} alt="overlay" className="z-10 absolute top-0" />
+          <Image src={pump01} alt="pupm01" className="hidden md:block" />
+          <Image src={overlay01} alt="overlay" className="z-10 absolute top-0 hidden md:block" />
         </motion.div>
       </Container>
     </div>

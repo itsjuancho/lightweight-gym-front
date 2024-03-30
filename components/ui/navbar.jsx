@@ -75,7 +75,7 @@ const Navbar = () => {
 
   return route !== "/" ? null : (
     <div
-      className={`z-50 fixed top-0 h-28 w-screen aeonik bg-gradient-to-b from-slate-950 to-transparent text-gray-50 text-lg py-8 transition-all duration-500 ease-in-out ${
+      className={`z-[1000] fixed top-0 h-28 w-screen aeonik bg-gradient-to-b from-slate-950 to-transparent text-gray-50 text-lg py-8 transition-all duration-500 ease-in-out ${
         visible ? "" : "-translate-y-[110%]"
       }`}
     >
