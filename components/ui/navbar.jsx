@@ -24,10 +24,7 @@ const Navbar = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const {session, setSession } = useSession();
-  const [totalItem, setTotalItem] = useState(() => {
-      const cartItem = JSON.parse(localStorage.getItem("cartItem"));
-      return cartItem ? cartItem.length : 0;
-  });
+  const [totalItem, setTotalItem] = useState(0);
 
   const handleScroll = () => {
     const currentScrollPos = window.scrollY;
@@ -45,6 +42,15 @@ const Navbar = () => {
     localStorage.removeItem("token");
     setSession(null);
   };
+
+  useEffect(() => {
+    const cartItems = localStorage.getItem("cartItem");
+    if (cartItems) {
+      const items = JSON.parse(cartItems);
+      setTotalItem(items ? items.length : 0);
+    }
+  }, [totalItem]);
+  
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -67,7 +73,6 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    console.log(session)
     if (typeof window !== "undefined") {
       window.addEventListener("scroll", handleScroll);
 
@@ -90,7 +95,11 @@ const Navbar = () => {
         </a>
 
         <div className="flex justify-around items-center w-[40%]">
-          <div className={`${session === null ? "text-red-500 visible" : " text-red-500 hidden"}`}>
+          <div
+            className={`${
+              session === null ? "text-red-500 visible" : " text-red-500 hidden"
+            }`}
+          >
             <a href={ROUTE_LOGIN}>Join/</a>
             <a href={ROUTE_REGISTER}> Sign in</a>
           </div>

@@ -75,7 +75,7 @@ const ProductPage = ({ params }) => {
   return (
     <div
       id="product-page"
-      className="pt-36 min-h-[100dvh] bg-gradient-to-b from-[#030712] to-[#210303] text-gray-50 aeonik flex flex-col justify-center"
+      className="pt-36 min-h-[100dvh] bg-gradient-to-b from-[#030712] to-[#210303] text-gray-50  flex flex-col justify-center"
     >
       <Container className={"w-auto relative"}>
         <div className="flex">
@@ -84,7 +84,7 @@ const ProductPage = ({ params }) => {
           </div>
           <div className="w-3/6 space-y-6">
             <div className="w-full text-zinc-50">
-              <p className="leading-[1.6] font-bold aeonik text-4xl pl-10 py-2">
+              <p className="leading-[1.6] font-bold  text-4xl pl-10 py-2">
                 {product?.name}
               </p>
             </div>

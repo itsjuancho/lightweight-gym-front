@@ -3,7 +3,7 @@ import Container from "../ui/container";
 
 const Pricing = () => {
   return (
-    <div className="bg-[#030712] text-gray-50 aeonik flex flex-col justify-center items-center">
+    <div className="bg-[#030712] text-gray-50  flex flex-col justify-center items-center">
       <Container className="w-full">
         <h1 className="text-heading self-start mb-16">Standard pricing options</h1>
         <div className="grid grid-cols-3 gap-5">

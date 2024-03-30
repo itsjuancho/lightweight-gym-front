@@ -5,7 +5,7 @@ const productInformation = ({ product, className }) => {
   return (
     <>
       <div className={`${classes}`}>
-        <p className="leading-[1.6] text-red-400 opacity-85 font-bold aeonik text-3xl pl-10">
+        <p className="leading-[1.6] text-red-400 opacity-85 font-bold  text-3xl pl-10">
           Price: {product?.price} credits
         </p>
       </div>

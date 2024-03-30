@@ -81,7 +81,7 @@ const Checkout = () => {
 
       {!loading && (
         <>
-          <div className="flex justify-between justify-center bg-black px-11">
+          <div className="flex justify-between items-center bg-black px-11">
             <a href={`/`} className="flex justify-center items-center">
               <Image src={lwLogo} alt="logo" className="w-[2rem] h-[2rem]" />
               <span className="coanda-bold mx-5 text-red-500 text-2xl">

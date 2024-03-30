@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { validateRegistration } from "../app/utils/validation";
 
 import { useEffect, useState } from "react";
@@ -25,10 +25,6 @@ const useAuth = () => {
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
 
-/*   useEffect(() => {
-    console.log(session);
-  }, [session]);
- */
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData({
@@ -51,7 +47,7 @@ const useAuth = () => {
       };
       return;
     }
-    urlRequest = LOGIN_URL;
+    urlRequest = "/login";
     successMessage = "Success Login";
     exception = "Failed to login";
     requestData = {
@@ -61,6 +57,7 @@ const useAuth = () => {
   };
 
   const handleSubmit = async (e) => {
+    const backUrl = process.env.NEXT_PUBLIC_BACK_URL;
     setStatus(null);
     e.preventDefault();
 
@@ -73,16 +70,17 @@ const useAuth = () => {
     setLoading(true);
     builderRequest(formData.isRegister);
     try {
-      const response = await fetch(`${BASE_URL}/${urlRequest}`, {
+      const response = await fetch(`${backUrl}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
         },
         body: JSON.stringify(requestData),
       });
 
       if (!response.ok) {
-        throw new setStatus(exception);
+        console.error(response);
       }
 
       if (!formData.isRegister) {

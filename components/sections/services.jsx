@@ -19,7 +19,7 @@ const Services = () => {
       });
 
   return (
-    <div id='services' className="overflow-hidden min-h-[100dvh] bg-[#030712] text-gray-50 aeonik flex flex-col justify-center">
+    <div id='services' className="overflow-hidden min-h-[100dvh] bg-[#030712] text-gray-50  flex flex-col justify-center">
       <Container className="relative grid grid-cols-12 gap-5 px-20">
         <div className="col-span-3" />
         <div className="col-span-9">

@@ -17,6 +17,7 @@ import {
   ROUTE_LOGIN,
   ROUTE_REGISTER,
 } from "../../app/utils/routes";
+
 function AuthForm({ title }) {
   const { formData, status, loading, handleChange, handleSubmit } = useAuth();
 
@@ -87,7 +88,7 @@ function AuthForm({ title }) {
           </div>
 
           <div className={`grid w-full items-center gap-1.5 my-6`}>
-            <Label htmlFor="text" className="text-2xl">
+            <Label htmlFor="text" className="text-2xl aeonik-bold">
               Username
             </Label>
             <Input
@@ -116,7 +117,7 @@ function AuthForm({ title }) {
 
           <div className="flex justify-between items-center">
             <div>
-              <Label htmlFor="password" className="text-2xl">
+              <Label htmlFor="password" className="text-2xl aeonik-bold">
                 Password
               </Label>
             </div>
