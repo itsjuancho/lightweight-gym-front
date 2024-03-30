@@ -1,11 +1,9 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import cart from "../../public/images/cart.svg";
 import lwLogo from "../../public/lw-logo.svg";
 import Container from "./container";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LOGIN_URL,
@@ -84,7 +82,7 @@ const Navbar = () => {
 
   return route !== "/" ? null : (
     <div
-      className={`z-50 fixed top-0 h-28 min-w-[100dvw] aeonik text-gray-50 text-2xl py-8 ${
+      className={`z-50 fixed top-0 h-28 w-screen aeonik text-gray-50 text-lg py-8 ${
         visible ? "visible" : "hidden"
       }`}
     >
@@ -94,22 +92,18 @@ const Navbar = () => {
           <p className="coanda-bold ml-6">Lightweight</p>
         </a>
 
-        <div className="flex justify-around items-center w-[40%]">
+        <div className="flex justify-between items-center w-[40%]">
           <div
-            className={`${
-              session === null ? "text-red-500 visible" : " text-red-500 hidden"
+            className={`text-red-500 ${
+              session === null ? "visible" : "hidden"
             }`}
           >
             <a href={ROUTE_LOGIN}>Join/</a>
             <a href={ROUTE_REGISTER}> Sign in</a>
           </div>
-
-          <div>
+            <a href="/products">Products</a>
             <a href={ROUTE_ABOUT}>About us</a>
-          </div>
-          <div>
             <a href={ROUTE_CONTACT}>Contact</a>
-          </div>
 
           <div className={`flex ${session !== null ? "" : "hidden"}`}>
             <a href={ROUTE_CART}>
@@ -123,7 +117,7 @@ const Navbar = () => {
             <a href={ROUTE_PROFILE}>
               <Avatar className="mx-4 my-2 cursor-pointer">
                 <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
-                <AvatarFallback>CN</AvatarFallback>
+                <AvatarFallback>@</AvatarFallback>
               </Avatar>
             </a>
             <button onClick={handleCloseSession}>Logout</button>
