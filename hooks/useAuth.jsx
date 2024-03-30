@@ -69,7 +69,7 @@ const useAuth = () => {
     setLoading(true);
     builderRequest(formData.isRegister);
     try {
-      const response = await fetch(`${BASE_URL}/${urlRequest}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACK_URL}/${urlRequest}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
