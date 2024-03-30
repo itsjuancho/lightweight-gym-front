@@ -85,14 +85,14 @@ const Navbar = () => {
           <p className="coanda-bold ml-6">Lightweight</p>
         </a>
 
-        <div className="flex justify-between items-center w-[40%]">
+        <div className="flex justify-end space-x-4 items-center w-[40%]">
           <div
             className={`text-red-500 ${
               session === null ? "visible" : "hidden"
             }`}
           >
-            <a href={ROUTE_LOGIN}>Join/</a>
-            <a href={ROUTE_REGISTER}> Sign in</a>
+            <a href={ROUTE_REGISTER}>Join/ </a>
+            <a href={ROUTE_LOGIN}> Sign in</a>
           </div>
             <a href="/products">Products</a>
             <a href={ROUTE_ABOUT}>About us</a>
