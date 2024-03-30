@@ -87,6 +87,21 @@ function AuthForm({ title }) {
             />
           </div>
 
+          <div
+            className={`grid w-full items-center gap-1.5 my-1 ${SHOW_ELEMENT.input}`}
+          >
+            <Label htmlFor="text" className="text-base">
+              Document
+            </Label>
+            <Input
+              type="text"
+              id="document"
+              value={formData.document}
+              onChange={handleChange}
+              className="bg-transparent border border-white w-full md:w-13 text-base	font-normal"
+            />
+          </div>
+
           <div className={`grid w-full items-center gap-1.5 my-1`}>
             <Label htmlFor="text" className="text-base aeonik-bold">
               Username

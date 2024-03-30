@@ -23,7 +23,7 @@ function useShoppingCart() {
   const [discount, setDiscount] = useState(0);
   const [selectedAccount, setSelectedAccount] = useState(null);
   const [showNotification, setShowNotification] = useState(false);
-  const accountId = 1;
+  const accountId = 11;
 
   useEffect(() => {
     if (session === null) {
@@ -48,14 +48,20 @@ function useShoppingCart() {
   }, [appliedCoupons, coupons, discount]);
 
   useEffect(() => {
+    const headers = new Headers();
+    headers.append("Access-Control-Allow-Headers", "Content-Type");
+    headers.append("Access-Control-Allow-Origin", "*");
+    headers.append("Access-Control-Allow-Methods", "OPTIONS,POST,GET");
+    headers.append("X-Requested-With", "XMLHttpRequest");
+    headers.append("Content-Type", "application/json");
+    headers.append("Authorization", `Bearer ${session}`);
+
     const fetchCounpons = async () => {
       try {
         const response = await fetch(
           `${BASE_URL}/coupon/valid-coupons/${accountId}`,
           {
-            headers: {
-              Authorization: `Bearer ${session}`,
-            },
+            headers:headers,
             method: "GET",
           }
         );
@@ -192,6 +198,10 @@ function useShoppingCart() {
     e.preventDefault();
     try {
       const headers = new Headers();
+      headers.append("Access-Control-Allow-Headers", "Content-Type");
+      headers.append("Access-Control-Allow-Origin", "*");
+      headers.append("Access-Control-Allow-Methods", "OPTIONS,POST,GET");
+      headers.append("X-Requested-With", "XMLHttpRequest");
       headers.append("Content-Type", "application/json");
       headers.append("Authorization", `Bearer ${session}`);
 
