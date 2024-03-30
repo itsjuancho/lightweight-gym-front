@@ -47,7 +47,7 @@ const useAuth = () => {
       };
       return;
     }
-    urlRequest = "/login";
+    urlRequest = ROUTE_LOGIN;
     successMessage = "Success Login";
     exception = "Failed to login";
     requestData = {
@@ -57,7 +57,6 @@ const useAuth = () => {
   };
 
   const handleSubmit = async (e) => {
-    const backUrl = process.env.NEXT_PUBLIC_BACK_URL;
     setStatus(null);
     e.preventDefault();
 
@@ -70,11 +69,10 @@ const useAuth = () => {
     setLoading(true);
     builderRequest(formData.isRegister);
     try {
-      const response = await fetch(`${backUrl}/login`, {
+      const response = await fetch(`${BASE_URL}/${urlRequest}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-Requested-With": "XMLHttpRequest",
         },
         body: JSON.stringify(requestData),
       });
