@@ -17,6 +17,7 @@ import {
   ROUTE_LOGIN,
   ROUTE_REGISTER,
 } from "../../app/utils/routes";
+
 function AuthForm({ title }) {
   const { formData, status, loading, handleChange, handleSubmit } = useAuth();
 
@@ -87,7 +88,7 @@ function AuthForm({ title }) {
           </div>
 
           <div className={`grid w-full items-center gap-1.5 my-6`}>
-            <Label htmlFor="text" className="text-2xl">
+            <Label htmlFor="text" className="text-2xl aeonik-bold">
               Username
             </Label>
             <Input
@@ -116,12 +117,12 @@ function AuthForm({ title }) {
 
           <div className="flex justify-between items-center">
             <div>
-              <Label htmlFor="password" className="text-2xl">
+              <Label htmlFor="password" className="text-2xl aeonik-bold">
                 Password
               </Label>
             </div>
             <div className={` ml-4 md:ml-0 ${SHOW_ELEMENT.label}`}>
-              <Link href={ROUTE_FORGOT_PASS} className="text-base aeonik">
+              <Link href={ROUTE_FORGOT_PASS} className="text-[1.2rem] aeonik">
                 Forgot your password?
               </Link>
             </div>
@@ -164,7 +165,9 @@ function AuthForm({ title }) {
         >
           Aren&apos;t a member yet?
           <span className="inline border-b border-white"> Sign up instead</span>
+          
         </Link>
+        <a href={ROUTE_HOME} className=" my-4 text-xl text-white border-b border-white aeonik text-base"> Back To Home</a>
         {isReg && (
           <Link href={ROUTE_LOGIN} className={`text-xl text-white aeonik`}>
             Already a member?

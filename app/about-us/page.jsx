@@ -3,17 +3,16 @@ import Container from "../../components/ui/container";
 
 const About = () => {
   const members = [
-    { name: "Maicol" },
-    { name: "Tobi" },
-    { name: "Elias" },
-    { name: "Ruth" },
-    { name: "Eri" },
-    { name: "Luca" },
-    { name: "Juancho" },
-    { name: "Ale" },
-    { name: "Juan Ignacio" },
-    { name: "Maxi Vulcano" },
-    { name: "Oscar" },
+    { name: "Tobías Moccagata" },
+    { name: "Elías Vásquez" },
+    { name: "Ruth Borda Mendez" },
+    { name: "Erika Martínez" },
+    { name: "Luca González" },
+    { name: "Juan Andrés Pérez" },
+    { name: "Alejandro Laurito" },
+    { name: "Juan Ignacio Delena" },
+    { name: "Máximo Vulcano" },
+    { name: "Oscar Pulido" },
   ];
 
   return (

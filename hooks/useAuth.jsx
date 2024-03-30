@@ -1,11 +1,14 @@
 "use client";
 import { validateRegistration } from "../app/utils/validation";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
 import { BASE_URL, LOGIN_URL, REGISTER_URL, ROUTE_HOME, ROUTE_LOGIN } from "../app/utils/routes";
+import { useRouter } from "next/navigation";
+import { useSession } from "./sessionContext";
 
 const useAuth = () => {
   const router = useRouter();
+  const { session, setSession} = useSession();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -44,7 +47,7 @@ const useAuth = () => {
       };
       return;
     }
-    urlRequest = "/login";
+    urlRequest = ROUTE_LOGIN;
     successMessage = "Success Login";
     exception = "Failed to login";
     requestData = {
@@ -54,7 +57,6 @@ const useAuth = () => {
   };
 
   const handleSubmit = async (e) => {
-    const backUrl = process.env.NEXT_PUBLIC_BACK_URL;
     setStatus(null);
     e.preventDefault();
 
@@ -67,11 +69,10 @@ const useAuth = () => {
     setLoading(true);
     builderRequest(formData.isRegister);
     try {
-      const response = await fetch(`${backUrl}/login`, {
+      const response = await fetch(`${BASE_URL}/${urlRequest}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-Requested-With": "XMLHttpRequest",
         },
         body: JSON.stringify(requestData),
       });
@@ -83,6 +84,8 @@ const useAuth = () => {
       if (!formData.isRegister) {
         const data = await response.json();
         localStorage.setItem("token", data.token);
+        localStorage.setItem("username", requestData.username);
+        setSession(data.token)
       }
 
       setFormData({
@@ -103,9 +106,8 @@ const useAuth = () => {
         router.push(`${ROUTE_LOGIN}`)
       }
       setStatus(successMessage);
-      router.push("/");
-    } catch (error) {
-      setStatus(`Error: ${error.message}`);
+    } catch (status) {
+      setStatus(status.message);
     }
     setLoading(false);
   };

@@ -99,7 +99,7 @@ const ProductsCarousel = ({
                   <span className=" text-lg leading-[1.6] text-gray-400 font-normal">
                     $ {item.price} Credits
                   </span>
-                  <Link href={`/products/${item.id}`} className="bg-red-500 text-xl rounded-md w-32 mt-2 text-center">Buy Now
+                  <Link href={`/products/${item.id}`} className="bg-red-500 text-xl rounded-md w-32 mt-2 text-center">View
                   </Link>
                 </div>
               </div>

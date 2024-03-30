@@ -1,76 +1,134 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import cart from "../../public/images/cart.svg";
 import lwLogo from "../../public/lw-logo.svg";
 import Container from "./container";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LOGIN_URL, ROUTE_CART, ROUTE_LOGIN, ROUTE_REGISTER } from '../../app/utils/routes';
+import {
+  LOGIN_URL,
+  ROUTE_ABOUT,
+  ROUTE_CART,
+  ROUTE_CONTACT,
+  ROUTE_LOGIN,
+  ROUTE_PROFILE,
+  ROUTE_REGISTER,
+} from "../../app/utils/routes";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Badge } from "../ui/badge";
+import { useSession } from "../../hooks/sessionContext";
 
 const Navbar = () => {
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(true);
+  const {session, setSession } = useSession();
+  const [totalItem, setTotalItem] = useState(0);
+
+  const handleScroll = () => {
+    const currentScrollPos = window.scrollY;
+
+    setVisible(
+      (prevScrollPos > currentScrollPos &&
+        prevScrollPos - currentScrollPos > 70) ||
+        currentScrollPos < 10
+    );
+
+    setPrevScrollPos(currentScrollPos);
+  };
+
+  const handleCloseSession = () => {
+    localStorage.removeItem("token");
+    setSession(null);
+  };
+
+  useEffect(() => {
+    const cartItems = localStorage.getItem("cartItem");
+    if (cartItems) {
+      const items = JSON.parse(cartItems);
+      setTotalItem(items ? items.length : 0);
+    }
+  }, [totalItem]);
+  
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const cartItems = JSON.parse(localStorage.getItem("cartItem"));
+      setTotalItem(cartItems ? cartItems.length : 0);
+    };
+
+    const handlePopState = () => {
+      const cartItems = JSON.parse(localStorage.getItem("cartItem"));
+      setTotalItem(cartItems ? cartItems.length : 0);
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", handleScroll);
+
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
+  }, [prevScrollPos, visible]);
+
   const route = usePathname();
-  const [authorized, setAuthorized] = useState(false);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) setAuthorized(true);
-    console.log(token, authorized);
-  }, [authorized]);
-
-  useEffect(() => {
-    console.log("Authorization status:", authorized);
-  }, [authorized]);
-
-  return route === "/login" || route === "/register" ? null : (
-    <div className="z-50 fixed top-0 h-28 min-w-[100dvw]  text-gray-50 text-2xl py-8">
-      <Container className="px-20 flex justify-between items-center">
+  return route !== "/" ? null : (
+    <div
+      className={`z-50 fixed top-0 h-28 min-w-[100dvw] aeonik text-gray-50 text-2xl py-8 ${
+        visible ? "visible" : "hidden"
+      }`}
+    >
+      <Container className="px-20 flex justify-between items-start">
         <a href="/" className="flex items-center">
           <Image src={lwLogo} alt="logo" />
           <p className="coanda-bold ml-6">Lightweight</p>
         </a>
-        <ul className="flex space-x-4 text-lg">
-          <li>
-            <Link
-              href="/products"
-              className="group transition duration-300 animate-fade-in"
-            >
-              Products
-              <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[1px] bg-white"></span>
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/about-us"
-              className="group transition duration-300 animate-fade-in"
-            >
-              About us
-              <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[1px] bg-white"></span>
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/contact"
-              className="group transition duration-300 animate-fade-in"
-            >
-              Contact
-              <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[1px] bg-white"></span>
-            </Link>
-          </li>
-          {authorized ? (
-            <div className="space-x-4">
-              <Link href={ROUTE_CART}>Cart</Link>
-              <button className="text-red-500">Log out</button>
-            </div>
-          ) : (
-            <Link
-              href="/login"
-              className="group transition duration-300 animate-fade-in text-red-500"
-            >
-              Join/ sign in
-              <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[1px] bg-red-500"></span>
-            </Link>
-          )}
-        </ul>
+
+        <div className="flex justify-around items-center w-[40%]">
+          <div
+            className={`${
+              session === null ? "text-red-500 visible" : " text-red-500 hidden"
+            }`}
+          >
+            <a href={ROUTE_LOGIN}>Join/</a>
+            <a href={ROUTE_REGISTER}> Sign in</a>
+          </div>
+
+          <div>
+            <a href={ROUTE_ABOUT}>About us</a>
+          </div>
+          <div>
+            <a href={ROUTE_CONTACT}>Contact</a>
+          </div>
+
+          <div className={`flex ${session !== null ? "" : "hidden"}`}>
+            <a href={ROUTE_CART}>
+              <Badge
+                className={`absolute bg-red-500 text-center top-[30px] mx-3`}
+              >
+                {totalItem}
+              </Badge>
+              <Image src={cart} alt="cart" className="my-3" />
+            </a>
+            <a href={ROUTE_PROFILE}>
+              <Avatar className="mx-4 my-2 cursor-pointer">
+                <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+            </a>
+            <button onClick={handleCloseSession}>Logout</button>
+          </div>
+        </div>
       </Container>
     </div>
   );
