@@ -34,7 +34,7 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import { Separator } from "../ui/separator";
-import { BASE_URL, COUPON_URL, ROUTE_HOME } from "../../app/utils/routes";
+import { BASE_URL, COUPON_URL, ROUTE_HOME, ROUTE_PROFILE } from "../../app/utils/routes";
 import Coupon from "../coupon/coupon";
 import useShoppingCart from "../../hooks/useShoppingCart";
 import useCreditCard from "../../hooks/useCreditCard";
@@ -69,7 +69,7 @@ const Checkout = () => {
   return (
     <div>
       <motion.div
-        className={`loading-screen ${loading? '':'hidden'}`}
+        className={`loading-screen ${loading ? "" : "hidden"}`}
         initial={{ opacity: 1 }}
         animate={{ opacity: loading ? 1 : 0 }}
         transition={{ duration: 1 }}
@@ -103,13 +103,15 @@ const Checkout = () => {
 
                 <Image src={cart} alt="cart" className="my-3" />
 
-                <Avatar className="mx-4">
-                  <AvatarImage
-                    src="https://github.com/shadcn.png"
-                    alt="shadcn"
-                  />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
+                <a href={ROUTE_PROFILE}>
+                  <Avatar className="mx-4 cursor-pointer">
+                    <AvatarImage
+                      src="https://github.com/shadcn.png"
+                      alt="shadcn"
+                    />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </a>
               </div>
             </div>
           </div>
