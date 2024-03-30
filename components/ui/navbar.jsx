@@ -26,13 +26,7 @@ const Navbar = () => {
 
   const handleScroll = () => {
     const currentScrollPos = window.scrollY;
-
-    setVisible(
-      (prevScrollPos > currentScrollPos &&
-        prevScrollPos - currentScrollPos > 70) ||
-        currentScrollPos < 10
-    );
-
+    setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
     setPrevScrollPos(currentScrollPos);
   };
 
@@ -71,19 +65,18 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.addEventListener("scroll", handleScroll);
-
-      return () => window.removeEventListener("scroll", handleScroll);
-    }
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, [prevScrollPos, visible]);
 
   const route = usePathname();
 
   return route !== "/" ? null : (
     <div
-      className={`z-50 fixed top-0 h-28 w-screen aeonik text-gray-50 text-lg py-8 ${
-        visible ? "visible" : "hidden"
+      className={`z-50 fixed top-0 h-28 w-screen aeonik bg-gradient-to-b from-slate-950 to-transparent text-gray-50 text-lg py-8 transition-all duration-500 ease-in-out ${
+        visible ? "" : "-translate-y-[110%]"
       }`}
     >
       <Container className="px-20 flex justify-between items-start">
