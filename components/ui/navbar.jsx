@@ -19,6 +19,7 @@ import { Badge } from "../ui/badge";
 import { useSession } from "../../hooks/sessionContext";
 
 const Navbar = () => {
+  console.log('navbar mounted');
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const {session, setSession } = useSession();
@@ -73,7 +74,7 @@ const Navbar = () => {
 
   const route = usePathname();
 
-  return route !== "/" ? null : (
+  return (
     <div
       className={`z-[1000] fixed top-0 h-28 w-screen aeonik bg-gradient-to-b from-slate-950 to-transparent text-gray-50 text-lg py-8 transition-all duration-500 ease-in-out ${
         visible ? "" : "-translate-y-[110%]"
