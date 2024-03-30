@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "../../../components/ui/container";
 import ProductSlider from "../../../components/ui/productSlider";
 import QuantitySelector from "../../../components/ui/quantitySelector";
@@ -12,15 +12,31 @@ import ProductBento from "../../../components/ui/productBento";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ROUTE_CART } from "../../utils/routes";
+import fetchProductById from "../../../hooks/fetchProductById";
 
 const ProductPage = ({ params }) => {
   const product_id = parseInt(params.product_id);
   const [showNotification, setShowNotification] = useState(false);
-  const product = products.find((item) => item.id === product_id);
+  const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  /* const [couponModal, setCouponModal] = useState(false); */
 
-  const changeQuantity = (amount: number) => {
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      fetchProductById(token, product_id)
+        .then((data) => {
+          setProduct(data);
+        })
+        .catch((err) => {
+          console.error("Error fetching products: ", err);
+        });
+    }
+  }, [fetchProductById]);
+
+  console.log(product);
+  
+
+  const changeQuantity = (amount) => {
     setQuantity((prevQuantity) => {
       const newQuantity = prevQuantity + amount;
       return newQuantity > 0 ? newQuantity : 1;
@@ -34,8 +50,8 @@ const ProductPage = ({ params }) => {
 
     const formattedProduct = {
       id: product?.id,
-      img: product?.image,
-      categoryId: "1",
+      img: product?.images[0]?.url,
+      categoryId: product?.categoryId, 
       name: product?.name,
       description: product?.description,
       quantity: quantity,
@@ -61,10 +77,8 @@ const ProductPage = ({ params }) => {
     setShowNotification(true);
   };
 
-/*   const closeCouponModal = () => {
-    setCouponModal(false);
-  };
- */
+  const productImgs = product?.images.map((image) => image.url);
+
   return (
     <div
       id="product-page"
@@ -73,7 +87,7 @@ const ProductPage = ({ params }) => {
       <Container className={"w-auto relative"}>
         <div className="flex">
           <div className="w-3/6">
-            <ProductSlider images={product?.image_gallery} />
+            <ProductSlider images={productImgs} />
           </div>
           <div className="w-3/6 space-y-6">
             <div className="w-full text-zinc-50">
@@ -96,7 +110,7 @@ const ProductPage = ({ params }) => {
               </button> */}
               <button
                 onClick={addToCart}
-                className="bg-zinc-600 border text-base py-2 px-8 text-center rounded hover:bg-transparent transition-colors text-xl"
+                className="bg-zinc-600 border text-base py-2 px-8 text-center rounded hover:bg-transparent transition-colors"
               >
                 Add to Cart
               </button>
@@ -107,7 +121,7 @@ const ProductPage = ({ params }) => {
               )}
               <Link
                 href={`http://localhost:3000/${ROUTE_CART}`}
-                className="bg-red-500 text-base py-2 px-8 text-center rounded border border-red-500 hover:bg-transparent transition-colors text-xl"
+                className="bg-red-500 text-base py-2 px-8 text-center rounded border border-red-500 hover:bg-transparent transition-colors"
               >
                 {" "}
                 Buy now{" "}
