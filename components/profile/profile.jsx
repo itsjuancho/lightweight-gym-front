@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import lwLogo from "../../public/lw-logo.svg";
 import fab from "../../public/images/fab.svg";
@@ -13,14 +13,23 @@ import { Separator } from "../ui/separator";
 import { ROUTE_CART } from "../../app/utils/routes";
 import EditForm from "../../components/editForm/EditForm";
 import PurchaseHistory from "../../components/purchaseHistory/PurchaseHistory";
+import { useSession } from "../../hooks/sessionContext";
+import useFindUserInfo from "../../hooks/useFindUserInfo";
 
 export const Profile = () => {
+  const { session, setSession } = useSession();
   const [selectedOption, setSelectedOption] = useState(null);
+  const { profile } = useFindUserInfo();
   const [titleOption, setTitleOption] = useState(null);
 
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
     setTitleOption(option);
+  };
+
+  const handleCloseSession = () => {
+    localStorage.removeItem("token");
+    setSession(null);
   };
 
   return (
@@ -41,8 +50,10 @@ export const Profile = () => {
 
           <div className="flex justify-end items-center w-2/5 text-white">
             <div className="flex flex-col items-center mx-2">
-              <p className="text-center">Lina Huertas</p>
-              <span className="text-center">Silver Category</span>
+              <p className="text-center">
+                {profile.firstName} {profile.lastName}
+              </p>
+              <span className="text-center">{profile.rank} Category</span>
             </div>
 
             <a href={ROUTE_CART}>
@@ -66,8 +77,12 @@ export const Profile = () => {
             </Avatar>
 
             <div className="text-white aeonik text-2xl">
-              <h1 className="text-center">Lina Huertas</h1>
-              <p className="text-center text-red-500">Bronze Category</p>
+              <h1 className="text-center">
+                {profile.firstName} {profile.lastName}
+              </h1>
+              <p className="text-center text-red-500">
+                {profile.rank} Category
+              </p>
             </div>
           </div>
           <Separator className="my-8 bg-gray-500" />
@@ -79,16 +94,21 @@ export const Profile = () => {
               <li onClick={() => handleOptionSelect("Purchase History")}>
                 Purchase History
               </li>
-              <li onClick={() => handleOptionSelect("Purchase History")}>
-                Logout
-              </li>
+              <li onClick={handleCloseSession}>Logout</li>
             </ul>
           </div>
         </div>
 
         <div className="bg-[#090808] w-full">
-          {selectedOption === "User Information" && <EditForm />}
-          {selectedOption === "Purchase History" && <PurchaseHistory/>}
+          {selectedOption === "User Information" && (
+            <EditForm
+              firstName={profile.firstName}
+              lastName={profile.lastName}
+              email={profile.email}
+              username={profile.username}
+            />
+          )}
+          {selectedOption === "Purchase History" && <PurchaseHistory />}
         </div>
       </div>
       <footer className="flex justify-between bg-black text-white text-xl py-[1.2rem] px-12">

@@ -10,6 +10,7 @@ import {
   ROUTE_ABOUT,
   ROUTE_CART,
   ROUTE_CONTACT,
+  ROUTE_FORGOT_PASS,
   ROUTE_LOGIN,
   ROUTE_PROFILE,
   ROUTE_REGISTER,
@@ -72,7 +73,13 @@ const Navbar = () => {
     };
   }, [prevScrollPos, visible]);
 
-  const route = usePathname();
+  const route = usePathname().substring(1);
+  const hideNavbarRoutes = [ROUTE_LOGIN, ROUTE_REGISTER, ROUTE_CART,ROUTE_FORGOT_PASS,ROUTE_PROFILE];
+  const shouldHideNavbar = hideNavbarRoutes.includes(route);
+
+  if (shouldHideNavbar) {
+    return null; 
+  }
 
   return (
     <div
