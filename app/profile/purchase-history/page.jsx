@@ -39,15 +39,15 @@ const page = () => {
   }, 0);
 
   return (
-    <div className="min-h-[100dvh] 2xl:pt-64 pt-0 bg-gradient-to-b from-[#030712] to-[#210303] text-gray-50  flex flex-col justify-start items-center">
+    <div className="min-h-[100dvh] 2xl:pt-64 py-32 bg-gradient-to-b from-[#030712] to-[#210303] text-gray-50  flex flex-col justify-start items-center">
       <Container className="w-full">
       <h1 className="coanda text-2xl font-bold text-red-500">Purchase History</h1>
         <Table>
           <TableCaption>Your purchases</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">Product name</TableHead>
-              <TableHead>Category</TableHead>
+              <TableHead className="w-[100px]">Product</TableHead>
+              <TableHead className="hidden md:block">Category</TableHead>
               <TableHead>Quantity</TableHead>
               <TableHead className="text-right text-red-500">Price</TableHead>
             </TableRow>
@@ -55,10 +55,10 @@ const page = () => {
           <TableBody>
             {purchases?.map((item, idx) => (
               <TableRow key={idx}>
-                <TableCell className="font-medium min-w-56">
+                <TableCell className="font-medium md:min-w-56 line-clamp-1 md:line-clamp-none">
                   {item.name}
                 </TableCell>
-                <TableCell>{item.category}</TableCell>
+                <TableCell className="hidden md:block">{item.category}</TableCell>
                 <TableCell>{item.quantity}</TableCell>
                 <TableCell className="flex justify-end items-center">
                   ${item.price}

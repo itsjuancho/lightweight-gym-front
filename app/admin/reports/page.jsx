@@ -104,10 +104,10 @@ const ReportsPage = () => {
 
     return (
         <div className="min-h-[100vh] bg-gradient-to-b from-[#030712] to-[#210303] text-gray-50 flex flex-col justify-center">
-            <Container className="w-full pt-40 pb-16 px-20">
-                <h1 className='text-2xl mb-16 font-bold'>Reports</h1>
-                <div className='flex justify-between items-center'>
-                    <p className='text-red-500'>Total Profits: ${totalProfit.toFixed(2)}</p>
+            <Container className="w-full md:pt-40 pb-16 md:px-20 px-5">
+                <h1 className='text-2xl md:mb-16 mb-8 font-bold'>Reports</h1>
+                <div className='flex md:flex-row flex-col md:justify-between justify-start md:items-center'>
+                    <p className='text-red-500 text-xs md:text-base mb-1 md:mb-0'>Total Profits: ${totalProfit.toFixed(2)}</p>
                     <button onClick={downloadCSV} className="mb-4 bg-red-500 hover:bg-red-700 transition-colors text-white font-bold py-2 px-4 rounded">
                         Export Report to CSV
                     </button>
@@ -134,7 +134,7 @@ const ReportsPage = () => {
                         ))}
                     </tbody>
                 </table>
-                <button onClick={toggleShowAll} className="mt-2 text-red-500 font-bold py-2 rounded">
+                <button onClick={toggleShowAll} className="mt-2 text-red-500 font-bold py-2">
                     {showAll ? 'Show Less' : 'Show All Rows'}
                 </button>
                 <div className="mt-8 w-full">
