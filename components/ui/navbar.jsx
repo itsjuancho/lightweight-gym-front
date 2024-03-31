@@ -1,11 +1,9 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import cart from "../../public/images/cart.svg";
 import lwLogo from "../../public/lw-logo.svg";
 import Container from "./container";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LOGIN_URL,
@@ -21,6 +19,7 @@ import { Badge } from "../ui/badge";
 import { useSession } from "../../hooks/sessionContext";
 
 const Navbar = () => {
+  console.log('navbar mounted');
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const {session, setSession } = useSession();
@@ -28,13 +27,7 @@ const Navbar = () => {
 
   const handleScroll = () => {
     const currentScrollPos = window.scrollY;
-
-    setVisible(
-      (prevScrollPos > currentScrollPos &&
-        prevScrollPos - currentScrollPos > 70) ||
-        currentScrollPos < 10
-    );
-
+    setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
     setPrevScrollPos(currentScrollPos);
   };
 
@@ -73,19 +66,18 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.addEventListener("scroll", handleScroll);
-
-      return () => window.removeEventListener("scroll", handleScroll);
-    }
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, [prevScrollPos, visible]);
 
   const route = usePathname();
 
-  return route !== "/" ? null : (
+  return (
     <div
-      className={`z-50 fixed top-0 h-28 min-w-[100dvw] aeonik text-gray-50 text-2xl py-8 ${
-        visible ? "visible" : "hidden"
+      className={`z-[1000] fixed top-0 h-28 w-screen aeonik bg-gradient-to-b from-slate-950 to-transparent text-gray-50 text-lg py-8 transition-all duration-500 ease-in-out ${
+        visible ? "" : "-translate-y-[110%]"
       }`}
     >
       <Container className="px-20 flex justify-between items-start">
@@ -94,22 +86,18 @@ const Navbar = () => {
           <p className="coanda-bold ml-6">Lightweight</p>
         </a>
 
-        <div className="flex justify-around items-center w-[40%]">
+        <div className="flex justify-end space-x-4 items-center w-[40%]">
           <div
-            className={`${
-              session === null ? "text-red-500 visible" : " text-red-500 hidden"
+            className={`text-red-500 ${
+              session === null ? "visible" : "hidden"
             }`}
           >
-            <a href={ROUTE_LOGIN}>Join/</a>
-            <a href={ROUTE_REGISTER}> Sign in</a>
+            <a href={ROUTE_REGISTER}>Join/ </a>
+            <a href={ROUTE_LOGIN}> Sign in</a>
           </div>
-
-          <div>
+            <a href="/products">Products</a>
             <a href={ROUTE_ABOUT}>About us</a>
-          </div>
-          <div>
             <a href={ROUTE_CONTACT}>Contact</a>
-          </div>
 
           <div className={`flex ${session !== null ? "" : "hidden"}`}>
             <a href={ROUTE_CART}>
@@ -123,7 +111,7 @@ const Navbar = () => {
             <a href={ROUTE_PROFILE}>
               <Avatar className="mx-4 my-2 cursor-pointer">
                 <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
-                <AvatarFallback>CN</AvatarFallback>
+                <AvatarFallback>@</AvatarFallback>
               </Avatar>
             </a>
             <button onClick={handleCloseSession}>Logout</button>

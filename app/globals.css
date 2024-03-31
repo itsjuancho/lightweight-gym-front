@@ -115,14 +115,9 @@
   color: #ffffff;
 }
 
-.authform {
-  display: flex;
-  justify-content: space-between;
-}
-
 .form-img > img {
   width: 606px;
-  height: 100vh;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -138,7 +133,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 10rem;
 }
 
 .custom-w-13 {

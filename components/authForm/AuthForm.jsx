@@ -32,14 +32,14 @@ function AuthForm({ title }) {
   };
 
   return (
-    <div className="authform w-screen min-h-[100dvh]">
+    <div className="flex w-screen min-h-[100dvh] overflow-x-hidden">
       <Image
         src={GymMen}
-        alt="gym men"
-        className="xl:w-[956px] lg:hidden xl:block hidden" 
+        alt="dude lifting weights"
+        className="xl:w-[956px] 2xl:block hidden object-cover"
       />
-      <div className="form bg-black w-full bg-gradient-to-t form-shadow-right">
-        <div className="form-title flex items-center justify-center w-full max-w-sm">
+      <div className="form bg-black w-full bg-gradient-to-t form-shadow-right py-16">
+        <div className="form-title flex items-center justify-center w-full max-w-sm overflow-x-hidden">
           <Link href={ROUTE_HOME}>
             <Image src={Logo} alt="logo" className="mr-8" />
           </Link>
@@ -58,9 +58,9 @@ function AuthForm({ title }) {
         </AnimatePresence>
         <div className="text-white aeonik-bold xl:w-2/6 md:w-7/12 w-4/5">
           <div
-            className={`grid w-full items-center gap-1.5 my-6 ${SHOW_ELEMENT.input}`}
+            className={`grid w-full items-center gap-1.5 my-1 ${SHOW_ELEMENT.input}`}
           >
-            <Label htmlFor="text" className="text-2xl">
+            <Label htmlFor="text" className="text-base">
               First name
             </Label>
             <Input
@@ -68,14 +68,14 @@ function AuthForm({ title }) {
               id="firstName"
               value={formData.firstName}
               onChange={handleChange}
-              className="bg-transparent border border-white w-full md:w-13 text-2xl font-normal"
+              className="bg-transparent border border-white w-full md:w-13 text-base font-normal"
             />
           </div>
 
           <div
-            className={`grid w-full items-center gap-1.5 my-6 ${SHOW_ELEMENT.input}`}
+            className={`grid w-full items-center gap-1.5 my-1 ${SHOW_ELEMENT.input}`}
           >
-            <Label htmlFor="text" className="text-2xl">
+            <Label htmlFor="text" className="text-base">
               Last name
             </Label>
             <Input
@@ -83,12 +83,27 @@ function AuthForm({ title }) {
               id="lastName"
               value={formData.lastName}
               onChange={handleChange}
-              className="bg-transparent border border-white w-full md:w-13 text-2xl	font-normal"
+              className="bg-transparent border border-white w-full md:w-13 text-base	font-normal"
             />
           </div>
 
-          <div className={`grid w-full items-center gap-1.5 my-6`}>
-            <Label htmlFor="text" className="text-2xl aeonik-bold">
+          <div
+            className={`grid w-full items-center gap-1.5 my-1 ${SHOW_ELEMENT.input}`}
+          >
+            <Label htmlFor="text" className="text-base">
+              Document
+            </Label>
+            <Input
+              type="text"
+              id="document"
+              value={formData.document}
+              onChange={handleChange}
+              className="bg-transparent border border-white w-full md:w-13 text-base	font-normal"
+            />
+          </div>
+
+          <div className={`grid w-full items-center gap-1.5 my-1`}>
+            <Label htmlFor="text" className="text-base aeonik-bold">
               Username
             </Label>
             <Input
@@ -96,14 +111,14 @@ function AuthForm({ title }) {
               id="username"
               value={formData.username}
               onChange={handleChange}
-              className="bg-transparent border border-white w-full md:w-13 text-2xl	font-normal"
+              className="bg-transparent border border-white w-full md:w-13 text-base	font-normal"
             />
           </div>
 
           <div
-            className={`grid w-full items-center gap-1.5 my-6 md:my-8 ${SHOW_ELEMENT.input}`}
+            className={`grid w-full items-center gap-1.5 my-1 ${SHOW_ELEMENT.input}`}
           >
-            <Label htmlFor="email" className="text-2xl">
+            <Label htmlFor="email" className="text-base">
               Email
             </Label>
             <Input
@@ -111,18 +126,18 @@ function AuthForm({ title }) {
               id="email"
               value={formData.email}
               onChange={handleChange}
-              className="bg-transparent border border-white w-full md:w-13 text-2xl	font-normal"
+              className="bg-transparent border border-white w-full md:w-13 text-base	font-normal"
             />
           </div>
 
           <div className="flex justify-between items-center">
             <div>
-              <Label htmlFor="password" className="text-2xl aeonik-bold">
+              <Label htmlFor="password" className="text-base aeonik-bold">
                 Password
               </Label>
             </div>
             <div className={` ml-4 md:ml-0 ${SHOW_ELEMENT.label}`}>
-              <Link href={ROUTE_FORGOT_PASS} className="text-[1.2rem] aeonik">
+              <Link href={ROUTE_FORGOT_PASS} className="aeonik text-xs">
                 Forgot your password?
               </Link>
             </div>
@@ -134,14 +149,14 @@ function AuthForm({ title }) {
               id="password"
               value={formData.password}
               onChange={handleChange}
-              className="bg-transparent border border-white w-full text-xl"
+              className="bg-transparent border border-white w-full text-base"
             />
           </div>
 
           <div
-            className={`grid w-full items-center gap-1.5 my-6 ${SHOW_ELEMENT.input}`}
+            className={`grid w-full items-center gap-1.5 my-1 ${SHOW_ELEMENT.input}`}
           >
-            <Label htmlFor="password" className="text-2xl">
+            <Label htmlFor="password" className="text-base">
               Re-Password
             </Label>
             <Input
@@ -149,27 +164,27 @@ function AuthForm({ title }) {
               id="rePassword"
               value={formData.rePassword}
               onChange={handleChange}
-              className="bg-transparent border border-white w-full md:w-13 text-xl"
+              className="bg-transparent border border-white w-full md:w-13 text-base"
             />
           </div>
         </div>
         <Button
           onClick={handleSubmit}
-          className="aeonik-bold w-4/5 xl:w-2/6 md:w-7/12 text-white bg-red-500 hover:bg-red-500 focus:bg-red-500 text-xl m-5 p-7 "
+          className="aeonik-bold w-4/5 xl:w-2/6 md:w-7/12 text-white bg-red-500 hover:bg-red-500 focus:bg-red-500 text-base my-4"
         >
           {SHOW_ELEMENT.buttonName}
         </Button>
         <Link
           href={ROUTE_REGISTER}
-          className={`text-xl text-white aeonik inline-block ${SHOW_ELEMENT.label}`}
+          className={`text-xs text-white aeonik inline-block ${SHOW_ELEMENT.label}`}
         >
           Aren&apos;t a member yet?
           <span className="inline border-b border-white"> Sign up instead</span>
-          
+
         </Link>
-        <a href={ROUTE_HOME} className=" my-4 text-xl text-white border-b border-white aeonik text-base"> Back To Home</a>
+
         {isReg && (
-          <Link href={ROUTE_LOGIN} className={`text-xl text-white aeonik`}>
+          <Link href={ROUTE_LOGIN} className={`text-xs text-white aeonik`}>
             Already a member?
             <span className="inline border-b border-white">
               {" "}
@@ -177,6 +192,7 @@ function AuthForm({ title }) {
             </span>
           </Link>
         )}
+        <a href={ROUTE_HOME} className=" my-4 text-white border-b border-white aeonik text-xs"> Back To Home</a>
       </div>
     </div>
   );

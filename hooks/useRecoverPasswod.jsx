@@ -8,12 +8,11 @@ import {
 } from "../app/utils/routes";
 import {
   validateFieldForResetPassword,
-  validateOnlyEmail
+  validateOnlyEmail,
 } from "../app/utils/validation";
 import { useState } from "react";
 
 const useRecoverPasswod = () => {
-
   const router = useRouter();
   const [status, setStatus] = useState(null);
   const [formData, setFormData] = useState({
@@ -42,9 +41,13 @@ const useRecoverPasswod = () => {
     const response = await fetch(`${BASE_URL}/${urlRequest}`, {
       method: "POST",
       headers: {
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
         "Content-Type": "application/json",
+        "X-Requested-With": "XMLHttpRequest",
       },
-      body:JSON.stringify(requestData),
+      body: JSON.stringify(requestData),
     });
 
     if (!response.ok) {
@@ -58,8 +61,12 @@ const useRecoverPasswod = () => {
 
   const resetPasswordFetch = async () => {
     const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', `Bearer ${requestData.token}`);
+    headers.append("Access-Control-Allow-Headers", "Content-Type");
+    headers.append("Access-Control-Allow-Origin", "*");
+    headers.append("Access-Control-Allow-Methods", "OPTIONS,POST,GET");
+    headers.append("X-Requested-With", "XMLHttpRequest");
+    headers.append("Content-Type", "application/json");
+    headers.append("Authorization", `Bearer ${requestData.token}`);
 
     const response = await fetch(`${BASE_URL}/${urlRequest}`, {
       method: "POST",
@@ -70,19 +77,17 @@ const useRecoverPasswod = () => {
     if (!response.ok) {
       throw new setStatus(exception);
     }
-    headers.delete('Authorization');  
+    headers.delete("Authorization");
     setStatus(successMessage);
     setFormData({
       email: "",
       newPassword: "",
       confirmPassword: "",
     });
-    router.push(`${ROUTE_LOGIN}`)
+    router.push(`${ROUTE_LOGIN}`);
   };
 
   const builderRequest = (isForgot) => {
-
-
     if (isForgot && formData.token) {
       urlRequest = RESET_PASSWORD_URL;
       successMessage = `Password is reset success`;
@@ -95,13 +100,12 @@ const useRecoverPasswod = () => {
       return;
     }
 
-
     if (isForgot) {
       urlRequest = FORGOT_PASSWORD_URL;
       successMessage = `Send link to ${formData.email} for recover you password`;
       exception = "Failed to  send email";
       requestData = {
-        mailTo: formData.email
+        mailTo: formData.email,
       };
       return;
     }
@@ -122,7 +126,6 @@ const useRecoverPasswod = () => {
 
     builderRequest(formData.isForgot);
     try {
-
       if (formData.isForgot && formData.token) {
         const validatePasswordError = validateFieldForResetPassword(formData);
         if (validatePasswordError) {
@@ -133,7 +136,7 @@ const useRecoverPasswod = () => {
         return;
       }
 
-      if (formData.isForgot ) {
+      if (formData.isForgot) {
         const validateEmailError = validateOnlyEmail(formData.email);
         if (validateEmailError) {
           setStatus(validateEmailError);
@@ -142,7 +145,6 @@ const useRecoverPasswod = () => {
         sendEmailFetch();
         return;
       }
-
     } catch (status) {
       setStatus(status.message);
     }

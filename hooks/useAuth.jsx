@@ -16,6 +16,7 @@ const useAuth = () => {
     username: "",
     password: "",
     rePassword: "",
+    document: "",
     isRegister: "",
   });
   let urlRequest;
@@ -44,10 +45,11 @@ const useAuth = () => {
         email: formData.email,
         username: formData.username,
         password: formData.password,
+        document: formData.document,
       };
       return;
     }
-    urlRequest = ROUTE_LOGIN;
+    urlRequest = LOGIN_URL;
     successMessage = "Success Login";
     exception = "Failed to login";
     requestData = {
@@ -69,15 +71,20 @@ const useAuth = () => {
     setLoading(true);
     builderRequest(formData.isRegister);
     try {
-      const response = await fetch(`${BASE_URL}/${urlRequest}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACK_URL}/${urlRequest}`, {
         method: "POST",
         headers: {
+          "Access-Control-Allow-Headers": "Content-Type",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
           "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
         },
         body: JSON.stringify(requestData),
       });
 
       if (!response.ok) {
+        setStatus(`Error connect back Error: ${response.type} ${response.status} ${response.statusText}`);
         console.error(response);
       }
 
@@ -96,16 +103,19 @@ const useAuth = () => {
         password: "",
         rePassword: "",
         isRegister: "",
+        document: "",
       });
       
-      if (!formData.isRegister) {
+      if (!formData.isRegister && response.ok) {
         router.push(`${ROUTE_HOME}`)
+        setStatus(successMessage);
       }
 
-      if (formData.isRegister) {
+      if (formData.isRegister && response.ok) {
         router.push(`${ROUTE_LOGIN}`)
+        setStatus(successMessage);
       }
-      setStatus(successMessage);
+      
     } catch (status) {
       setStatus(status.message);
     }
