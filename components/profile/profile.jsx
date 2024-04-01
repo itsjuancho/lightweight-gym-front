@@ -10,17 +10,29 @@ import linke from "../../public/images/linke.svg";
 import x from "../../public/images/x.svg";
 import cart from "../../public/images/cart.svg";
 import { Separator } from "../ui/separator";
-import { ROUTE_CART } from "../../app/utils/routes";
+import { ROUTE_CART, ROUTE_HOME } from "../../app/utils/routes";
 import EditForm from "../../components/editForm/EditForm";
 import PurchaseHistory from "../../components/purchaseHistory/PurchaseHistory";
 import { useSession } from "../../hooks/sessionContext";
 import useFindUserInfo from "../../hooks/useFindUserInfo";
+import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 export const Profile = () => {
+  const router=useRouter();
   const { session, setSession } = useSession();
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState("Purchase History");
   const { profile } = useFindUserInfo();
   const [titleOption, setTitleOption] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
@@ -30,10 +42,26 @@ export const Profile = () => {
   const handleCloseSession = () => {
     localStorage.removeItem("token");
     setSession(null);
+    router.push(ROUTE_HOME)
+  };
+  const resetHandle = () => {
+    console.log("wenas")
+    window.location.reload();
   };
 
   return (
     <div>
+      <motion.div
+        className={`loading-screen ${loading ? "" : "hidden"}`}
+        initial={{ opacity: 1 }}
+        animate={{ opacity: loading ? 1 : 0 }}
+        transition={{ duration: 1 }}
+      >
+        <div className="flex justify-center items-center h-screen bg-black">
+          <h1 className="text-3xl text-red-500 aeonik">Loading...</h1>
+        </div>
+      </motion.div>
+
       <div className="flex justify-between justify-center bg-black px-11">
         <a href={`/`} className="flex justify-center items-center">
           <Image src={lwLogo} alt="logo" className="w-[2rem] h-[2rem]" />
@@ -106,6 +134,8 @@ export const Profile = () => {
               lastName={profile.lastName}
               email={profile.email}
               username={profile.username}
+              document={profile.document}
+              resetHandle={resetHandle}
             />
           )}
           {selectedOption === "Purchase History" && <PurchaseHistory />}

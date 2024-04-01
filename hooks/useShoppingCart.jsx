@@ -5,25 +5,34 @@ import {
   BASE_URL,
   COUPON_CLIENT_URL,
   COUPON_URL,
+  PROFILE_URL_REST,
   PURCHAGE_URL,
+  ROUTE_HOME,
   ROUTE_LOGIN,
 } from "../app/utils/routes";
 import { useRouter } from "next/navigation";
 import { useSession } from "./sessionContext";
+import useFindUserInfo from "./useFindUserInfo";
 
 function useShoppingCart() {
   const router = useRouter();
   const { session } = useSession();
+  const [openModal, setOpenModal] = useState(false);
   const [cartProducts, setCartProducts] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
   const [totalToPay, setTotalToPay] = useState(0);
   const [coupons, setCoupons] = useState([]);
-  const [profile, setProfile] = useState(null);
+  const [accountId, setAccountId] = useState(0);
+  const [nameUser, setNameUser] = useState(null);
+  const [category, setCategory] = useState(null);
   const [appliedCoupons, setAppliedCoupons] = useState([]);
   const [discount, setDiscount] = useState(0);
   const [selectedAccount, setSelectedAccount] = useState(null);
   const [showNotification, setShowNotification] = useState(false);
-  const accountId = 11;
+  const [status, setStatus] = useState({
+    title: "",
+    message: "",
+  });
 
   useEffect(() => {
     if (session === null) {
@@ -55,48 +64,44 @@ function useShoppingCart() {
     headers.append("X-Requested-With", "XMLHttpRequest");
     headers.append("Content-Type", "application/json");
     headers.append("Authorization", `Bearer ${session}`);
-
-    const fetchCounpons = async () => {
+  
+    const fetchData = async () => {
       try {
-        const response = await fetch(
-          `${BASE_URL}/coupon/valid-coupons/${accountId}`,
+        const username = localStorage.getItem("username");
+        const accountResponse = await fetch(
+          `${BASE_URL}/${PROFILE_URL_REST}/${username}`,
           {
-            headers:headers,
+            headers: headers,
             method: "GET",
           }
         );
-        if (!response.ok) {
-          throw new Error("Failed to fetch coupons");
+        if (!accountResponse.ok) {
+          throw new Error(`Failed to get profile info ${await accountResponse.text()}`);
         }
-        const data = await response.json();
-        setCoupons(data);
-      } catch (error) {
-        console.error("Error fetching coupons:", error);
-      }
-    };
+        const accountData = await accountResponse.json();
+        setAccountId(accountData.accountId)
+        setNameUser(`${accountData.firstName} ${accountData.lastName}`)
+        setCategory(accountData.rank)
 
-    const fetchProfile = async () => {
-      try {
-        const response = await fetch(
-          `${BASE_URL}/coupon/valid-coupons/${accountId}`,
+        const couponsResponse = await fetch(
+          `${BASE_URL}/coupon/valid-coupons/${accountData.accountId}`,
           {
-            headers: {
-              Authorization: `Bearer ${session}`,
-            },
+            headers: headers,
             method: "GET",
           }
         );
-        if (!response.ok) {
+        if (!couponsResponse.ok) {
           throw new Error("Failed to fetch coupons");
         }
-        const data = await response.json();
-        setCoupons(data);
+        const couponsData = await couponsResponse.json();
+  
+        setCoupons(couponsData);
       } catch (error) {
-        console.error("Error fetching coupons:", error);
+        console.error("Error fetching data:", error);
       }
     };
-
-    fetchCounpons();
+  
+    fetchData();
   }, []);
 
   const handleSelectChange = (event) => {
@@ -155,10 +160,10 @@ function useShoppingCart() {
         newQuantity -= 1;
       }
       updatedProducts[productIndex].quantity = newQuantity;
-      const price = parseFloat(
+     /*  const price = parseFloat(
         updatedProducts[productIndex].price.replace(",", ".") || 0
-      );
-      updatedProducts[productIndex].total = price * newQuantity;
+      ); */
+      updatedProducts[productIndex].total =  updatedProducts[productIndex].price * newQuantity;
       setCartProducts(updatedProducts);
     }
 
@@ -172,7 +177,9 @@ function useShoppingCart() {
   };
 
   const removeItem = (prodId) => {
-    const updatedProducts = cartProducts.filter((product) => product.id !== prodId);
+    const updatedProducts = cartProducts.filter(
+      (product) => product.id !== prodId
+    );
     setCartProducts(updatedProducts);
     localStorage.setItem("cartItem", JSON.stringify(updatedProducts));
   };
@@ -211,8 +218,8 @@ function useShoppingCart() {
       }));
 
       let requestData = {
-        accountId: 1,
-        storeSubscriptionId: 1,
+        accountId: accountId,
+        storeSubscriptionId: null,
         purchaseDetails: purchaseDetails,
         couponsIds: appliedCoupons,
       };
@@ -224,15 +231,31 @@ function useShoppingCart() {
       });
 
       if (!response.ok) {
-        console.log(response);
+        const errorData = await response.json();
+        setStatus({
+          title: "Error to buy products",
+          message: errorData.message,
+        });
+        setOpenModal(true)
         return;
       }
-      setShowNotification(true);
+
+      setStatus({
+        title: "Purchase Successfully Completed",
+        message: "thank you very much for your purchase",
+      });
+
       setCartProducts([]);
       localStorage.setItem("cartItem", []);
+      setOpenModal(true)
+      setTimeout(() => {
+        router.push(ROUTE_HOME);
+      }, 2000);
+
     } catch (error) {
       console.error(error.message);
       setShowNotification(false);
+      setOpenModal(true)
     }
   };
 
@@ -250,6 +273,11 @@ function useShoppingCart() {
     showNotification,
     removeItem,
     removeCoupon,
+    openModal,
+    setOpenModal,
+    nameUser,
+    category,
+    status
   };
 }
 
