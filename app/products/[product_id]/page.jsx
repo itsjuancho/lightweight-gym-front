@@ -82,7 +82,7 @@ const ProductPage = ({ params }) => {
 
   const handleBuyNow = () => {
     addToCart();
-    router.push(`http://localhost:3000/${ROUTE_CART}`);
+    router.push(`${ROUTE_CART}`);
   };
 
   /*   const closeCouponModal = () => {
@@ -122,7 +122,7 @@ const ProductPage = ({ params }) => {
               </button> */}
               <button
                 onClick={addToCart}
-                className="bg-zinc-600 border text-base py-2 px-8 text-center rounded hover:bg-transparent transition-colors"
+                className="bg-zinc-600 border py-2 px-8 text-center rounded hover:bg-transparent transition-colors"
               >
                 Add to Cart
               </button>
@@ -134,17 +134,11 @@ const ProductPage = ({ params }) => {
               )}
               <button
                 onClick={handleBuyNow}
-                className="bg-red-500 text-base py-2 px-8 text-center rounded border border-red-500 hover:bg-transparent transition-colors text-xl"
+                className="bg-red-500 py-2 px-8 text-center rounded border border-red-500 hover:bg-transparent transition-colors"
               >
                 {" "}
                 Buy now{" "}
               </button>
-              <a
-                href={ROUTE_HOME}
-                className="w-[140px] mx-52 bg-red-500 text-base py-2 px-8 text-center rounded border border-red-500 hover:bg-transparent transition-colors text-xl"
-              >
-                Volver
-              </a>
             </div>
           </div>
         </div>

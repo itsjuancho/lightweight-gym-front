@@ -73,6 +73,8 @@ const ProductsPage = () => {
     }
   }, [filteredProducts, currentPage, itemsPerPage]);
 
+  console.log(currentItems, "current items");
+
   return (
     <div className="min-h-[100dvh] bg-gradient-to-b from-[#030712] to-[#210303] text-gray-50  flex flex-col justify-start">
       <Container className="w-full pt-40 pb-16 px-20">
@@ -117,11 +119,10 @@ const ProductsPage = () => {
                   key={index + 1}
                   onClick={() => paginate(index + 1)}
                   disabled={currentPage === index + 1}
-                  className={`px-4 py-2 text-base rounded-md border transition-colors duration-200 ${
-                    currentPage === index + 1
-                      ? "bg-red-600/40 text-white border-slate-100 cursor-default"
-                      : "text-red-500 border-gray-300 hover:bg-red-500/30"
-                  }`}
+                  className={`px-4 py-2 text-base rounded-md border transition-colors duration-200 ${currentPage === index + 1
+                    ? "bg-red-600/40 text-white border-slate-100 cursor-default"
+                    : "text-red-500 border-gray-300 hover:bg-red-500/30"
+                    }`}
                 >
                   {index + 1}
                 </button>
@@ -141,22 +142,28 @@ const ProductsPage = () => {
               key={product.id}
               className="mb-4"
             >
-              <div className="bg-[#111827] rounded-3xl w-full h-96 mb-2 border border-slate-700">
-                {product.image && (
-                  <Image
-                    className="w-full object-cover"
-                    src={product.image[0]}
-                  />
+              <div className="bg-[#111827] rounded-3xl w-full h-96 mb-2 border border-slate-700 overflow-hidden shadow-inner flex flex-col justify-between items-center">
+                {product.images && (
+                  <div className="relative h-5/6 overflow-hidden w-full">
+                    <div className="z-10 pointer-events-none w-full h-full absolute top-0 left-0 bg-gradient-to-b from-transparent to-[#111827]"/>
+                    <Image
+                      width={512}
+                      height={512}
+                      className="w-full object-cover h-full brightness-90 hover:scale-105 transition-transform"
+                      src={product.images[0].url}
+                    />
+                  </div>
                 )}
+                <div className="w-full flex items-center justify-between p-4">
+                  <p className="text-sm line-clamp-1 font-semibold text-white/80">
+                    {product.name}
+                  </p>
+                  <p className="text-lg font-bold text-white">
+                    ${product.price}
+                  </p>
+                </div>
               </div>
-              <div className="flex items-center justify-between">
-                <p className="text-lg line-clamp-1 font-semibold">
-                  {product.name}
-                </p>
-                <p className="text-2xl font-bold text-red-100">
-                  ${product.price}
-                </p>
-              </div>
+
             </Link>
           ))}
         </div>

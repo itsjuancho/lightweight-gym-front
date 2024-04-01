@@ -13,9 +13,9 @@ const ShowAlert = ({ type, message}) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -50 }}
       transition={{ duration: 0.5 }}
-      className="xl:w-2/6 md:w-7/12 w-4/5"
+      className="xl:w-2/6 md:w-7/12 w-4/5 my-8"
     >
-      <Alert className=" bg-transparent text-white  ">
+      <Alert className=" bg-transparent text-white">
         {type.includes("Success") ? (
           <RocketIcon color="white" className="h-7 w-7" />
         ) : (
