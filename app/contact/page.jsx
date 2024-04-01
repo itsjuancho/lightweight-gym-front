@@ -22,7 +22,7 @@ const Contact = () => {
     <div className="min-h-[100dvh] bg-gradient-to-b from-[#030712] to-[#210303] text-gray-50 flex flex-col justify-center py-10 px-5">
       <h1 className="text-heading coanda-bold text-red-500 mb-4">Let's do it</h1>
       <span className="text-xl text-balance">
-        Call us, or submit your email and we'll be in touch
+        Call us, or submit your email and we&apos;ll be in touch
       </span>
       <span className="text-3xl text-red-500 mt-4">
         (214) 296-5026
