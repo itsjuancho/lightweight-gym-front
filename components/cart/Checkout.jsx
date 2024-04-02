@@ -28,20 +28,52 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
 import { Separator } from "../ui/separator";
-import { BASE_URL, COUPON_URL, ROUTE_HOME, ROUTE_PROFILE } from "../../app/utils/routes";
+import {
+  BASE_URL,
+  COUPON_URL,
+  ROUTE_HOME,
+  ROUTE_PROFILE,
+} from "../../app/utils/routes";
 import Coupon from "../coupon/coupon";
 import useShoppingCart from "../../hooks/useShoppingCart";
 import useCreditCard from "../../hooks/useCreditCard";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const Checkout = () => {
+  const phoneRegex = /^\d{5,}$/;
   const [loading, setLoading] = useState(true);
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const router = useRouter();
+
+  const validatePhone = () => phoneRegex.test(phone);
+
+
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+    enableCheckoutButton();
+  };
+
+  const handleAddressChange = (event) => {
+    setAddress(event.target.value);
+    enableCheckoutButton();
+  };
+
+  const handlePhoneChange = (event) => {
+    setPhone(event.target.value);
+    enableCheckoutButton();
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -64,7 +96,24 @@ const Checkout = () => {
     showNotification,
     removeItem,
     removeCoupon,
+    openModal,
+    setOpenModal,
+    nameUser,
+    category,
+    status,
   } = useShoppingCart();
+
+
+  const enableCheckoutButton = () => {
+    setIsButtonDisabled(!(name && address && validatePhone() && cartProducts.length>0));
+  };
+
+  const handleClose = () => {
+    if (!status.title.includes("Error to buy products")) {
+      router.push(ROUTE_HOME);
+    }
+    setOpenModal(false)
+  };
 
   return (
     <div>
@@ -81,6 +130,27 @@ const Checkout = () => {
 
       {!loading && (
         <>
+          <Dialog open={openModal} onOpenChange={setOpenModal}>
+            <DialogContent className="sm:max-w-[425px] bg-white">
+              <DialogHeader>
+                <DialogTitle>{status.title}</DialogTitle>
+                <DialogDescription className="text-lg">
+                  {status.message}
+                </DialogDescription>
+              </DialogHeader>
+              <DialogFooter>
+                <Button
+                  onClick={handleClose}
+                  type="button"
+                  variant="secondary"
+                  className="bg-red-500 text-white text-lg"
+                >
+                  Continue
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+
           <div className="flex justify-between items-center bg-black px-11">
             <a href={`/`} className="flex justify-center items-center">
               <Image src={lwLogo} alt="logo" className="w-[2rem] h-[2rem]" />
@@ -97,8 +167,8 @@ const Checkout = () => {
 
               <div className="flex justify-end items-center w-2/5 text-white">
                 <div className="flex flex-col items-center mx-2">
-                  <p className="text-center">Lina Huertas</p>
-                  <span className="text-center">Silver Category</span>
+                  <p className="text-center">{nameUser}</p>
+                  <span className="text-center">{category} Category</span>
                 </div>
 
                 <Image src={cart} alt="cart" className="my-3" />
@@ -216,16 +286,37 @@ const Checkout = () => {
                 </div>
                 <div className="grid w-full items-center gap-1.5 px-8 my-3">
                   <Label className="font-semibold text-xl my-2">
-                    Account Holder
+                    Invoicing in the name of
                   </Label>
                   <Input
                     type="text"
                     id="account"
+                    onChange={handleNameChange}
                     className="bg-transparent border border-white text-lg	"
                     placeholder="Your Name"
                   />
                 </div>
-                <div className="grid w-full items-center gap-1.5 px-8 my-6">
+                <div className="grid w-full items-center gap-1.5 px-8 my-3">
+                  <Label className="font-semibold text-xl my-2">Address</Label>
+                  <Input
+                    type="text"
+                    id="address"
+                    onChange={handleAddressChange}
+                    className="bg-transparent border border-white text-lg	"
+                    placeholder="Your Address"
+                  />
+                </div>
+                <div className="grid w-full items-center gap-1.5 px-8 my-3">
+                  <Label className="font-semibold text-xl my-2">Phone</Label>
+                  <Input
+                    type="number"
+                    id="phone"
+                    onChange={handlePhoneChange}
+                    className="bg-transparent border border-white text-lg	"
+                    placeholder="Your Phone"
+                  />
+                </div>
+                {/*                 <div className="grid w-full items-center gap-1.5 px-8 my-6">
                   <Label className="font-semibold text-xl my-2">Shipping</Label>
                   <Select>
                     <SelectTrigger className="bg-transparent border border-white text-lg">
@@ -235,7 +326,7 @@ const Checkout = () => {
                       <SelectItem value="1">123944-Lina Account</SelectItem>
                     </SelectContent>
                   </Select>
-                </div>
+                </div> */}
 
                 <div className="font-semibold px-8 my-6">
                   <Dialog className="w-full bg-blue dialog-size">
@@ -293,7 +384,7 @@ const Checkout = () => {
                   </Dialog>
                 </div>
 
-                <div className="grid w-full items-center gap-1.5 px-8 my-7">
+                {/*                 <div className="grid w-full items-center gap-1.5 px-8 my-7">
                   <Label className="font-semibold text-xl my-2">
                     Payment Method
                   </Label>
@@ -309,7 +400,7 @@ const Checkout = () => {
                       </SelectItem>
                     </SelectContent>
                   </Select>
-                </div>
+                </div> */}
                 <hr />
                 <div className="font-semibold px-8 my-7">
                   <div className="flex justify-between my-5">
@@ -330,6 +421,7 @@ const Checkout = () => {
                   <Button
                     onClick={handleSubmit}
                     className="bg-red-500 text-base w-[90%]"
+                    disabled={isButtonDisabled}
                   >
                     {" "}
                     Checkout{" "}

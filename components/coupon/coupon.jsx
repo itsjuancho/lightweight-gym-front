@@ -10,7 +10,7 @@ const Coupon = ({
   idCoupon,
   isApplied,
   applyCoupon,
-  handleRemove,
+  handleRemove
 }) => {
   const handleRedeemCoupon = () => {
     applyCoupon(idCoupon);

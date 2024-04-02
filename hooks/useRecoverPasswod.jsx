@@ -38,36 +38,40 @@ const useRecoverPasswod = () => {
   };
 
   const sendEmailFetch = async () => {
+    const headers = new Headers();
+    headers.append("Access-Control-Allow-Headers", "Content-Type");
+    headers.append("Access-Control-Allow-Origin", "*");
+    headers.append("Access-Control-Allow-Methods", "OPTIONS,POST,GET,PUT");
+    headers.append("Content-Type", "application/json");
+    headers.append("X-Requested-With", "XMLHttpRequest");
+
     const response = await fetch(`${BASE_URL}/${urlRequest}`, {
       method: "POST",
-      headers: {
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-        "Content-Type": "application/json",
-        "X-Requested-With": "XMLHttpRequest",
-      },
+      headers: headers,
       body: JSON.stringify(requestData),
     });
 
     if (!response.ok) {
       throw new setStatus(exception);
     }
-    setStatus(successMessage);
-    setFormData({
-      email: "",
-    });
+    if (response.ok) {
+      setStatus(successMessage);
+      setFormData({
+        email: "",
+      });
+    }
   };
 
   const resetPasswordFetch = async () => {
     const headers = new Headers();
     headers.append("Access-Control-Allow-Headers", "Content-Type");
     headers.append("Access-Control-Allow-Origin", "*");
-    headers.append("Access-Control-Allow-Methods", "OPTIONS,POST,GET");
-    headers.append("X-Requested-With", "XMLHttpRequest");
+    headers.append("Access-Control-Allow-Methods", "OPTIONS,POST,GET,PUT");
     headers.append("Content-Type", "application/json");
+    headers.append("X-Requested-With", "XMLHttpRequest");
     headers.append("Authorization", `Bearer ${requestData.token}`);
 
+    console.log(formData)
     const response = await fetch(`${BASE_URL}/${urlRequest}`, {
       method: "POST",
       headers: headers,
@@ -102,7 +106,7 @@ const useRecoverPasswod = () => {
 
     if (isForgot) {
       urlRequest = FORGOT_PASSWORD_URL;
-      successMessage = `Send link to ${formData.email} for recover you password`;
+      successMessage = `Success Send link to ${formData.email} for recover you password`;
       exception = "Failed to  send email";
       requestData = {
         mailTo: formData.email,

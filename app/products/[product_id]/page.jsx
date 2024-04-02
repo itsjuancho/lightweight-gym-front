@@ -23,20 +23,16 @@ const ProductPage = ({ params }) => {
   /* const [couponModal, setCouponModal] = useState(false); */
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      fetchProductById(token, product_id)
-        .then((data) => {
-          setProduct(data);
-        })
-        .catch((err) => {
-          console.error("Error fetching products: ", err);
-        });
-    }
+    fetchProductById(product_id)
+      .then((data) => {
+        setProduct(data);
+      })
+      .catch((err) => {
+        console.error("Error fetching products: ", err);
+      });
   }, [fetchProductById]);
 
   console.log(product);
-  
 
   const changeQuantity = (amount) => {
     setQuantity((prevQuantity) => {
@@ -54,7 +50,7 @@ const ProductPage = ({ params }) => {
     const formattedProduct = {
       id: product?.id,
       img: product?.images[0]?.url,
-      categoryId: product?.categoryId, 
+      categoryId: product?.categoryId,
       name: product?.name,
       description: product?.description,
       quantity: quantity,
@@ -82,7 +78,7 @@ const ProductPage = ({ params }) => {
 
   const handleBuyNow = () => {
     addToCart();
-    router.push(`${ROUTE_CART}`);
+   router.push(`${window.location.origin}/${ROUTE_CART}`);
   };
 
   /*   const closeCouponModal = () => {

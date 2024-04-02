@@ -31,10 +31,9 @@ const ProductsPage = () => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token && products.length === 0) {
+    if (products.length === 0) {
       setLoading(true);
-      fetchAllProducts(token)
+      fetchAllProducts()
         .then((data) => {
           setProducts(data);
           setLoading(false);
