@@ -62,7 +62,7 @@ export const Profile = () => {
         </div>
       </motion.div>
 
-      <div className="flex justify-between justify-center bg-black px-11">
+      <div className="flex justify-between bg-black px-11">
         <a href={`/`} className="flex justify-center items-center">
           <Image src={lwLogo} alt="logo" className="w-[2rem] h-[2rem]" />
           <span className="coanda-bold mx-5 text-red-500 text-2xl">
@@ -71,9 +71,9 @@ export const Profile = () => {
         </a>
         <div className=" flex justify-between w-full">
           <div className="flex justify-evenly items-center text-white w-2/4 text-xl underline">
-            <Link href={"/#services"}>View Products</Link>
-            <Link href={"/#about"}>About Us </Link>
-            <Link href={"/#contact"}>Contact </Link>
+            <Link href={"/products"}>View Products</Link>
+            <Link href={"/about-us"}>About Us </Link>
+            <Link href={"/contact"}>Contact </Link>
           </div>
 
           <div className="flex justify-end items-center w-2/5 text-white">

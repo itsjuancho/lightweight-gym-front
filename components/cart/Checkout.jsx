@@ -160,9 +160,9 @@ const Checkout = () => {
             </a>
             <div className=" flex justify-between w-full">
               <div className="flex justify-evenly items-center text-white w-2/4 text-xl underline">
-                <Link href={"/#services"}>View Products</Link>
-                <Link href={"/#about"}>About Us </Link>
-                <Link href={"/#contact"}>Contact </Link>
+                <Link href={"/products"}>View Products</Link>
+                <Link href={"/about-us"}>About Us </Link>
+                <Link href={"/contact"}>Contact </Link>
               </div>
 
               <div className="flex justify-end items-center w-2/5 text-white">

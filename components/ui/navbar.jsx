@@ -18,12 +18,16 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Badge } from "../ui/badge";
 import { useSession } from "../../hooks/sessionContext";
+import HamburgerIcon from "./burger";
+import MenuPanel from "./mobile-menu";
 
 const Navbar = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
-  const {session, setSession } = useSession();
+  const { session, setSession } = useSession();
   const [totalItem, setTotalItem] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const handleScroll = () => {
     const currentScrollPos = window.scrollY;
@@ -43,7 +47,6 @@ const Navbar = () => {
       setTotalItem(items ? items.length : 0);
     }
   }, [totalItem]);
-  
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -66,33 +69,48 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [prevScrollPos, visible]);
 
   const route = usePathname().substring(1);
-  const hideNavbarRoutes = [ROUTE_LOGIN, ROUTE_REGISTER, ROUTE_CART,ROUTE_PROFILE];
+  const hideNavbarRoutes = [
+    ROUTE_LOGIN,
+    ROUTE_REGISTER,
+    ROUTE_CART,
+    ROUTE_PROFILE,
+  ];
   const shouldHideNavbar = hideNavbarRoutes.includes(route);
 
   if (shouldHideNavbar) {
-    return null; 
+    return null;
   }
 
   return (
     <div
-      className={`z-[1000] fixed top-0 h-28 w-screen aeonik bg-gradient-to-b from-slate-950 to-transparent text-gray-50 text-lg py-8 transition-all duration-500 ease-in-out ${
+      className={`z-[1000] fixed top-0 h-20 md:h-28 w-screen aeonik bg-gradient-to-b from-slate-950 to-transparent text-gray-50 text-sm md:text-lg py-4 md:py-8 transition-all duration-500 ease-in-out ${
         visible ? "" : "-translate-y-[110%]"
       }`}
     >
-      <Container className="px-20 flex justify-between items-start">
+      <Container className="px-5 md:px-20 flex justify-between items-center">
+        <HamburgerIcon isOpen={isMenuOpen} toggle={toggleMenu} />
+        <MenuPanel isOpen={isMenuOpen} />
         <a href="/" className="flex items-center">
-          <Image src={lwLogo} alt="logo" />
-          <p className="coanda-bold ml-6">Lightweight</p>
+          <Image
+            src={lwLogo}
+            alt="logo"
+            width={32}
+            height={32}
+            className="md:w-auto md:h-auto"
+          />
+          <p className="coanda-bold ml-3 md:ml-6 text-sm md:text-lg">
+            Lightweight
+          </p>
         </a>
 
-        <div className="flex justify-end space-x-4 items-center w-[40%]">
+        <div className="hidden md:flex justify-end space-x-4 items-center w-[40%]">
           <div
             className={`text-red-500 ${
               session === null ? "visible" : "hidden"
@@ -101,9 +119,9 @@ const Navbar = () => {
             <a href={ROUTE_REGISTER}>Join/ </a>
             <a href={ROUTE_LOGIN}> Sign in</a>
           </div>
-            <a href="/products">Products</a>
-            <a href={ROUTE_ABOUT}>About us</a>
-            <a href={ROUTE_CONTACT}>Contact</a>
+          <a href="/products">Products</a>
+          <a href={ROUTE_ABOUT}>About us</a>
+          <a href={ROUTE_CONTACT}>Contact</a>
 
           <div className={`flex ${session !== null ? "" : "hidden"}`}>
             <a href={ROUTE_CART}>

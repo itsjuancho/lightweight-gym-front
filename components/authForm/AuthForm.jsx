@@ -38,7 +38,7 @@ function AuthForm({ title }) {
         alt="dude lifting weights"
         className="xl:w-[956px] 2xl:block hidden object-cover"
       />
-      <div className="form bg-black w-full bg-gradient-to-t form-shadow-right py-16">
+      <div className="form bg-black w-full bg-gradient-to-t form-shadow-right py-16 md:py-32">
         <div className="form-title flex items-center justify-center w-full max-w-sm overflow-x-hidden">
           <Link href={ROUTE_HOME}>
             <Image src={Logo} alt="logo" className="mr-8" />
@@ -176,7 +176,7 @@ function AuthForm({ title }) {
         </Button>
         <Link
           href={ROUTE_REGISTER}
-          className={`text-xs text-white aeonik inline-block ${SHOW_ELEMENT.label}`}
+          className={`text-xs md:text-sm text-white aeonik inline-block ${SHOW_ELEMENT.label}`}
         >
           Aren&apos;t a member yet?
           <span className="inline border-b border-white"> Sign up instead</span>
@@ -184,7 +184,7 @@ function AuthForm({ title }) {
         </Link>
 
         {isReg && (
-          <Link href={ROUTE_LOGIN} className={`text-xs text-white aeonik`}>
+          <Link href={ROUTE_LOGIN} className={`text-xs md:text-sm text-white aeonik`}>
             Already a member?
             <span className="inline border-b border-white">
               {" "}
@@ -192,7 +192,7 @@ function AuthForm({ title }) {
             </span>
           </Link>
         )}
-        <a href={ROUTE_HOME} className=" my-4 text-white border-b border-white aeonik text-xs"> Back To Home</a>
+        <a href={ROUTE_HOME} className="my-4 text-white border-b border-white aeonik text-xs md:text-sm"> Back To Home</a>
       </div>
     </div>
   );
