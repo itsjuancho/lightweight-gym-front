@@ -6,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 const ProductsCarousel = ({
-  items,
   direction = "left",
   speed = "fast",
   pauseOnHover = true,
@@ -14,10 +13,29 @@ const ProductsCarousel = ({
 }) => {
   const containerRef = useRef(null);
   const scrollerRef = useRef(null);
+  const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {
     addAnimation();
-  }, []);
+    const randomProducts = async () => {
+      try {
+        const backUrl = process.env.NEXT_PUBLIC_BACK_URL;
+        const res = await fetch(`${backUrl}/product/random`);
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await res.json();
+        setSuggestions(data);
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+        setSuggestions([]);
+      }
+    }
+
+    randomProducts()
+    console.log(suggestions, 'suggestions');
+  }, [suggestions.length === 0]);
+
   const [start, setStart] = useState(false);
   function addAnimation() {
     if (containerRef.current && scrollerRef.current) {
@@ -77,9 +95,9 @@ const ProductsCarousel = ({
           pauseOnHover && "hover:[animation-play-state:paused]"
         )}
       >
-        {items.map((item, idx) => (
+        {suggestions.map((item, idx) => (
           <li
-            className="w-96 flex justify-start items-end min-h-96 max-w-full relative rounded-2xl border border-b-0 flex-shrink-0 border-slate-700 px-8 py-6 md:w-[450px]"
+            className="overflow-hidden w-96 flex justify-start items-end min-h-96 max-w-full relative rounded-2xl border border-b-0 flex-shrink-0 border-slate-700 px-8 py-6 md:w-[450px]"
             style={{
               background:
                 "linear-gradient(180deg, var(--slate-800), var(--slate-900)",
@@ -91,12 +109,12 @@ const ProductsCarousel = ({
                 aria-hidden="true"
                 className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
               ></div>
-              <div className="relative z-20 mt-6 flex flex-row">
+              <div className="relative z-30 mt-6 flex flex-row">
                 <div className="flex flex-col gap-1">
-                  <span className=" text-2xl leading-[1.6] text-gray-50 font-bold ">
+                  <span className=" text-xl leading-[1.6] text-gray-50 font-bold line-clamp-1">
                     {item.name}
                   </span>
-                  <span className=" text-lg leading-[1.6] text-gray-400 font-normal">
+                  <span className="leading-[1.6] text-gray-400 font-normal">
                     $ {item.price} Credits
                   </span>
                   <Link href={`/products/${item.id}`} className="bg-red-500 text-xl rounded-md w-32 mt-2 text-center">View
@@ -104,7 +122,8 @@ const ProductsCarousel = ({
                 </div>
               </div>
             </blockquote>
-            <Image src={item.image} alt={item.name} width={384} height={0} className="absolute mb-3"/>
+            <div className="z-30 pointer-events-none w-full h-2/3 absolute top-0 left-0 bg-gradient-to-b from-transparent to-[#111827]"/>
+            <Image src={item.images[1].url} alt={item.name} width={384} height={0} className="z-10 absolute top-0 left-0 w-full h-2/3 object-cover mb-3" />
           </li>
         ))}
       </ul>
