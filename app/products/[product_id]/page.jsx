@@ -78,7 +78,7 @@ const ProductPage = ({ params }) => {
 
   const handleBuyNow = () => {
     addToCart();
-   router.push(`${window.location.origin}/${ROUTE_CART}`);
+    router.push(`${window.location.origin}/${ROUTE_CART}`);
   };
 
   /*   const closeCouponModal = () => {
@@ -90,16 +90,16 @@ const ProductPage = ({ params }) => {
   return (
     <div
       id="product-page"
-      className="pt-36 min-h-[100dvh] bg-gradient-to-b from-[#030712] to-[#210303] text-gray-50  flex flex-col justify-center"
+      className="pt-28 md:pt-36 min-h-screen bg-gradient-to-b from-[#030712] to-[#210303] text-gray-50 flex flex-col justify-center"
     >
-      <Container className={"w-auto relative"}>
-        <div className="flex">
-          <div className="w-3/6">
+      <Container className={"w-full px-5 md:px-20 relative"}>
+      <div className="flex flex-col md:flex-row">
+      <div className="w-full max-w-full md:max-w-xl md:w-3/6">
             <ProductSlider images={productImgs} />
           </div>
-          <div className="w-3/6 space-y-6">
+          <div className="mt-6 md:mt-0 md:w-3/6 space-y-6">
             <div className="w-full text-zinc-50">
-              <p className="leading-[1.6] font-bold  text-4xl pl-10 py-2">
+            <p className="text-2xl md:text-4xl font-bold md:pl-10 py-2">
                 {product?.name}
               </p>
             </div>
@@ -108,7 +108,7 @@ const ProductPage = ({ params }) => {
               changeQuantity={changeQuantity}
             />
             <ProductInformation product={product} className="" />
-            <div className="flex justify-end space-x-10 items-center">
+            <div className="flex flex-col md:flex-row justify-end space-x-0 md:space-x-10 space-y-4 md:space-y-0 items-center">
               {/*   <button
                 onClick={() => setCouponModal(true)}
                 className="group text-neutral-100 transition duration-300 animate-fade-in"
@@ -118,19 +118,19 @@ const ProductPage = ({ params }) => {
               </button> */}
               <button
                 onClick={addToCart}
-                className="bg-zinc-600 border py-2 px-8 text-center rounded hover:bg-transparent transition-colors"
+                className="bg-zinc-600 border py-2 px-8 text-center rounded hover:bg-transparent transition-colors w-full md:w-auto"
               >
                 Add to Cart
               </button>
 
               {showNotification && (
                 <div className="absolute top-0 z-10 right-0 text-center w-60 p-3 bg-red-500/50 text-white text-xl rounded">
-                  Item added to cart!
+                Item added to cart!
                 </div>
               )}
               <button
                 onClick={handleBuyNow}
-                className="bg-red-500 py-2 px-8 text-center rounded border border-red-500 hover:bg-transparent transition-colors"
+                className="bg-red-500 py-2 px-8 text-center rounded border border-red-500 hover:bg-transparent transition-colors w-full md:w-auto"
               >
                 {" "}
                 Buy now{" "}
@@ -139,7 +139,7 @@ const ProductPage = ({ params }) => {
           </div>
         </div>
         <div className="overflow-hidden mb-10">
-          <h1 className="text-heading my-12">
+        <h1 className="text-2xl md:text-heading my-12 text-center md:text-left">
             Other <b className="text-red-500">products</b>
           </h1>
           <ProductsCarousel

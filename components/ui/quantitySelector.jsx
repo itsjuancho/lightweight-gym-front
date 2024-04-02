@@ -2,7 +2,7 @@ import React from 'react'
 
 const QuantitySelector = ({quantity, changeQuantity}) => {
   return (
-    <div className="flex ml-10">
+    <div className="flex md:ml-10">
       <button onClick={() => changeQuantity(-1)}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
