@@ -9,7 +9,7 @@ export const ROUTE_ABOUT="/about-us"
 export const ROUTE_PROFILE="profile"
 
 
-export const BASE_URL="http://ec2-3-16-214-18.us-east-2.compute.amazonaws.com:8080"
+export const BASE_URL="https://happy-mixed-gaura.glitch.me/ec2-3-16-214-18.us-east-2.compute.amazonaws.com:8080"
 export const REGISTER_URL="user/create-user"
 export const LOGIN_URL="login"
 export const FORGOT_PASSWORD_URL="email/send-mail-recover"

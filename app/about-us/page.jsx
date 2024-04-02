@@ -3,7 +3,7 @@ import Container from "../../components/ui/container";
 
 const About = () => {
   const members = [
-    { name: "Tobías Moccagata" },
+    { name: "Tobías Moccagatta" },
     { name: "Elías Vásquez" },
     { name: "Ruth Borda Mendez" },
     { name: "Erika Martínez" },
@@ -17,17 +17,17 @@ const About = () => {
 
   return (
     <div id="about" className="min-h-[100dvh] bg-[#030712] text-gray-50  flex flex-col justify-center">
-      <Container className="py-16 gap-5 px-20 flex flex-col justify-center items-center">
-        <h1 className="text-red-500 text-display coanda-bold text-nowrap">
+      <Container className="py-32 gap-5 md:px-20 px-5 flex flex-col justify-center items-center">
+        <h1 className="text-red-500 md:text-display text-4xl coanda-bold md:text-nowrap text-center md:text-start">
           The muscle behind Lightweight
         </h1>
-        <p className="text-2xl text-center max-w-[650px] text-balance mt-16">
+        <p className="md:text-2xl text-center max-w-[650px] text-balance mt-2">
           our team is the core of our strength. Comprised of seasoned
           powerlifters, certified trainers, and nutrition experts, we&apos;re
           united by a single mission—to ignite your full potential.
         </p>
 
-        <div className="w-full flex flex-wrap justify-center items-center gap-5 mt-16">
+        <div className="w-full md:flex md:flex-wrap md:justify-center md:items-center gap-5 md:mt-16 mt-8">
           {members.map((member, index) => (
             <div
               key={index}

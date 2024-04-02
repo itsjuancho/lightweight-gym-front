@@ -54,17 +54,27 @@ function useShoppingCart() {
 
   useEffect(() => {
     calculateDiscount();
-  }, [appliedCoupons, coupons, discount]);
+  }, [appliedCoupons, coupons, discount,subtotal]);
 
   useEffect(() => {
     const headers = new Headers();
-    headers.append("Access-Control-Allow-Headers", "Content-Type");
+    headers.append(
+      "Access-Control-Allow-Headers",
+      "Origin, Content-Type, Accept, X-Auth-Token"
+    );
     headers.append("Access-Control-Allow-Origin", "*");
-    headers.append("Access-Control-Allow-Methods", "OPTIONS,POST,GET");
+    headers.append(
+      "Access-Control-Expose-Headers",
+      "Content-Length, X-Kuma-Revision"
+    );
+    headers.append("Access-Control-Allow-Credentials", "true");
+    headers.append(
+      "Access-Control-Allow-Methods",
+      "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+    );
     headers.append("X-Requested-With", "XMLHttpRequest");
-    headers.append("Content-Type", "application/json");
     headers.append("Authorization", `Bearer ${session}`);
-  
+
     const fetchData = async () => {
       try {
         const username = localStorage.getItem("username");
@@ -76,12 +86,14 @@ function useShoppingCart() {
           }
         );
         if (!accountResponse.ok) {
-          throw new Error(`Failed to get profile info ${await accountResponse.text()}`);
+          throw new Error(
+            `Failed to get profile info ${await accountResponse.text()}`
+          );
         }
         const accountData = await accountResponse.json();
-        setAccountId(accountData.accountId)
-        setNameUser(`${accountData.firstName} ${accountData.lastName}`)
-        setCategory(accountData.rank)
+        setAccountId(accountData.accountId);
+        setNameUser(`${accountData.firstName} ${accountData.lastName}`);
+        setCategory(accountData.rank);
 
         const couponsResponse = await fetch(
           `${BASE_URL}/coupon/valid-coupons/${accountData.accountId}`,
@@ -94,13 +106,13 @@ function useShoppingCart() {
           throw new Error("Failed to fetch coupons");
         }
         const couponsData = await couponsResponse.json();
-  
+
         setCoupons(couponsData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-  
+
     fetchData();
   }, []);
 
@@ -160,14 +172,16 @@ function useShoppingCart() {
         newQuantity -= 1;
       }
       updatedProducts[productIndex].quantity = newQuantity;
-     /*  const price = parseFloat(
+      /*  const price = parseFloat(
         updatedProducts[productIndex].price.replace(",", ".") || 0
       ); */
-      updatedProducts[productIndex].total =  updatedProducts[productIndex].price * newQuantity;
+      updatedProducts[productIndex].total =
+        updatedProducts[productIndex].price * newQuantity;
       setCartProducts(updatedProducts);
     }
 
     setCartProducts(updatedProducts);
+    localStorage.setItem("cartItem", JSON.stringify(updatedProducts));
   };
 
   const applyCoupon = (couponId) => {
@@ -204,6 +218,7 @@ function useShoppingCart() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log(session)
       const headers = new Headers();
       headers.append("Access-Control-Allow-Headers", "Content-Type");
       headers.append("Access-Control-Allow-Origin", "*");
@@ -211,7 +226,7 @@ function useShoppingCart() {
       headers.append("X-Requested-With", "XMLHttpRequest");
       headers.append("Content-Type", "application/json");
       headers.append("Authorization", `Bearer ${session}`);
-
+  
       const purchaseDetails = cartProducts.map((product) => ({
         productId: product.id,
         quantity: product.quantity,
@@ -236,26 +251,27 @@ function useShoppingCart() {
           title: "Error to buy products",
           message: errorData.message,
         });
-        setOpenModal(true)
+        setOpenModal(true);
         return;
       }
 
-      setStatus({
-        title: "Purchase Successfully Completed",
-        message: "thank you very much for your purchase",
-      });
+      if (response.ok) {
+        setStatus({
+          title: "Purchase Successfully Completed",
+          message: "thank you very much for your purchase",
+        });
 
-      setCartProducts([]);
-      localStorage.setItem("cartItem", []);
-      setOpenModal(true)
-      setTimeout(() => {
-        router.push(ROUTE_HOME);
-      }, 2000);
-
+        setCartProducts([]);
+        localStorage.setItem("cartItem", []);
+        setOpenModal(true);
+        setTimeout(() => {
+          router.push(ROUTE_HOME);
+        }, 2000);
+      }
     } catch (error) {
       console.error(error.message);
       setShowNotification(false);
-      setOpenModal(true)
+      setOpenModal(true);
     }
   };
 
@@ -277,7 +293,7 @@ function useShoppingCart() {
     setOpenModal,
     nameUser,
     category,
-    status
+    status,
   };
 }
 

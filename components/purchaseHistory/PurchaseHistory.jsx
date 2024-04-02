@@ -27,7 +27,7 @@ const PurchaseHistory = () => {
           <TableHeader>
             <TableRow>
               <TableHead className="w-[100px]">Product name</TableHead>
-              <TableHead className="text-center">purchase Date</TableHead>
+              <TableHead className="text-center">Purchase Date</TableHead>
               <TableHead className="text-center">Quantity</TableHead>
               <TableHead className="text-right text-red-500">Price</TableHead>
             </TableRow>

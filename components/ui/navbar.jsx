@@ -20,7 +20,6 @@ import { Badge } from "../ui/badge";
 import { useSession } from "../../hooks/sessionContext";
 
 const Navbar = () => {
-  console.log('navbar mounted');
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const {session, setSession } = useSession();
@@ -74,7 +73,7 @@ const Navbar = () => {
   }, [prevScrollPos, visible]);
 
   const route = usePathname().substring(1);
-  const hideNavbarRoutes = [ROUTE_LOGIN, ROUTE_REGISTER, ROUTE_CART,ROUTE_FORGOT_PASS,ROUTE_PROFILE];
+  const hideNavbarRoutes = [ROUTE_LOGIN, ROUTE_REGISTER, ROUTE_CART,ROUTE_PROFILE];
   const shouldHideNavbar = hideNavbarRoutes.includes(route);
 
   if (shouldHideNavbar) {

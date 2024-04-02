@@ -37,11 +37,15 @@ const useHistory = () => {
       try {
         const username = localStorage.getItem("username");
 
-        const headers = {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${session}`,
-        };
-
+        const headers = new Headers();
+        headers.append("Access-Control-Allow-Headers", "Origin, Content-Type, Accept, X-Auth-Token");
+        headers.append("Access-Control-Allow-Origin", "*");
+        headers.append("Access-Control-Expose-Headers", "Content-Length, X-Kuma-Revision");
+        headers.append("Access-Control-Allow-Credentials", "true");
+        headers.append("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
+        headers.append("X-Requested-With", "XMLHttpRequest");
+        headers.append("Authorization", `Bearer ${session}`);
+        
         // Obtener datos de la cuenta
         const accountResponse = await fetch(`${BASE_URL}/${PROFILE_URL_REST}/${username}`, {
           headers: headers,

@@ -8,7 +8,7 @@ import { useSession } from "./sessionContext";
 
 const useAuth = () => {
   const router = useRouter();
-  const { session, setSession} = useSession();
+  const { session, setSession } = useSession();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -74,9 +74,11 @@ const useAuth = () => {
       const response = await fetch(`${process.env.NEXT_PUBLIC_BACK_URL}/${urlRequest}`, {
         method: "POST",
         headers: {
-          "Access-Control-Allow-Headers": "Content-Type",
+          "Access-Control-Allow-Headers": "Origin, Content-Type, Accept, X-Auth-Token",
           "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+          'Access-Control-Expose-Headers': 'Content-Length, X-Kuma-Revision',
+          'Access-Control-Allow-Credentials': 'true',
+          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
           "Content-Type": "application/json",
           "X-Requested-With": "XMLHttpRequest",
         },
@@ -105,7 +107,7 @@ const useAuth = () => {
         isRegister: "",
         document: "",
       });
-      
+
       if (!formData.isRegister && response.ok) {
         router.push(`${ROUTE_HOME}`)
         setStatus(successMessage);
@@ -115,7 +117,7 @@ const useAuth = () => {
         router.push(`${ROUTE_LOGIN}`)
         setStatus(successMessage);
       }
-      
+
     } catch (status) {
       setStatus(status.message);
     }

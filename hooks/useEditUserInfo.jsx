@@ -64,9 +64,11 @@ const useEditUserInfo = (firstName, lastName, email, resetHandle) => {
   const updateUserInfo = async () => {
     const username = localStorage.getItem("username");
     const headers = new Headers();
-    headers.append("Access-Control-Allow-Headers", "Content-Type");
+    headers.append("Access-Control-Allow-Headers", "Origin, Content-Type, Accept, X-Auth-Token");
     headers.append("Access-Control-Allow-Origin", "*");
-    headers.append("Access-Control-Allow-Methods", "OPTIONS,POST,GET,PUT");
+    headers.append("Access-Control-Expose-Headers", "Content-Length, X-Kuma-Revision");
+    headers.append("Access-Control-Allow-Credentials", "true");
+    headers.append("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
     headers.append("X-Requested-With", "XMLHttpRequest");
     headers.append("Content-Type", "application/json");
     headers.append("Authorization", `Bearer ${session}`);
@@ -110,9 +112,9 @@ const useEditUserInfo = (firstName, lastName, email, resetHandle) => {
     const headers = new Headers();
     headers.append("Access-Control-Allow-Headers", "Content-Type");
     headers.append("Access-Control-Allow-Origin", "*");
-    headers.append("Access-Control-Allow-Methods", "POST,GET,PUT");
-    headers.append("X-Requested-With", "XMLHttpRequest");
+    headers.append("Access-Control-Allow-Methods", "OPTIONS,POST,GET,PUT");
     headers.append("Content-Type", "application/json");
+    headers.append("X-Requested-With", "XMLHttpRequest");
     headers.append("Authorization", `Bearer ${session}`);
 
     const response = await fetch(
