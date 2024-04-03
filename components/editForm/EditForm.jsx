@@ -204,7 +204,7 @@ const EditForm = ({
           </div>
           <div className="p-3 relative w-full md:w-2/5">
             <Label htmlFor="newPassword" className="text-2xl">
-              NewPassword
+              New Password
             </Label>
             <Input
               readOnly={readOnly}
