@@ -264,6 +264,7 @@ function useShoppingCart() {
 
         setCartProducts([]);
         localStorage.setItem("cartItem", []);
+        setTotalItem(cartProducts.length)
         setOpenModal(true);
         setTimeout(() => {
           router.push(ROUTE_HOME);
