@@ -27,8 +27,9 @@ const Navbar = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const { session, setSession, role } = useSession();
-  const [totalItem, setTotalItem] = useState(0);
+ /*  const [totalItem, setTotalItem] = useState(0); */
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const {totalItem} =useSession();
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const handleScroll = () => {
@@ -44,15 +45,15 @@ const Navbar = () => {
     window.location.reload()
   };
 
-  useEffect(() => {
+/*   useEffect(() => {
     const cartItems = localStorage.getItem("cartItem");
     if (cartItems) {
       const items = JSON.parse(cartItems);
       setTotalItem(items ? items.length : 0);
     }
-  }, [totalItem]);
+  }, [totalItem]); */
 
-  useEffect(() => {
+/*   useEffect(() => {
     const handleStorageChange = () => {
       const cartItems = JSON.parse(localStorage.getItem("cartItem"));
       setTotalItem(cartItems ? cartItems.length : 0);
@@ -70,7 +71,7 @@ const Navbar = () => {
       window.removeEventListener("storage", handleStorageChange);
       window.removeEventListener("popstate", handlePopState);
     };
-  }, []);
+  }, []); */
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);

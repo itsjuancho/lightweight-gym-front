@@ -16,7 +16,7 @@ import useFindUserInfo from "./useFindUserInfo";
 
 function useShoppingCart() {
   const router = useRouter();
-  const { session } = useSession();
+  const { session,setTotalItem } = useSession();
   const [openModal, setOpenModal] = useState(false);
   const [cartProducts, setCartProducts] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
@@ -196,6 +196,7 @@ function useShoppingCart() {
     );
     setCartProducts(updatedProducts);
     localStorage.setItem("cartItem", JSON.stringify(updatedProducts));
+    setTotalItem(updatedProducts.length)
   };
 
   const removeCoupon = (cupId) => {

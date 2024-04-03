@@ -17,7 +17,7 @@ const PurchaseHistory = () => {
   const { purchases, totalPrice, totalDiscount } = useHistory();
 
   return (
-    <div className="h-[100%] bg-[#090808] text-gray-50  flex flex-col justify-start items-center">
+    <div className="h-[100%] bg-[#0a0909] text-gray-50  flex flex-col justify-start items-center">
       <Container className="w-full">
         <h1 className="coanda text-2xl font-bold text-red-500 my-5">
           Purchase History
