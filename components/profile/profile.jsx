@@ -19,7 +19,7 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 
 export const Profile = () => {
-  const router=useRouter();
+  const router = useRouter();
   const { session, setSession } = useSession();
   const [selectedOption, setSelectedOption] = useState("Purchase History");
   const { profile } = useFindUserInfo();
@@ -42,10 +42,10 @@ export const Profile = () => {
   const handleCloseSession = () => {
     localStorage.removeItem("token");
     setSession(null);
-    router.push(ROUTE_HOME)
+    router.push(ROUTE_HOME);
   };
   const resetHandle = () => {
-    console.log("wenas")
+    console.log("wenas");
     window.location.reload();
   };
 
@@ -62,44 +62,14 @@ export const Profile = () => {
         </div>
       </motion.div>
 
-      <div className="flex justify-between justify-center bg-black px-11">
-        <a href={`/`} className="flex justify-center items-center">
-          <Image src={lwLogo} alt="logo" className="w-[2rem] h-[2rem]" />
-          <span className="coanda-bold mx-5 text-red-500 text-2xl">
-            Lightweight
-          </span>
-        </a>
-        <div className=" flex justify-between w-full">
-          <div className="flex justify-evenly items-center text-white w-2/4 text-xl underline">
-            <Link href={"/#services"}>View Products</Link>
-            <Link href={"/#about"}>About Us </Link>
-            <Link href={"/#contact"}>Contact </Link>
-          </div>
-
-          <div className="flex justify-end items-center w-2/5 text-white">
-            <div className="flex flex-col items-center mx-2">
-              <p className="text-center">
-                {profile.firstName} {profile.lastName}
-              </p>
-              <span className="text-center">{profile.rank} Category</span>
-            </div>
-
-            <a href={ROUTE_CART}>
-              <Image src={cart} alt="cart" className="my-3 cursor-pointer" />
-            </a>
-
-            <Avatar className="mx-4">
-              <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-          </div>
-        </div>
+      <div className="h-[6rem] bg-[#090808]">
+  
       </div>
 
       <div className="flex">
-        <div className="bg-[#0E0E0E] w-2/5 h-[90vh] flex flex-col items-center">
+        <div className="bg-[#0E0E0E] w-2/5 h-[65rem] flex flex-col items-center">
           <div>
-            <Avatar className="my-10 mx-10 w-[160px] h-[160px]">
+            <Avatar className="my-10 mx-[10rem] w-[160px] h-[160px]">
               <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
@@ -108,7 +78,10 @@ export const Profile = () => {
               <h1 className="text-center">
                 {profile.firstName} {profile.lastName}
               </h1>
-              <p className="text-center text-red-500">
+              <p className="text-center text-white aeonik my-4">
+                Account Balance: ${profile.creditBalance}
+              </p>
+              <p className="text-center text-red-500 aeonik">
                 {profile.rank} Category
               </p>
             </div>
@@ -127,7 +100,7 @@ export const Profile = () => {
           </div>
         </div>
 
-        <div className="bg-[#090808] w-full">
+        <div className="bg-[#090808] w-full h-[65rem]">
           {selectedOption === "User Information" && (
             <EditForm
               firstName={profile.firstName}
@@ -141,7 +114,7 @@ export const Profile = () => {
           {selectedOption === "Purchase History" && <PurchaseHistory />}
         </div>
       </div>
-      <footer className="flex justify-between bg-black text-white text-xl py-[1.2rem] px-12">
+      <footer className="flex justify-between bg-black text-white text-xl py-[12.2px] px-12">
         <p>©2024 Lightweight</p>
 
         <div className="flex justify-evenly w-72">

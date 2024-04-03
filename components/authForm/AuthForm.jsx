@@ -56,9 +56,9 @@ function AuthForm({ title }) {
             />
           )}
         </AnimatePresence>
-        <div className="text-white aeonik-bold xl:w-2/6 md:w-7/12 w-4/5">
+        <div className="text-white aeonik-bold xl:w-2/6 md:w-7/12 w-4/5 my-6">
           <div
-            className={`grid w-full items-center gap-1.5 my-1 ${SHOW_ELEMENT.input}`}
+            className={`grid w-full items-center gap-1.5 my-4 ${SHOW_ELEMENT.input}`}
           >
             <Label htmlFor="text" className="text-base">
               First name
@@ -73,7 +73,7 @@ function AuthForm({ title }) {
           </div>
 
           <div
-            className={`grid w-full items-center gap-1.5 my-1 ${SHOW_ELEMENT.input}`}
+            className={`grid w-full items-center gap-1.5 my-4 ${SHOW_ELEMENT.input}`}
           >
             <Label htmlFor="text" className="text-base">
               Last name
@@ -88,7 +88,7 @@ function AuthForm({ title }) {
           </div>
 
           <div
-            className={`grid w-full items-center gap-1.5 my-1 ${SHOW_ELEMENT.input}`}
+            className={`grid w-full items-center gap-1.5 my-4 ${SHOW_ELEMENT.input}`}
           >
             <Label htmlFor="text" className="text-base">
               Document
@@ -102,8 +102,8 @@ function AuthForm({ title }) {
             />
           </div>
 
-          <div className={`grid w-full items-center gap-1.5 my-1`}>
-            <Label htmlFor="text" className="text-base aeonik-bold">
+          <div className={`grid w-full items-center gap-1.5 my-4`}>
+            <Label htmlFor="text" className="text-base aeonik-bold text-base">
               Username
             </Label>
             <Input
@@ -116,7 +116,7 @@ function AuthForm({ title }) {
           </div>
 
           <div
-            className={`grid w-full items-center gap-1.5 my-1 ${SHOW_ELEMENT.input}`}
+            className={`grid w-full items-center gap-1.5 my-4 ${SHOW_ELEMENT.input}`}
           >
             <Label htmlFor="email" className="text-base">
               Email
@@ -130,14 +130,14 @@ function AuthForm({ title }) {
             />
           </div>
 
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center my-4">
             <div>
-              <Label htmlFor="password" className="text-base aeonik-bold">
+              <Label htmlFor="password" className="text-base aeonik-bold text-base">
                 Password
               </Label>
             </div>
             <div className={` ml-4 md:ml-0 ${SHOW_ELEMENT.label}`}>
-              <Link href={ROUTE_FORGOT_PASS} className="aeonik text-xs">
+              <Link href={ROUTE_FORGOT_PASS} className="aeonik text-base">
                 Forgot your password?
               </Link>
             </div>
@@ -154,7 +154,7 @@ function AuthForm({ title }) {
           </div>
 
           <div
-            className={`grid w-full items-center gap-1.5 my-1 ${SHOW_ELEMENT.input}`}
+            className={`grid w-full items-center gap-1.5 my-4 ${SHOW_ELEMENT.input}`}
           >
             <Label htmlFor="password" className="text-base">
               Re-Password
@@ -170,29 +170,29 @@ function AuthForm({ title }) {
         </div>
         <Button
           onClick={handleSubmit}
-          className="aeonik-bold w-4/5 xl:w-2/6 md:w-7/12 text-white bg-red-500 hover:bg-red-500 focus:bg-red-500 text-base my-4"
+          className="aeonik-bold w-4/5 xl:w-2/6 md:w-7/12 text-white bg-red-500 hover:bg-red-500 focus:bg-red-500 text-base my-8"
         >
           {SHOW_ELEMENT.buttonName}
         </Button>
         <Link
           href={ROUTE_REGISTER}
-          className={`text-xs text-white aeonik inline-block ${SHOW_ELEMENT.label}`}
+          className={`text-base text-white aeonik inline-block ${SHOW_ELEMENT.label}`}
         >
           Aren&apos;t a member yet?
-          <span className="inline border-b border-white"> Sign up instead</span>
+          <span className="inline border-b border-white text-base"> Sign up instead</span>
 
         </Link>
 
         {isReg && (
-          <Link href={ROUTE_LOGIN} className={`text-xs text-white aeonik`}>
+          <Link href={ROUTE_LOGIN} className={`text-base text-white aeonik`}>
             Already a member?
-            <span className="inline border-b border-white">
+            <span className="inline border-b border-white text-base">
               {" "}
               Sign in instead
             </span>
           </Link>
         )}
-        <a href={ROUTE_HOME} className=" my-4 text-white border-b border-white aeonik text-xs"> Back To Home</a>
+        <a href={ROUTE_HOME} className=" my-4 text-white border-b border-white aeonik text-base"> Back To Home</a>
       </div>
     </div>
   );

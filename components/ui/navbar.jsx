@@ -4,7 +4,7 @@ import Image from "next/image";
 import cart from "../../public/images/cart.svg";
 import lwLogo from "../../public/lw-logo.svg";
 import Container from "./container";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   LOGIN_URL,
   ROUTE_ABOUT,
@@ -24,7 +24,7 @@ const Navbar = () => {
   const [visible, setVisible] = useState(true);
   const {session, setSession } = useSession();
   const [totalItem, setTotalItem] = useState(0);
-
+ 
   const handleScroll = () => {
     const currentScrollPos = window.scrollY;
     setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
@@ -73,7 +73,7 @@ const Navbar = () => {
   }, [prevScrollPos, visible]);
 
   const route = usePathname().substring(1);
-  const hideNavbarRoutes = [ROUTE_LOGIN, ROUTE_REGISTER, ROUTE_CART,ROUTE_PROFILE];
+  const hideNavbarRoutes = [ROUTE_LOGIN, ROUTE_REGISTER, ROUTE_CART];
   const shouldHideNavbar = hideNavbarRoutes.includes(route);
 
   if (shouldHideNavbar) {

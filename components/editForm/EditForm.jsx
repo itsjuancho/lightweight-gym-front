@@ -16,6 +16,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
+import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 
 const EditForm = ({ firstName, lastName, email, username, document,resetHandle }) => {
  
@@ -27,7 +28,7 @@ const EditForm = ({ firstName, lastName, email, username, document,resetHandle }
   );
 
   return (
-    <div className="text-white">
+    <ScrollArea className="text-white">
       <Dialog open={openModal} onOpenChange={setOpenModal}>
         <DialogContent className="sm:max-w-[425px] bg-white">
           <DialogHeader>
@@ -239,7 +240,8 @@ const EditForm = ({ firstName, lastName, email, username, document,resetHandle }
           Save Changes
         </Button>
       </div>
-    </div>
+      <ScrollBar orientation="vertical" />
+    </ScrollArea>
   );
 };
 
