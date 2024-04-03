@@ -3,12 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import lwLogo from "../../public/lw-logo.svg";
-import fab from "../../public/images/fab.svg";
-import ig from "../../public/images/ig.svg";
-import linke from "../../public/images/linke.svg";
-import x from "../../public/images/x.svg";
-import cart from "../../public/images/cart.svg";
+import profileIcon from "../../public/images/bxs-user-rectangle.svg";
 import { Separator } from "../ui/separator";
 import { ROUTE_CART, ROUTE_HOME } from "../../app/utils/routes";
 import EditForm from "../../components/editForm/EditForm";
@@ -17,6 +12,9 @@ import { useSession } from "../../hooks/sessionContext";
 import useFindUserInfo from "../../hooks/useFindUserInfo";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import DropdownProfile from "../ui/DropdownProfile";
+import HamburgerIcon from "../ui/burger";
+import { Button } from "../ui/button";
 
 export const Profile = () => {
   const router = useRouter();
@@ -25,6 +23,11 @@ export const Profile = () => {
   const { profile } = useFindUserInfo();
   const [titleOption, setTitleOption] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -62,16 +65,25 @@ export const Profile = () => {
         </div>
       </motion.div>
 
-      <div className="bg-slate-950 h-[5rem]">
-      </div>
+      <div className="bg-slate-950 h-[5rem]"></div>
+      <div className="flex relative">
+        <Button
+          onClick={toggleSidebar}
+          className="Round bg-white absolute z-50 bottom-[10rem] left-[2rem] md:hidden cursor-pointer "
+        >
+          <Image src={profileIcon} alt="profile"></Image>
+        </Button>
 
-      <div className="flex">
-        <div className="bg-[#070a16] w-2/5 h-[65rem] flex flex-col items-center">
+        <DropdownProfile isOpen={isOpen} toggleSidebar={toggleSidebar} handleCloseSession={handleCloseSession} handleOptionSelect={handleOptionSelect} profile={profile} />
+
+        <div className="hidden md:block xl:w-2/6 w-3/6 h-[65rem] flex flex-col items-center bg-[#070a16]">
           <div>
-            <Avatar className="my-10 mx-[10rem] w-[160px] h-[160px]">
-              <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
+            <div className="flex justify-center">
+              <Avatar className="my-7 w-[160px] h-[160px]">
+                <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+            </div>
 
             <div className="text-white aeonik text-2xl">
               <h1 className="text-center">
@@ -86,7 +98,7 @@ export const Profile = () => {
             </div>
           </div>
           <Separator className="my-8 bg-gray-500" />
-          <div className="cursor-pointer">
+          <div className="cursor-pointer flex justify-center">
             <ul className="text-white aeonik text-2xl">
               <li onClick={() => handleOptionSelect("User Information")}>
                 Edit Info
@@ -99,7 +111,7 @@ export const Profile = () => {
           </div>
         </div>
 
-        <div className="bg-[#090808] w-full h-[65rem]">
+        <div className="w-full h-[65rem] z-0">
           {selectedOption === "User Information" && (
             <EditForm
               firstName={profile.firstName}

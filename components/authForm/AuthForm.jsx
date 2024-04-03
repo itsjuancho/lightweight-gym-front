@@ -176,11 +176,7 @@ function AuthForm({ title }) {
         </Button>
         <Link
           href={ROUTE_REGISTER}
-<<<<<<< HEAD
-          className={`text-base text-white aeonik inline-block ${SHOW_ELEMENT.label}`}
-=======
           className={`text-xs md:text-sm text-white aeonik inline-block ${SHOW_ELEMENT.label}`}
->>>>>>> 18eb86056eba993e4bd0d61c9099fc072bd80280
         >
           Aren&apos;t a member yet?
           <span className="inline border-b border-white text-base"> Sign up instead</span>
@@ -188,11 +184,7 @@ function AuthForm({ title }) {
         </Link>
 
         {isReg && (
-<<<<<<< HEAD
-          <Link href={ROUTE_LOGIN} className={`text-base text-white aeonik`}>
-=======
           <Link href={ROUTE_LOGIN} className={`text-xs md:text-sm text-white aeonik`}>
->>>>>>> 18eb86056eba993e4bd0d61c9099fc072bd80280
             Already a member?
             <span className="inline border-b border-white text-base">
               {" "}
@@ -200,11 +192,7 @@ function AuthForm({ title }) {
             </span>
           </Link>
         )}
-<<<<<<< HEAD
-        <a href={ROUTE_HOME} className=" my-4 text-white border-b border-white aeonik text-base"> Back To Home</a>
-=======
         <a href={ROUTE_HOME} className="my-4 text-white border-b border-white aeonik text-xs md:text-sm"> Back To Home</a>
->>>>>>> 18eb86056eba993e4bd0d61c9099fc072bd80280
       </div>
     </div>
   );

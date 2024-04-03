@@ -7,11 +7,8 @@ import Image from "next/image";
 import Container from "./container";
 
 const Footer = () => {
-
-  
-
   return (
-    <footer className="bg-slate-950 text-white text-xl py-10">
+    <footer className=" bg-slate-950 text-white text-xl py-8">
       <Container className="flex justify-between px-5 md:px-20">
         <p>©2024 Lightweight</p>
 
