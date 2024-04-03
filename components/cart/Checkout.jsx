@@ -395,7 +395,7 @@ const Checkout = () => {
                     </div>
                     <div className="flex justify-between my-5">
                       <p>Coupon Discount</p>
-                      <span>- ${discount}</span>
+                      <span>- ${discount.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between my-5">
                       <p>Total (Tax Incl.)</p>

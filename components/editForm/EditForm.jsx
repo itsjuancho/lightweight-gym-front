@@ -66,12 +66,12 @@ const EditForm = ({
         <h2 className="text-3xl text-center my-10 aeonik">User Information</h2>
       </div>
 
-      <div className="md:w-full h-[30rem] flex-col justify-center justify-items-center bg-orange-200">
-        <div className="px-20 bg-blue-200 md:w-[40rem]">
+      <div className="md:w-full h-[30rem] ">
+        <div className="flex-col px-20">
           <div>
             <h3 className="text-red-500 text-3xl mx-4">My Information</h3>
           </div>
-          <div className="p-3 relative">
+          <div className="p-3 relative mx-30 w-full md:w-2/5">
             <Label htmlFor="firstName" className="text-2xl">
               First Name
             </Label>
@@ -96,7 +96,7 @@ const EditForm = ({
               }`}
             />
           </div>
-          <div className="p-3 relative">
+          <div className="p-3 relative w-full md:w-2/5">
             <Label htmlFor="lastName" className="text-2xl">
               Last Name
             </Label>
@@ -121,7 +121,7 @@ const EditForm = ({
               }`}
             />
           </div>
-          <div className="p-3 relative">
+          <div className="p-3 relative w-full md:w-2/5">
             <Label htmlFor="email" className="text-2xl">
               Email
             </Label>
@@ -146,7 +146,7 @@ const EditForm = ({
               }`}
             />
           </div>
-          <div className="p-3">
+          <div className="p-3 w-full md:w-2/5">
             <Label htmlFor="username" className="text-2xl">
               Username
             </Label>
@@ -158,7 +158,7 @@ const EditForm = ({
               className="bg-transparent border border-gray-500 w-full text-2xl text-gray-500"
             />
           </div>
-          <div className="p-3">
+          <div className="p-3 w-full md:w-2/5">
             <Label htmlFor="document" className="text-2xl">
               Document
             </Label>
@@ -173,11 +173,11 @@ const EditForm = ({
         </div>
 
         <Separator className="my-8 bg-gray-500" />
-        <div className="md:w-[40rem] px-20 py-10">
+        <div className="md:w-full px-20 py-10">
           <div>
             <h3 className="text-red-500 text-3xl mx-4">Modify Password</h3>
           </div>
-          <div className="p-3 relative">
+          <div className="p-3 relative w-full md:w-2/5">
             <Label htmlFor="currentPassword" className="text-2xl">
               Current Password
             </Label>
@@ -202,7 +202,7 @@ const EditForm = ({
               }`}
             />
           </div>
-          <div className="p-3 relative">
+          <div className="p-3 relative w-full md:w-2/5">
             <Label htmlFor="newPassword" className="text-2xl">
               NewPassword
             </Label>
@@ -227,7 +227,7 @@ const EditForm = ({
               }`}
             />
           </div>
-          <div className="p-3 relative">
+          <div className="p-3 relative w-full md:w-2/5">
             <Label htmlFor="confirmPassword" className="text-2xl">
               Confirm Password
             </Label>

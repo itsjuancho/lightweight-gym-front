@@ -13,6 +13,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ROUTE_CART, ROUTE_HOME } from "../../utils/routes";
 import fetchProductById from "../../../hooks/fetchProductById";
+import { useSession } from "../../../hooks/sessionContext";
 
 const ProductPage = ({ params }) => {
   const product_id = parseInt(params.product_id);
@@ -20,6 +21,7 @@ const ProductPage = ({ params }) => {
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const router = useRouter();
+  const {setTotalItem} = useSession();
   /* const [couponModal, setCouponModal] = useState(false); */
 
   useEffect(() => {
@@ -73,6 +75,7 @@ const ProductPage = ({ params }) => {
       currentCart.push(formattedProduct);
     }
     localStorage.setItem("cartItem", JSON.stringify(currentCart));
+    setTotalItem(currentCart.length);
     setShowNotification(true);
   };
 

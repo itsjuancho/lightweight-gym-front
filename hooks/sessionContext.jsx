@@ -12,6 +12,15 @@ export const SessionProvider = ({ children }) => {
   }
   const [session, setSession] = useState(initial);
   const [role, setRole] = useState(null)
+  const [totalItem, setTotalItem] = useState(0);
+
+  useEffect(() => {
+    const cartItems = localStorage.getItem("cartItem");
+    if (cartItems) {
+      const items = JSON.parse(cartItems);
+      setTotalItem(items ? items.length : 0);
+    }
+  }, [totalItem]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -23,7 +32,7 @@ export const SessionProvider = ({ children }) => {
   }, [session]);
 
   return (
-    <SessionContext.Provider value={{ session, setSession, role, setRole }}>
+    <SessionContext.Provider value={{ session, setSession, role, setRole,totalItem,setTotalItem }}>
       {children}
     </SessionContext.Provider>
   );
