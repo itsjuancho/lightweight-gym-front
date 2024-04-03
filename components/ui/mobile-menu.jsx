@@ -22,12 +22,14 @@ const variants = {
 };
 
 const MenuPanel = ({ isOpen }) => {
-  const { session, setSession } = useSession();
+  const { session, setSession, role } = useSession();
   const [totalItem, setTotalItem] = useState(0);
 
   const handleCloseSession = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("role");
     setSession(null);
+    window.location.reload()
   };
 
   useEffect(() => {
@@ -72,16 +74,20 @@ const MenuPanel = ({ isOpen }) => {
             <a href="/products">Products</a>
             <a href={ROUTE_ABOUT}>About us</a>
             <a href={ROUTE_CONTACT}>Contact</a>
-            <a href={ROUTE_CART} className="flex items-center relative">
+            {role === "ROLE_ADMIN" ? (<a className="text-red-500" href="/admin">Admin</a>) : (
+              <a href={ROUTE_CART} className="flex items-center relative">
               Cart
               <Badge
-                className={`absolute bg-red-500 text-center -top-2 right-0`}
+                className={`absolute bg-red-500 text-center -top-2 right-8`}
               >
                 {totalItem}
               </Badge>
               <Image src={cart} alt="cart" className="" />
             </a>
-            <a onClick={handleCloseSession} className="text-red-500">Logout</a>
+            )}
+            <a onClick={handleCloseSession}>
+              Logout
+            </a>
             <div
               className={`text-red-500 ${
                 session === null ? "visible" : "hidden"
@@ -91,14 +97,23 @@ const MenuPanel = ({ isOpen }) => {
               <a href={ROUTE_LOGIN}> Sign in</a>
             </div>
           </div>
-          <div className={`flex flex-col ${session !== null ? "" : "hidden"}`}>
-            <a href={ROUTE_PROFILE}>
-              <Avatar className="cursor-pointer scale-125">
-                <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
-                <AvatarFallback>@</AvatarFallback>
-              </Avatar>
-            </a>
-          </div>
+          {role === "ROLE_ADMIN" ? (
+            <></>
+          ) : (
+            <div
+              className={`flex flex-col ${session !== null ? "" : "hidden"}`}
+            >
+              <a href={ROUTE_PROFILE}>
+                <Avatar className="cursor-pointer scale-125">
+                  <AvatarImage
+                    src="https://github.com/shadcn.png"
+                    alt="shadcn"
+                  />
+                  <AvatarFallback>@</AvatarFallback>
+                </Avatar>
+              </a>
+            </div>
+          )}
         </div>
       </nav>
     </motion.div>

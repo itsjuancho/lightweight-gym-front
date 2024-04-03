@@ -4,7 +4,7 @@ import Image from "next/image";
 import cart from "../../public/images/cart.svg";
 import lwLogo from "../../public/lw-logo.svg";
 import Container from "./container";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   LOGIN_URL,
   ROUTE_ABOUT,
@@ -20,11 +20,13 @@ import { Badge } from "../ui/badge";
 import { useSession } from "../../hooks/sessionContext";
 import HamburgerIcon from "./burger";
 import MenuPanel from "./mobile-menu";
+import Link from "next/link";
 
 const Navbar = () => {
+  const router = useRouter();
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
-  const { session, setSession } = useSession();
+  const { session, setSession, role } = useSession();
   const [totalItem, setTotalItem] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -37,7 +39,9 @@ const Navbar = () => {
 
   const handleCloseSession = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("role");
     setSession(null);
+    window.location.reload()
   };
 
   useEffect(() => {
@@ -106,7 +110,7 @@ const Navbar = () => {
             className="md:w-auto md:h-auto"
           />
           <p className="coanda-bold ml-3 md:ml-6 text-sm md:text-lg">
-            Lightweight
+            {role === "ROLE_ADMIN" ? "Administration" : "Lightweight"}
           </p>
         </a>
 
@@ -123,23 +127,35 @@ const Navbar = () => {
           <a href={ROUTE_ABOUT}>About us</a>
           <a href={ROUTE_CONTACT}>Contact</a>
 
-          <div className={`flex ${session !== null ? "" : "hidden"}`}>
-            <a href={ROUTE_CART}>
-              <Badge
-                className={`absolute bg-red-500 text-center top-[30px] mx-3`}
-              >
-                {totalItem}
-              </Badge>
-              <Image src={cart} alt="cart" className="my-3" />
-            </a>
-            <a href={ROUTE_PROFILE}>
-              <Avatar className="mx-4 my-2 cursor-pointer">
-                <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
-                <AvatarFallback>@</AvatarFallback>
-              </Avatar>
-            </a>
-            <button onClick={handleCloseSession}>Logout</button>
-          </div>
+          {role === "ROLE_ADMIN" ? (
+            <div className="space-x-4">
+              <Link className="text-red-500 text-xl" href="/admin">
+                Admin
+              </Link>
+              <button onClick={handleCloseSession}>Logout</button>
+            </div>
+          ) : (
+            <div className={`flex ${session !== null ? "" : "hidden"}`}>
+              <a href={ROUTE_CART}>
+                <Badge
+                  className={`absolute bg-red-500 text-center top-[30px] mx-3`}
+                >
+                  {totalItem}
+                </Badge>
+                <Image src={cart} alt="cart" className="my-3" />
+              </a>
+              <a href={ROUTE_PROFILE}>
+                <Avatar className="mx-4 my-2 cursor-pointer">
+                  <AvatarImage
+                    src="https://github.com/shadcn.png"
+                    alt="shadcn"
+                  />
+                  <AvatarFallback>@</AvatarFallback>
+                </Avatar>
+              </a>
+              <button onClick={handleCloseSession}>Logout</button>
+            </div>
+          )}
         </div>
       </Container>
     </div>
