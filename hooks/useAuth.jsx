@@ -94,6 +94,7 @@ const useAuth = () => {
         const data = await response.json();
         localStorage.setItem("token", data.token);
         localStorage.setItem("username", requestData.username);
+        localStorage.setItem("role", data.roles[0])
         setSession(data.token)
       }
 

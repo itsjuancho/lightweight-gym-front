@@ -11,16 +11,19 @@ export const SessionProvider = ({ children }) => {
     initial = localStorage.getItem("token");
   }
   const [session, setSession] = useState(initial);
+  const [role, setRole] = useState(null)
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
     if (token) {
       setSession(token);
+      setRole(role);
     }
   }, [session]);
 
   return (
-    <SessionContext.Provider value={{ session, setSession }}>
+    <SessionContext.Provider value={{ session, setSession, role, setRole }}>
       {children}
     </SessionContext.Provider>
   );

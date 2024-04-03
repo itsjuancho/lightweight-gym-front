@@ -28,6 +28,7 @@ const ProductsPage = () => {
     3: "Gym attire",
     4: "Accesories",
     5: "Books & Guides",
+    6: "Personal care"
   };
 
   useEffect(() => {
@@ -76,9 +77,9 @@ const ProductsPage = () => {
 
   return (
     <div className="min-h-[100dvh] bg-gradient-to-b from-[#030712] to-[#210303] text-gray-50  flex flex-col justify-start">
-      <Container className="w-full pt-40 pb-16 px-20">
+      <Container className="w-full pt-40 pb-16 px-5 md:px-20">
         <h1 className="text-3xl font-semibold mb-16">Explore our products</h1>
-        <div className="flex space-x-4 mb-8 justify-start w-full">
+        <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 mb-8 justify-start w-full">
           <div className="relative rounded-lg shadow-sm border">
             {isInputActive && (
               <p className="text-sm absolute -top-6 text-zinc-500 animate-fade-in duration-300 ease-in-out">
@@ -94,11 +95,11 @@ const ProductsPage = () => {
               onFocus={() => setIsInputActive(true)}
               onBlur={() => setIsInputActive(false)}
               onChange={(e) => setText(e.target.value)}
-              className="block w-[360px] rounded-md border-0 py-1.5 pl-8 bg-transparent ring-0 active:ring-0"
+              className="block w-full md:w-[360px] rounded-md border-0 py-1.5 pl-8 bg-transparent ring-0 active:ring-0"
             />
           </div>
           <Select onValueChange={handleCategoryChange}>
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="md:w-[180px] w-full">
               <SelectValue placeholder="Select Category" />
             </SelectTrigger>
             <SelectContent className="bg-slate-950 text-white">

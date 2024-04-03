@@ -36,7 +36,7 @@ const Hero = () => {
             variants={btnVariants}
             initial="initial"
             animate="animate"
-            className="bg-red-500 hover:bg-transparent border-transparent border hover:border-red-500 transition-colors px-6 py-2 w-full md:w-max rounded-sm md:mt-14 mt-32"
+            className="bg-red-500 hover:bg-transparent border-transparent border hover:border-red-500 transition-colors px-6 py-2 w-full md:w-max rounded-sm mt-14"
           >
             <a href="/login">Start your journey</a>
           </motion.button>
@@ -44,17 +44,17 @@ const Hero = () => {
             variants={btnVariants}
             initial="initial"
             animate="animate"
-            className="flex flex-col space-y-4 absolute md:bottom-0 bottom-12"
+            className="flex flex-col space-y-4 absolute md:bottom-0 bottom-14"
           >
             <Image
               src={arrowDown}
               alt="animate"
-              className="animation-fadeInOut delay-0 w-6 2xl:w-full"
+              className="animation-fadeInOut delay-0 w-6 2xl:w-full hidden md:block"
             />
             <Image
               src={arrowDown}
               alt="animate"
-              className="animation-fadeInOut delay-300 w-6 2xl:w-full"
+              className="animation-fadeInOut delay-300 w-6 2xl:w-full hidden md:block"
             />
             <Image
               src={arrowDown}
@@ -69,8 +69,8 @@ const Hero = () => {
           animate="animate"
           className="relative md:col-span-7"
         >
-          <Image src={pump01} alt="pupm01" className="hidden md:block" />
-          <Image src={overlay01} alt="overlay" className="z-10 absolute top-0 hidden md:block" />
+          <Image src={pump01} alt="pupm01" className="" />
+          <Image src={overlay01} alt="overlay" className="z-10 absolute top-0" />
         </motion.div>
       </Container>
     </div>

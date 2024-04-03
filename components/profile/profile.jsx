@@ -62,12 +62,11 @@ export const Profile = () => {
         </div>
       </motion.div>
 
-      <div className="h-[6rem] bg-[#090808]">
-  
+      <div className="bg-slate-950 h-[5rem]">
       </div>
 
       <div className="flex">
-        <div className="bg-[#0E0E0E] w-2/5 h-[65rem] flex flex-col items-center">
+        <div className="bg-[#070a16] w-2/5 h-[65rem] flex flex-col items-center">
           <div>
             <Avatar className="my-10 mx-[10rem] w-[160px] h-[160px]">
               <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
@@ -114,16 +113,6 @@ export const Profile = () => {
           {selectedOption === "Purchase History" && <PurchaseHistory />}
         </div>
       </div>
-      <footer className="flex justify-between bg-black text-white text-xl py-[12.2px] px-12">
-        <p>©2024 Lightweight</p>
-
-        <div className="flex justify-evenly w-72">
-          <Image src={fab} alt="facebook" />
-          <Image src={linke} alt="Linkedin" />
-          <Image src={x} alt="X" />
-          <Image src={ig} alt="IG" />
-        </div>
-      </footer>
     </div>
   );
 };
