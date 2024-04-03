@@ -4,13 +4,14 @@ import Image from "next/image";
 import cart from "../../public/images/cart.svg";
 import lwLogo from "../../public/lw-logo.svg";
 import Container from "./container";
-import { usePathname, useRouter } from "next/navigation";
+
 import {
   LOGIN_URL,
   ROUTE_ABOUT,
   ROUTE_CART,
   ROUTE_CONTACT,
   ROUTE_FORGOT_PASS,
+  ROUTE_HOME,
   ROUTE_LOGIN,
   ROUTE_PROFILE,
   ROUTE_REGISTER,
@@ -23,7 +24,6 @@ import MenuPanel from "./mobile-menu";
 import Link from "next/link";
 
 const Navbar = () => {
-  const router = useRouter();
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const { session, setSession, role } = useSession();
@@ -79,19 +79,6 @@ const Navbar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [prevScrollPos, visible]);
-
-  const route = usePathname().substring(1);
-  const hideNavbarRoutes = [
-    ROUTE_LOGIN,
-    ROUTE_REGISTER,
-    ROUTE_CART,
-    ROUTE_PROFILE,
-  ];
-  const shouldHideNavbar = hideNavbarRoutes.includes(route);
-
-  if (shouldHideNavbar) {
-    return null;
-  }
 
   return (
     <div
