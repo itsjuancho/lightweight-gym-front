@@ -57,7 +57,7 @@ const FAQ = () => {
                     Frequently Asked Questions
                 </h1>
                 <p className="md:text-2xl text-center max-w-[650px] text-balance mt-2">
-                    Have questions? Don't worry, you can find
+                    Have questions? Don&apos;t worry, you can find
                     answers here
                 </p>
 
@@ -68,7 +68,7 @@ const FAQ = () => {
                 </div>
 
                 <p className="pt-20 text-center text-sm max-w-[650px] text-balance mt-2">
-                    Didn't find your expected answer?
+                    Didn&apos;t find your expected answer?
                     Please contact us by Help Center or send email to Lightweightgym@gmail.com
                 </p>
             </Container>
