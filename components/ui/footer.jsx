@@ -10,7 +10,7 @@ const Footer = () => {
   return (
     <footer className=" bg-slate-950 text-white text-xl py-8">
       <Container className="flex justify-between px-5 md:px-20">
-        <p>©2024 Lightweight</p>
+        <p>Lightweight © 2024</p>
 
         <div className="flex space-x-4">
           <Image src={fab} alt="facebook" />

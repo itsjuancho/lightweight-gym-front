@@ -9,6 +9,7 @@ import {
   ROUTE_ABOUT,
   ROUTE_CART,
   ROUTE_CONTACT,
+  ROUTE_FAQ,
   ROUTE_FORGOT_PASS,
   ROUTE_LOGIN,
   ROUTE_PROFILE,
@@ -72,6 +73,7 @@ const MenuPanel = ({ isOpen }) => {
         <div className="flex flex-row justify-between w-full">
           <div className="flex flex-col space-y-5">
             <a href="/products">Products</a>
+            <a href={ROUTE_FAQ}>FAQ</a>
             <a href={ROUTE_ABOUT}>About us</a>
             <a href={ROUTE_CONTACT}>Contact</a>
             {role === "ROLE_ADMIN" ? (<a className="text-red-500" href="/admin">Admin</a>) : (
