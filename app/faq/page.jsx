@@ -8,7 +8,7 @@ const FAQ = () => {
             title: "How can I register at the Lightweight App?",
             content: <><div style={ {paddingBottom: '15px'}}>You can register in the app following this link: <strong><a href="https://pi-frontend-delta.vercel.app/register">pi-frontend-delta.vercel.app/register</a></strong></div>
             
-            There, you will need to use your personal information for registration and a valid email, as we'll send you a validation email so you can start using your account</>
+            There, you will need to use your personal information for registration and a valid email, as we&apos;ll send you a validation email so you can start using your account</>
         },
         {
             title: "How can I recharge credits to my account?",
@@ -21,16 +21,16 @@ const FAQ = () => {
         },
         {
             title: "What's the maximum amount of coupons I can redeem?",
-            content: <>You can redeem how many coupons you like. The system doesn't have restrictions for it. 
+            content: <>You can redeem how many coupons you like. The system doesn&apos;t have restrictions for it. 
             
-            However, the total price of all the redeem coupons doesn't exceed the 50% of your purchase. 
+            However, the total price of all the redeem coupons doesn&apos;t exceed the 50% of your purchase. 
             If your discount percentage is up to 50%, the app limits the total discount.</>
         },
         {
             title: "How can I use a discount coupon on my purchases?",
             content: <> To use a discount coupon on your purchases, simply select the products you wish to buy and proceed to checkout. 
             In the order summary section, you will find a field to enter your coupon code. 
-            Enter the code and click "Apply" to see the discount reflected in your total purchase.</>
+            Enter the code and click &quot;Apply&quot; to see the discount reflected in your total purchase.</>
         },
         {
             title: "How can I get discount coupons in Lightweight App?",
@@ -45,7 +45,7 @@ const FAQ = () => {
         },
         {
             title: "Do discount coupons have any cash value?",
-            content: <>No, discount coupons don't have any cash value and cannot be redeemed for cash. 
+            content: <>No, discount coupons don&apos;t have any cash value and cannot be redeemed for cash. 
             They can only be used to obtain discounts on purchases within Lightweight App, according to the conditions established for each coupon.</>
         }
     ];
