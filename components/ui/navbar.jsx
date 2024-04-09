@@ -10,6 +10,7 @@ import {
   ROUTE_ABOUT,
   ROUTE_CART,
   ROUTE_CONTACT,
+  ROUTE_FAQ,
   ROUTE_FORGOT_PASS,
   ROUTE_HOME,
   ROUTE_LOGIN,
@@ -112,6 +113,7 @@ const Navbar = () => {
             <a href={ROUTE_LOGIN}> Sign in</a>
           </div>
           <a href="/products">Products</a>
+          <a href={ROUTE_FAQ}>FAQ</a>
           <a href={ROUTE_ABOUT}>About us</a>
           <a href={ROUTE_CONTACT}>Contact</a>
 
