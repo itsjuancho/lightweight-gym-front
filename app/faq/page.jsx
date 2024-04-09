@@ -6,7 +6,7 @@ const FAQ = () => {
     const questions = [
         {
             title: "How can I register at the Lightweight App?",
-            content: <><div style={ {paddingBottom: '15px'}}>You can register in the app following this link: <strong><a href="https://pi-frontend-delta.vercel.app/register">pi-frontend-delta.vercel.app/register</a></strong></div>
+            content: <><div style={ {paddingBottom: '15px'}}>You can register in the app following this link: <strong><a href="https://lightweight-gym-front.vercel.app/register">lightweight-gym-front.vercel.app/register</a></strong></div>
             
             There, you will need to use your personal information for registration and a valid email, as we&apos;ll send you a validation email so you can start using your account</>
         },
